@@ -1,0 +1,7 @@
+27/12/2022:
+# First Release - v0.1
+Added Padding option to move rows closer to each other or further apart.
+Added additional 8 icon styles.
+Added option to move icon position to the right of the down/up data.
+Added option to change data into binary or decimal.
+Added option to add digits after decimal place.
