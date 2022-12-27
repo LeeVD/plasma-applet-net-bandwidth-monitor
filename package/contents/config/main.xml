@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name=""/>
+
+    <group name="General">
+        <entry name="showSeparately" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="speedLayout" type="String">
+            <default>auto</default>
+        </entry>
+        <entry name="swapDownUp" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="iconType" type="String">
+            <default>iconA</default>
+        </entry>
+        <entry name="showIcons" type="Bool">
+            <default>true</default>
+        </entry>
+
+        <entry name="showUnits" type="Bool">
+            <default>true</default>
+        </entry>
+
+        <entry name="speedUnits" type="String">
+            <default>bytes</default>
+        </entry>
+
+        <entry name="shortUnits" type="Bool">
+            <default>false</default>
+        </entry>
+
+        <entry name="fontSize" type="Double">
+            <default>1</default>
+        </entry>
+
+        <entry name="updateInterval" type="Double">
+            <default>10</default>
+        </entry>
+        <entry name="iconPosition" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="binaryDecimal" type="String">
+            <default>binary</default>
+        </entry>
+        <entry name="decimalPlace" type="string">
+            <default>1000.0</default>
+        </entry>
+        <entry name="getPadding" type="Int">
+            <default>0</default>
+        </entry>        
+    </group>
+
+    <group name="Network">
+        <entry name="netSources" type="StringList">
+            <default></default>
+        </entry>
+    </group>
+
+<!--    <group name="ToolTip">
+        <entry name="showTooltip" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showNetTotals" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showTotalUnits" type="string">
+            <default>Bytes</default>
+        </entry>
+        <entry name="showIntName" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showIP" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showIPextra" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showIcon" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showIconOption" type="string">
+            <default>wired</default>
+        </entry>
+        <entry name="showSigStrength" type="Bool">
+            <default>false</default>
+        </entry>
+    </group>-->
+</kcfg>
