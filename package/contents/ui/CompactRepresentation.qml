@@ -655,7 +655,7 @@ Item {
         sensorList = [];
         sensors = dbusData.allSensors("network/");
 
-        console.log("addSource triggered")
+        //console.log("addSource triggered")
         //console.log("CR-sensors: from CR " + sensors)
         // qml: Network-sensors: 
             // network/all,
@@ -753,10 +753,6 @@ Item {
             //console.log("CR-onStatsUpd: "+ pathKeys + " || "+ values)
             // qml: CR-onStatsUpd: network/wlp2s0/download,network/wlp2s0/upload || 334,128
             // qml: CR-onStatsUpd: network/wlp2s0/downloadBits,network/wlp2s0/totalDownload,network/wlp2s0/uploadBits,network/wlp2s0/totalUpload || 0,49913032,0,169202 - WIP
-
-
-        console.log("decimalPlace: "+decimalPlace)
-        console.log("speedTextMetrics: "+ speedTextMetrics.width)
         
             var sensorKey;
             var valueIdx;
