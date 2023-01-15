@@ -26,11 +26,11 @@ Item {
     property alias  cfg_iconPosition:   iconPosition.checked
     property alias  cfg_showIcons:      showIcons.checked
     property alias  cfg_showUnits:      showUnits.checked
-    property string cfg_speedUnits:     'bytes'
+    property string cfg_speedUnits:     'bits'
     property alias  cfg_shortUnits:     shortUnits.checked
     property double cfg_fontSize:       fontSize
     property double cfg_updateInterval: updateInterval
-    property string cfg_binaryDecimal:  'binary'
+    property string cfg_binaryDecimal:  'metric'
     property string cfg_decimalPlace:   decimalPlace
     property int    cfg_getPadding:     getPadding.value
 
@@ -339,16 +339,25 @@ Item {
 
         ComboBox {
             id: iconType
-            textRole: 'label'
+            textRole: 'text'
             model: [
-                { 'label': i18n('ᐁ ᐃ'),    'value': 'iconA' },
-                { 'label': i18n('➘ ➚'),    'value': 'iconB' },
-                { 'label': i18n('🮦 🮧'),    'value': 'iconC' },
-                { 'label': i18n('🭦 🭋'),    'value': 'iconD' },
-                { 'label': i18n('🮷 🮸'),    'value': 'iconE' },
-                { 'label': i18n('▼ ▲'),     'value': 'iconF' },
-                { 'label': i18n('⮟ ⮝'),    'value': 'iconG' },
-                { 'label': i18n('🠧 🠥'),     'value': 'iconH' }
+                { text: i18n('ᐁ ᐃ'),    value: 'iconA' },
+                { text: i18n('▽ △'),    value: 'iconB' },
+                { text: i18n('▼ ▲'),     value: 'iconC' },
+                { text: i18n('⮟ ⮝'),    value: 'iconD' },
+                { text: i18n('⩔ ⩓'),    value: 'iconE' },
+                { text: i18n('🢗 🢕'),    value: 'iconF' },
+                { text: i18n('⋁ ⋀'),    value: 'iconG' },
+                { text: i18n('◥ ◢'),    value: 'iconH' },
+                { text: i18n('D: U:'),    value: 'iconI' },
+                { text: i18n('🠇 🠅'),     value: 'iconJ' },
+                { text: i18n('🠋 🠉'),    value: 'iconK' },
+                { text: i18n('🡇 🡅'),    value: 'iconL' },
+                { text: i18n('🡫 🡩'),    value: 'iconM' },
+                { text: i18n('⮋ ⮉'),     value: 'iconN' },
+                { text: i18n('⇩ ⇧'),    value: 'iconO' }, 
+                { text: i18n('⮯ ⮭'),    value: 'iconP' },
+                { text: i18n('⥥ ⥣'),    value: 'iconQ' }   
             ]
             onCurrentIndexChanged: cfg_iconType = model[currentIndex]['value']
 
@@ -390,8 +399,8 @@ Item {
             id: binaryDecimal
             textRole: 'label'
             model: [
-                { 'label': i18n('Binary'),  'value': 'binary' },
-                { 'label': i18n('Decimal'), 'value': 'decimal'}
+                { 'label': i18n('Binary (1024)'),  'value': 'binary' },
+                { 'label': i18n('Metric (1000)'),  'value': 'decimal'}
             ]
             onCurrentIndexChanged: cfg_binaryDecimal = model[currentIndex]['value']
 
