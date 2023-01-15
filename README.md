@@ -12,7 +12,6 @@ https://www.opencode.net/bstrong5280/system-monitor-plasmoid
 I've taken the UI element from netspeed-widget and the dbus workings from system-monitor, glued them together and added a few additional UI nice to haves. This widget doesn't need ksysguard to function.
 This is extremely BETA software and the first plasma widget I've done. If you find something or many things that aren't working, let me know and I'll take a look when I can.
 
-*** There is an issue with missing 'up / down' icons from the dropdown list.  This is likely related to font packs on the OS.  If on Manjaro Plasma, you should be ok, any other distro your experience may vary.  Issue is being looked into. ***
 
 Available Options:
 - Layout (dfaust)
@@ -25,9 +24,9 @@ Available Options:
 - Speed units (dfaust)
 - Shorten speed units (dfaust)
 - Show speed icons (dfaust)
-- Icon style [8 versions]
+- Icon style [8 versions] - more added
 - Show icons on the right
-- Numbers [binary, decimal]
+- Numbers [binary, metric]
 - Decimal place
 
 TODO:
@@ -47,7 +46,7 @@ TODO:
     - Show WiFi signal strength
 
 TO FIX:
-- Missing 'UP/DOWN traffic' icons on some distros
+- Missing 'UP/DOWN traffic' icons on some distros ***should be fixed in v0.1.1***
 
 
 ![4](https://user-images.githubusercontent.com/72889808/209709200-9f4c045e-2b54-4fb3-9758-62c4096e8fc9.png)
