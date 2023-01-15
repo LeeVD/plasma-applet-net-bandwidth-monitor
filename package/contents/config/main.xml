@@ -27,7 +27,7 @@
         </entry>
 
         <entry name="speedUnits" type="String">
-            <default>bytes</default>
+            <default>bits</default>
         </entry>
 
         <entry name="shortUnits" type="Bool">
@@ -39,7 +39,7 @@
         </entry>
 
         <entry name="updateInterval" type="Double">
-            <default>10</default>
+            <default>1000</default>
         </entry>
         <entry name="iconPosition" type="Bool">
             <default>false</default>
