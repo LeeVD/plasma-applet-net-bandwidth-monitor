@@ -521,6 +521,7 @@ Item {
     }
 
     function iconStyle(a){
+        //single line //double line //mixed values
         if (iconType === 'iconA'){
             switch(a) {
                 case 0: return 'ᐃ' 
@@ -530,51 +531,114 @@ Item {
         }
         if (iconType === 'iconB'){
             switch(a) {
-                case 0: return '➚' 
-                case 1: return '➘'
-                case 2: return '➘➚'
+                case 0: return '△' 
+                case 1: return '▽'
+                case 2: return '▽△'
             }
         }
         if (iconType === 'iconC'){
             switch(a) {
-                case 0: return '🮧' 
-                case 1: return '🮦'
-                case 2: return '🮦🮧'
-                }
+                case 0: return '▲' 
+                case 1: return '▼'
+                case 2: return '▼▲'
+            }
         }
         if (iconType === 'iconD'){
             switch(a) {
-                case 0: return '🭋' 
-                case 1: return '🭦'
-                case 2: return '🭦🭋'
+                case 0: return '⮝' 
+                case 1: return '⮟'
+                case 2: return '⮟⮝'
                 }
         }
         if (iconType === 'iconE'){
             switch(a) {
-                case 0: return '🮸' 
-                case 1: return '🮷'
-                case 2: return '🮷🮸'
+                case 0: return '⩓' 
+                case 1: return '⩔'
+                case 2: return '⩔⩓'
                 }
         }
         if (iconType === 'iconF'){
             switch(a) {
-                case 0: return '▲' 
-                case 1: return '▼'
-                case 2: return '▼▲'
+                case 0: return '🢕' 
+                case 1: return '🢗'
+                case 2: return '🢗🢕'
                 }
         }
         if (iconType === 'iconG'){
             switch(a) {
-                case 0: return '⮝'
-                case 1: return '⮟'
-                case 2: return '⮟ ⮝'
+                case 0: return '⋀' 
+                case 1: return '⋁'
+                case 2: return '⋁⋀'
                 }
         }
         if (iconType === 'iconH'){
             switch(a) {
-                case 0: return '🠥'
-                case 1: return '🠧'
-                case 2: return '🠧 🠥'
+                case 0: return '◢'
+                case 1: return '◥'
+                case 2: return '◥◢'
+                }
+        }
+        if (iconType === 'iconI'){
+            switch(a) {
+                case 0: return 'U:'
+                case 1: return 'D:'
+                case 2: return 'U/D'
+                }
+        }
+        if (iconType === 'iconJ'){
+            switch(a) {
+                case 0: return '🠅'
+                case 1: return '🠇'
+                case 2: return '🠇🠅'
+                }
+        }
+        if (iconType === 'iconK'){
+            switch(a) {
+                case 0: return '🠉'
+                case 1: return '🠋'
+                case 2: return '🠋🠉'
+                }
+        }
+        if (iconType === 'iconL'){
+            switch(a) {
+                case 0: return '🡅'
+                case 1: return '🡇'
+                case 2: return '🡇🡅'
+                }
+        }
+        if (iconType === 'iconM'){
+            switch(a) {
+                case 0: return '🡩'
+                case 1: return '🡫'
+                case 2: return '🡫🡩'
+                }
+        }
+        if (iconType === 'iconN'){
+            switch(a) {
+                case 0: return '⮉'
+                case 1: return '⮋'
+                case 2: return '⮋⮉'
+                }
+        }
+        if (iconType === 'iconO'){
+            switch(a) {
+                case 0: return '⇧'
+                case 1: return '⇩'
+                case 2: return '⇩⇧'
+                }
+        }
+        if (iconType === 'iconP'){
+            switch(a) {
+                case 0: return '⮭'
+                case 1: return '⮯'
+                case 2: return '⮯⮭'
+                }
+        }
+        if (iconType === 'iconQ'){
+            switch(a) {
+                case 0: return '⥣'
+                case 1: return '⥥'
+                case 2: return '⥥⥣'
                 }
         }
     }
@@ -588,15 +652,16 @@ Item {
 
     // MERGE speedText and speedUnit - WIP
     function speedText(value) {
+        // data communication 1 kilobit = 1000 bits, while in data storage 1 Kilobyte = 1024 Bytes
         var m    = getBinDec            // binary 1024 | decimal 1000
         var deci = getDecimalPlace();   // # of decimal places
-        var kilo = m;                   // One Kilo is 1024 x
-        var mega = m * m;               // One MB is 1024 Kx
-        var giga = m * m * m;           // One GB is 1024 Mx
-        var tera = m * m * m * m;       // One TB is 1024 Gx
+        var kilo = m;                   // One Kilo is 1024 b/B
+        var mega = m * m;               // One MB is 1024 Kb/B
+        var giga = m * m * m;           // One GB is 1024 Mb/B
+        var tera = m * m * m * m;       // One TB is 1024 Gb/B
 
         if (speedUnits !== 'bits') {
-            value = value * 8
+            value = value / 8
         }
 
         if      (value < kilo)  return value;                        // return bytes if less than a Kx
@@ -606,18 +671,20 @@ Item {
     }
 
     function speedUnit(value) {
+        // data communication 1 kilobit = 1000 bits, while in data storage 1 Kilobyte = 1024 Bytes
         var m    = getBinDec            // binary 1024 | decimal 1000
         var deci = getDecimalPlace();   // # of decimal places
         var kilo = m;                   // One Kilo is 1024 x
         var mega = m * m;               // One MB is 1024 Kx
         var giga = m * m * m;           // One GB is 1024 Mx
         var tera = m * m * m * m;       // One TB is 1024 Gx
-
+        //console.log("bits in: " + value)
         if (speedUnits !== 'bits') {
-            value = value * 8
+            value = value / 8
+            //console.log("bytes out: " + value)
         }
-  
-        if (value < kilo)       return shortUnits ? (boolUnits ? 'b' : 'B') : (boolUnits ? 'b/s' : 'B/s');   // return bytes if less than a KB
+        
+        if (value < kilo)       return shortUnits ? (boolUnits ? 'b' : 'B') : (boolUnits ? 'b/s'  : 'B/s' ); // return bytes if less than a KB
         else if (value < mega)  return shortUnits ? (boolUnits ? 'k' : 'K') : (boolUnits ? 'Kb/s' : 'KB/s'); // return KB if less than a MB
         else if (value < giga)  return shortUnits ? (boolUnits ? 'm' : 'M') : (boolUnits ? 'Mb/s' : 'MB/s'); // return MB if less than a GB
         else                    return shortUnits ? (boolUnits ? 'g' : 'G') : (boolUnits ? 'Gb/s' : 'GB/s'); // return GB if less than a TB                    
