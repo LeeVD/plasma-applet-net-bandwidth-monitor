@@ -5,3 +5,11 @@ Added additional 8 icon styles.
 Added option to move icon position to the right of the down/up data.
 Added option to change data into binary or decimal.
 Added option to add digits after decimal place.
+
+15/01/2023
+# Fix Release - v0.1.1
+Changed speed icons to try and fix issue with missing fonts in setting dropdown.
+Added extra speed icons. Icons taken from HACK and DejaVu Sans.
+Fixed error with update interval, should now start at 1 second.
+Fixed error with bits to bytes calculation, [note to self, divide not multiple... stupid!]
+Added more info to setting section - Numbers + (1000 / 1024), renamed 'Decimal' to 'Metric'.
