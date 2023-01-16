@@ -46,6 +46,7 @@ TODO:
     - Show WiFi signal strength
 
 TO FIX:
+- Time update interval is broken. Wont update when set to new 'n seconds' period. 
 - Missing 'UP/DOWN traffic' icons on some distros ***should be fixed in v0.1.1***
 
 
