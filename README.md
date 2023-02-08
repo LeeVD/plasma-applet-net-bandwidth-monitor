@@ -1,37 +1,46 @@
+![1a](https://user-images.githubusercontent.com/72889808/217653034-4ed63b12-875b-4001-84f7-b3159d933a99.png)
+
 # plasma-applet-net-bandwidth-monitor
 Network bandwidth monitor for plasma using dbus
 
 
-This plasma 5 widget that displays network bandwidth data utilizes the excellent work by dfaust and bstrong5280:
+Plasma 5 widget that displays network bandwidth data. Built upon the foundations of the excellent work by dfaust and bstrong5280:
 
-https://github.com/dfaust/plasma-applet-netspeed-widget/
-
-https://www.opencode.net/bstrong5280/system-monitor-plasmoid
-
+https://github.com/dfaust/plasma-applet-netspeed-widget/  |  https://www.opencode.net/bstrong5280/system-monitor-plasmoid
 
 I've taken the UI element from netspeed-widget and the dbus workings from system-monitor, glued them together and added a few additional UI nice to haves. This widget doesn't need ksysguard to function.
 This is extremely BETA software and the first plasma widget I've done. If you find something or many things that aren't working, let me know and I'll take a look when I can.
 
+v0.2:
+Massive code rewrite for efficiency, understanding of original code workings and ease of reading. Fixed a number of previous issue / bugs from previous release and added more functionality.  Brand new settings and network interface(s) page, touch screen friendly.  More intervals between choices from previous version for finer control.  Holding buttons down for quick change.  Settings and buttons will activate only they need to be.  Added hide when inactive.  Added when interval is chnaged from default 0.5 seconds you have the choice to show on the next UI update, the data collected at that moment or the accumulated data over the last interval time.
+
+Thanks to all those that feedback their experiences using the widget and the thanks received.
+
 
 Available Options:
-- Layout (dfaust)
-- Display Order (dfaust)
-- Show speeds separately (dfaust)
-- Font size (dfaust)(modified)
-- Update interval (dfaust)(modified)
-- Padding
-- Show speed units (dfaust)
-- Speed units (dfaust)
-- Shorten speed units (dfaust)
-- Show speed icons (dfaust)
-- Icon style [8 versions] - more added
-- Show icons on the right
+- Layout
+- Display Order
+- Show speeds separately
+- Font size
+- Update interval
+- Interval data relay -- # NEW
+- Layout Padding
+- Hide when inactive -- # NEW
+- Show speed units
+- Speed units
+- Shorten speed units 
+- Show speed icons
+- Icon style
+- Icon position
 - Numbers [binary, metric]
 - Decimal place
 
+Network Interface(s):
+- monitor individual or multiple interfaces
+
 TODO:
 - Main options:
-    - Hide when inactive
+    - ~~Hide when inactive~~ *DONE*
     - shrink area on taskbar when hidden
     - minimum activivity for hidden
 - ToolTip options:
@@ -46,19 +55,22 @@ TODO:
     - Show WiFi signal strength
 
 TO FIX:
-- Time update interval is broken. Wont update when set to new 'n seconds' period. 
-- Missing 'UP/DOWN traffic' icons on some distros ***should be fixed in v0.1.1***
+- ~~Time update interval is broken. Wont update when set to new 'n seconds' period.~~ *DONE* 
+- ~~Missing 'UP/DOWN traffic' icons on some distros.~~ *DONE*
+
 
 
 ![4](https://user-images.githubusercontent.com/72889808/209709200-9f4c045e-2b54-4fb3-9758-62c4096e8fc9.png)
 
+![A](https://user-images.githubusercontent.com/72889808/217652964-20a0556a-a403-40e5-9e54-5a49bdb83fd5.png)
 
 ![1](https://user-images.githubusercontent.com/72889808/209696486-0419dd51-f7c8-47a4-aba6-1f2fc4590812.png)
 
+![B](https://user-images.githubusercontent.com/72889808/217652736-9e8c7d27-d5eb-486f-ab66-e8bcc28b87ca.png)
 
-![2](https://user-images.githubusercontent.com/72889808/209696495-4a0b6a7e-50f5-4773-a1c5-dff1eecdd568.png)
+![C](https://user-images.githubusercontent.com/72889808/217652754-07799096-c390-4bde-a974-8632371cd54d.png)
 
+![D](https://user-images.githubusercontent.com/72889808/217654861-3e6d21ac-91bd-41eb-a592-5aedf321624b.png)
 
-![3](https://user-images.githubusercontent.com/72889808/209696509-fc4d369f-ed62-4f42-badc-2988e59a5183.png)
 
 
