@@ -13,3 +13,13 @@ Added extra speed icons. Icons taken from HACK and DejaVu Sans.
 Fixed error with update interval, should now start at 1 second.
 Fixed error with bits to bytes calculation, [note to self, divide not multiple... stupid!]
 Added more info to setting section - Numbers + (1000 / 1024), renamed 'Decimal' to 'Metric'.
+
+08/02/2023
+# second Release - v0.2
+Major code rewrite and clean
+Reworked settings / options page
+Reworked Network Interface(s) page
+Fixed previous known bugs
+Added hide when inactive
+Added interval data relay option
+remembered to update the version number in 'About'
