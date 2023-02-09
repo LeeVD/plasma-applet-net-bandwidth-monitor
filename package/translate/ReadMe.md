@@ -14,20 +14,10 @@ Or if you know how to make a pull request
 ## Links
 
 * i18n scripts from: https://github.com/Zren/plasma-applet-lib/tree/master/package/translate
-* https://zren.github.io/kde/docs/widget/#translations-i18n
-* https://techbase.kde.org/Development/Tutorials/Localization/i18n_Build_Systems
-* https://api.kde.org/frameworks/ki18n/html/prg_guide.html
-
-## Examples
-
-* https://l10n.kde.org/stats/gui/trunk-kf5/team/fr/plasma-desktop/
-* https://github.com/psifidotos/nowdock-plasmoid/tree/master/po
-* https://github.com/kotelnik/plasma-applet-redshift-control/tree/master/translations
 
 ## Status
 
 |  Locale  |  Lines  | % Done|
 |----------|---------|-------|
 | Template |      57 |       |
-| en       |    0/57 |    0% |
 | zh_CN    |   57/57 |  100% |
