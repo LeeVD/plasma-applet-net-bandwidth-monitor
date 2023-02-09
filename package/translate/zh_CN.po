@@ -1,0 +1,301 @@
+# Translation of nsw_dbus in zh_CN
+# Copyright (C) 2023
+# This file is distributed under the same license as the nsw_dbus package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nsw_dbus\n"
+"Report-Msgid-Bugs-To: https://github.com/LeeVD/plasma-applet-net-bandwidth-monitor\n"
+"POT-Creation-Date: 2023-02-10 02:25+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.desktop
+msgid "Network Bandwidth DBUS Widget"
+msgstr "Network Bandwidth DBUS 挂件"
+
+#: ../metadata.desktop
+msgid "Network bandwidth"
+msgstr "Network bandwidth"
+
+#: ../contents/config/config.qml
+#, kde-format
+msgid "General"
+msgstr "常规"
+
+#: ../contents/config/config.qml
+#, kde-format
+msgid "Network Interface(s)"
+msgstr "网络接口"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Layout:"
+msgstr "布局"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Automatic"
+msgstr "自动"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Vertical"
+msgstr "垂直"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Horizontal"
+msgstr "水平"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Display order:"
+msgstr "显示顺序："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Upload speed first"
+msgstr "上传网速在前"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Download speed first"
+msgstr "下载网速在前"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Show speeds separately:"
+msgstr "同时显示上传和下载："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Font size:"
+msgstr "字体大小："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Update interval:"
+msgstr "更新间隔："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid " second"
+msgstr " 秒"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid " seconds"
+msgstr " 秒"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Interval data relay:"
+msgstr "数据更新方法："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Current"
+msgstr "0.5 秒内平均值"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Accumulated"
+msgstr "间隔内平均值"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Layout Padding:"
+msgstr "布局对齐："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Default pixels"
+msgstr "默认设置"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid " pixel closer"
+msgstr " 像素近"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid " pixels closer"
+msgstr " 像素近"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid " pixel apart"
+msgstr " 像素远"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid " pixels apart"
+msgstr " 像素远"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Hide when inactive:"
+msgstr "不活动时隐藏："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Show speed units:"
+msgstr "显示网速单位："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Speed units:"
+msgstr "网速单位："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Bits"
+msgstr "Bits"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Bytes"
+msgstr "Bytes"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Shorten speed units:"
+msgstr "更短的网速单位格式："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Show speed icons:"
+msgstr "显示类型图标："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Icon Style:"
+msgstr "图标风格："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "ᐁ ᐃ"
+msgstr "ᐁ ᐃ"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "▽ △"
+msgstr "▽ △"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "▼ ▲"
+msgstr "▼ ▲"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "⮟ ⮝"
+msgstr "⮟ ⮝"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "⩔ ⩓"
+msgstr "⩔ ⩓"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "🢗 🢕"
+msgstr "🢗 🢕"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "⋁ ⋀"
+msgstr "⋁ ⋀"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "◥ ◢"
+msgstr "◥ ◢"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "D: U"
+msgstr "D: U"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "🠇 🠅"
+msgstr "🠇 🠅"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "🠋 🠉"
+msgstr "🠋 🠉"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "🡇 🡅"
+msgstr "🡇 🡅"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "🡫 🡩"
+msgstr "🡫 🡩"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "⮋ ⮉"
+msgstr "⮋ ⮉"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "⇩ ⇧"
+msgstr "⇩ ⇧"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "⮯ ⮭"
+msgstr "⮯ ⮭"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "⥥ ⥣"
+msgstr "⥥ ⥣"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Icon position:"
+msgstr "图标位置："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Left"
+msgstr "左"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Right"
+msgstr "右"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Numbers:"
+msgstr "数值进位："
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Binary (1024)"
+msgstr "二进制（1024）"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Metric (1000)"
+msgstr "公制（1000）"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Decimal Place:"
+msgstr "保留小数点："

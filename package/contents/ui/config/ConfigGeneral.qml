@@ -63,7 +63,7 @@ Item {
         Label {
             Layout.row:                 1
             Layout.column:              1
-            text:                       i18n('Layout:')
+            text:                       i18n("Layout:")
         }
         RowLayout {
             RadioButton {
@@ -98,7 +98,7 @@ Item {
         Label {
             Layout.row:                 2
             Layout.column:              1
-            text:                       i18n('Display order:')
+            text:                       i18n("Display order:")
         }
         RowLayout {
             RadioButton {
@@ -121,7 +121,7 @@ Item {
         Label {
             Layout.row: 3
             Layout.column: 1
-            text: i18n('Show speeds separately:')
+            text: i18n("Show speeds separately:")
         }
         CheckBox {
             id: showSeparately
@@ -134,7 +134,7 @@ Item {
         Label {
             Layout.row: 4
             Layout.column: 1
-            text: i18n('Font size:')
+            text: i18n("Font size:")
         }
         RowLayout {
             id: fontSizeRow
@@ -236,7 +236,7 @@ Item {
         Label {
             Layout.row: 5
             Layout.column: 1
-            text: i18n('Update interval:')
+            text: i18n("Update interval:")
         }
         RowLayout {
             id: intervalRow
@@ -281,8 +281,8 @@ Item {
                 Label {
                     id: intervalLabel
                     text: {
-                        if (cfg_updateInterval===1000)  return (cfg_updateInterval / 1000) + " second"
-                        else                            return (cfg_updateInterval / 1000) + " seconds"
+                        if (cfg_updateInterval===1000)  return (cfg_updateInterval / 1000) + i18n(" second")
+                        else                            return (cfg_updateInterval / 1000) + i18n(" seconds")
                     }
                 }
             }
@@ -342,7 +342,7 @@ Item {
         Label {
             Layout.row:                 6
             Layout.column:              1
-            text:                       i18n('Interval data relay:')
+            text:                       i18n("Interval data relay:")
         }
         RowLayout {
             id: accumRow
@@ -379,7 +379,7 @@ Item {
         Label {
             Layout.row:                 7
             Layout.column:              1
-            text:                       i18n('Layout Padding:')
+            text:                       i18n("Layout Padding:")
         }
         RowLayout {
             id:                         paddingRow
@@ -418,15 +418,15 @@ Item {
             }
             function paddingText() {        // MATH -i * -1 = +i
                 if          (cfg_layoutPadding === 0) {
-                    return "Default pixels"
+                    return i18n("Default pixels")
                 // NEGATIVE NUMBER = MOVE LAYOUT CLOSER
                 } else if   (Math.sign(cfg_layoutPadding) === -1) {   //Math.sign returns '-1' if number is a negative
-                    if      (cfg_layoutPadding === -1) return (cfg_layoutPadding * -1) + " pixel closer"
-                    return  (cfg_layoutPadding * -1) + " pixels closer"
+                    if      (cfg_layoutPadding === -1) return (cfg_layoutPadding * -1) + i18n(" pixel closer")
+                    return  (cfg_layoutPadding * -1) + i18n(" pixels closer")
                 // POSITIVE NUMBER = MOVE LAYOUT APART
                 } else {
-                    if      (cfg_layoutPadding ===  1) return cfg_layoutPadding + " pixel apart"
-                    return   cfg_layoutPadding + " pixels apart"
+                    if      (cfg_layoutPadding ===  1) return cfg_layoutPadding + i18n(" pixel apart")
+                    return   cfg_layoutPadding + i18n(" pixels apart")
                 }
             }
             Rectangle {
@@ -493,7 +493,7 @@ Item {
         Label {
             Layout.row:                 8
             Layout.column:              1
-            text:                       i18n('Hide when inactive:')
+            text:                       i18n("Hide when inactive:")
         }
         CheckBox {
             id:                         hideInactive
@@ -521,7 +521,7 @@ Item {
         Label {
             Layout.row:                 10
             Layout.column:              1
-            text:                       i18n('Show speed units:')
+            text:                       i18n("Show speed units:")
         }
         CheckBox {
             id:                         showUnits
@@ -533,7 +533,7 @@ Item {
         Label {
             Layout.row:                 11
             Layout.column:              1
-            text:                       i18n('Speed units:')
+            text:                       i18n("Speed units:")
         }
         RowLayout {
             RadioButton {
@@ -557,7 +557,7 @@ Item {
         Label {
             Layout.row:                 12
             Layout.column:              1
-            text:                       i18n('Shorten speed units:')
+            text:                       i18n("Shorten speed units:")
         }
         CheckBox {
             id:                         shortUnits
@@ -579,7 +579,7 @@ Item {
         Label {
             Layout.row:                 14
             Layout.column:              1
-            text:                       i18n('Show speed icons:')
+            text:                       i18n("Show speed icons:")
         }
         CheckBox {
             id:                         showIcons
@@ -591,7 +591,7 @@ Item {
         Label {
             Layout.row:                 15
             Layout.column:              1            
-            text:                       i18n('Icon Style:')
+            text:                       i18n("Icon Style:")
         }
         ComboBox {
             // ICONS FROM HACK FONT AND NATO SAN
@@ -601,23 +601,23 @@ Item {
             textRole:                   'text'
 
             model: [
-                { text: i18n('ᐁ ᐃ') },
-                { text: i18n('▽ △') },
-                { text: i18n('▼ ▲') },
-                { text: i18n('⮟ ⮝') }, 
-                { text: i18n('⩔ ⩓') }, 
-                { text: i18n('🢗 🢕') }, 
-                { text: i18n('⋁ ⋀') }, 
-                { text: i18n('◥ ◢') }, 
-                { text: i18n('D: U:') },
-                { text: i18n('🠇 🠅') },
-                { text: i18n('🠋 🠉') },
-                { text: i18n('🡇 🡅') },
-                { text: i18n('🡫 🡩') },
-                { text: i18n('⮋ ⮉') },
-                { text: i18n('⇩ ⇧') },
-                { text: i18n('⮯ ⮭') },
-                { text: i18n('⥥ ⥣') }
+                { text: i18n("ᐁ ᐃ") },
+                { text: i18n("▽ △") },
+                { text: i18n("▼ ▲") },
+                { text: i18n("⮟ ⮝") }, 
+                { text: i18n("⩔ ⩓") }, 
+                { text: i18n("🢗 🢕") }, 
+                { text: i18n("⋁ ⋀") }, 
+                { text: i18n("◥ ◢") }, 
+                { text: i18n("D: U") },
+                { text: i18n("🠇 🠅") },
+                { text: i18n("🠋 🠉") },
+                { text: i18n("🡇 🡅") },
+                { text: i18n("🡫 🡩") },
+                { text: i18n("⮋ ⮉") },
+                { text: i18n("⇩ ⇧") },
+                { text: i18n("⮯ ⮭") },
+                { text: i18n("⥥ ⥣") }
             ]
 
             onCurrentIndexChanged: cfg_iconType = model[currentIndex]['text']
@@ -635,7 +635,7 @@ Item {
         Label {
             Layout.row:                 16
             Layout.column:              1
-            text:                       i18n('Icon position:')
+            text:                       i18n("Icon position:")
         }
         RowLayout {
             RadioButton {
@@ -669,7 +669,7 @@ Item {
         Label {
             Layout.row:                 18
             Layout.column:              1
-            text:                       i18n('Numbers:')
+            text:                       i18n("Numbers:")
         }
         RowLayout {
             RadioButton {
@@ -693,7 +693,7 @@ Item {
         Label {
             Layout.row:                 19
             Layout.column:              1
-            text:                       i18n('Decimal Place:')
+            text:                       i18n("Decimal Place:")
         }
         RowLayout {
             id:                         decimalPlaceRow
@@ -801,7 +801,7 @@ Item {
         // Label {
         //     Layout.row: 20
         //     Layout.column: 1
-        //     text: i18n('Widget space:')
+        //     text: i18n("Widget space:")
         // }
         // RowLayout {
         //     id: hideZoneRow

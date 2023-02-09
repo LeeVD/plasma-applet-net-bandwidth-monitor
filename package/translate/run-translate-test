@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Requires plasmoidviewer
+packageDir=../
+
+QML_DISABLE_DISK_CACHE=true plasmoidviewer -a "$packageDir" -l topedge -f horizontal -x 0 -y 0

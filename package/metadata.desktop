@@ -9,10 +9,13 @@ X-KDE-PluginInfo-Email=thoth360@hotmail.com
 X-KDE-PluginInfo-License=GPL3
 X-KDE-PluginInfo-Name=org.kde.nsw_dbus
 X-KDE-PluginInfo-Version=v0.2
-X-KDE-PluginInfo-Website=https://github.com/leevd
+X-KDE-PluginInfo-Website=https://github.com/LeeVD/plasma-applet-net-bandwidth-monitor
 X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
 X-Plasma-RemoteLocation=
 X-KDE-PluginInfo-Category=System Information
 Icon=network-connect
+
+Name[zh_CN]=Network Bandwidth DBUS 挂件
+Comment[zh_CN]=Network bandwidth
