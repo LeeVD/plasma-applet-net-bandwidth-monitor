@@ -817,7 +817,7 @@ Item {
 
             const [downSpeed, upSpeed] = multiNetAddition()
 
-            // Range of elapsedTime: [0.5, UPDATE_INTERVAL]
+            // Range of accumulatorTime: [0.5, UPDATE_INTERVAL]
             accumulatorTime += TRIGGER_INTERVAL
             
             if (accumulatorTime < UPDATE_INTERVAL) {                 // STARTING CODE [ STARTS AT 0.5 ]
