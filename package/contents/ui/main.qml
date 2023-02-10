@@ -50,7 +50,7 @@ Item {
     property var        netDataByte:        []
     property var        netDataTotal:       []
     property var        netDataAccumulator: []      
-    property var        accumulatorCounter: 0
+    property var        accumulatorTime: 0  // seconds
     //property var        getIPInfo:          []
     //property var        ip:                 []
     //property var        sm:                 []

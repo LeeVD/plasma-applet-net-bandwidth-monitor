@@ -778,7 +778,7 @@ Item {
 
                     netDataAccumulator.down =   0       // RESET ACCUMULATOR DATA FOR NEXT COUNT
                     netDataAccumulator.up =     0
-                    accumulatorCounter =        0       // RESET ACCUMULATOR COUNTER, USED TO TRIGGER updateInterval AT THE CORRECT TIME
+                    accumulatorTime =        0          // RESET ACCUMULATOR TIME, USED TO RECORD THE accumulated time
 
                 } else {
                     var values = multiNetAddition()     // ADD VALUES FOR MULTIPLE ACTIVE NETWORKS
@@ -815,16 +815,12 @@ Item {
             const TRIGGER_INTERVAL = 0.5
             const UPDATE_INTERVAL = updateInterval / 1000       // unit of updateInterval is miltseconds
 
-            const SPEED_VALUE = multiNetAddition()
-            const downSpeed = SPEED_VALUE[0]
-            const upSpeed = SPEED_VALUE[1]
-
-            let elapsedTime = 0                                 // seconds
+            const [downSpeed, upSpeed] = multiNetAddition()
 
             // Range of elapsedTime: [0.5, UPDATE_INTERVAL]
-            elapsedTime += TRIGGER_INTERVAL
+            accumulatorTime += TRIGGER_INTERVAL
             
-            if (elapsedTime < UPDATE_INTERVAL) {                 // STARTING CODE [ STARTS AT 0.5 ]
+            if (accumulatorTime < UPDATE_INTERVAL) {                 // STARTING CODE [ STARTS AT 0.5 ]
                 // flow(bits) = speed(bits/s) * time(seconds)
                 netDataAccumulator.down   += downSpeed * TRIGGER_INTERVAL
                 netDataAccumulator.up     += upSpeed   * TRIGGER_INTERVAL
@@ -834,15 +830,17 @@ Item {
 
                 // The average speed of the interval
                 // speed(bit/s) = flow(bits) / time(seconds)
-                netDataAccumulator.down /= elapsedSeconds
-                netDataAccumulator.up /= elapsedSeconds
+                netDataAccumulator.down /= accumulatorTime
+                netDataAccumulator.up /= accumulatorTime
             } 
-            // console.log("updateInterval:                    " + updateInterval)
-            // console.log("-- accumulatorCounter out:         " + accumulatorCounter)
-            // console.log("netDataBits[i].down:               " + downSpeed) //netDataBits[i].down)
-            // console.log("netDataBits[i].up:                 " + upSpeed) //netDataBits[i].up)
-            // console.log("netDataAccumulator.down:           " + netDataAccumulator.down)
-            // console.log("netDataAccumulator.up:             " + netDataAccumulator.up)
+            console.log("-----------------------------------")
+            console.log("updateInterval:                    " + updateInterval)
+            console.log("-- UPDATE_INTERVAL:                " + UPDATE_INTERVAL)
+            console.log("-- accumulatorTime:                " + accumulatorTime)
+            console.log("netDataBits[i].down:               " + downSpeed) //netDataBits[i].down)
+            console.log("netDataBits[i].up:                 " + upSpeed) //netDataBits[i].up)
+            console.log("netDataAccumulator.down:           " + netDataAccumulator.down)
+            console.log("netDataAccumulator.up:             " + netDataAccumulator.up)
         }
     }
     
