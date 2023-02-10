@@ -87,12 +87,6 @@ Item {
             // NEW DBUS DATA RECIEVED EVERY 0.5 SECONDS
             sysMonitor.statsUpd(keys, values)
 
-            // no network
-            if (numCheckedNets < 1) {
-                uiUpdateTimer = 0
-                return
-            }
-
             // updateInterval === 500
             if (updateInterval <= 500) {
                 sysMonitor.updateUi()
