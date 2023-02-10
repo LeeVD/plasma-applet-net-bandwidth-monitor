@@ -812,24 +812,35 @@ Item {
 
             // IF ACTIVATED, WILL TRIGGER EVRY 500 MILISECONDS
 
-            var values = multiNetAddition()
-            var countx = updateInterval / 500                   // GET NUMBER OF TICKS FOR COUNTER
+            const TRIGGER_INTERVAL = 0.5
+            const UPDATE_INTERVAL = updateInterval / 1000       // unit of updateInterval is miltseconds
 
-            if (accumulatorCounter < countx) {                  // STARTING CODE [ STARTS AT 500 ]
+            const SPEED_VALUE = multiNetAddition()
+            const downSpeed = SPEED_VALUE[0]
+            const upSpeed = SPEED_VALUE[1]
 
-                    netDataAccumulator.down   += values[0]
-                    netDataAccumulator.up     += values[1]
-            } //else 
-            if (accumulatorCounter === countx) {                // ENDING CODE
+            let elapsedTime = 0                                 // seconds
 
-                    netDataAccumulator.down   += values[0]      //netDataBits[i].down
-                    netDataAccumulator.up     += values[1]      //netDataBits[i].up
+            // Range of elapsedTime: [0.5, UPDATE_INTERVAL]
+            elapsedTime += TRIGGER_INTERVAL
+            
+            if (elapsedTime < UPDATE_INTERVAL) {                 // STARTING CODE [ STARTS AT 0.5 ]
+                // flow(bits) = speed(bits/s) * time(seconds)
+                netDataAccumulator.down   += downSpeed * TRIGGER_INTERVAL
+                netDataAccumulator.up     += upSpeed   * TRIGGER_INTERVAL
+            } else {                                            // ENDING CODE
+                netDataAccumulator.down   += downSpeed * TRIGGER_INTERVAL
+                netDataAccumulator.up     += upSpeed   * TRIGGER_INTERVAL
+
+                // The average speed of the interval
+                // speed(bit/s) = flow(bits) / time(seconds)
+                netDataAccumulator.down /= elapsedSeconds
+                netDataAccumulator.up /= elapsedSeconds
             } 
-            accumulatorCounter            += 1
             // console.log("updateInterval:                    " + updateInterval)
             // console.log("-- accumulatorCounter out:         " + accumulatorCounter)
-            // console.log("netDataBits[i].down:               " + values[0]) //netDataBits[i].down)
-            // console.log("netDataBits[i].up:                 " + values[1]) //netDataBits[i].up)
+            // console.log("netDataBits[i].down:               " + downSpeed) //netDataBits[i].down)
+            // console.log("netDataBits[i].up:                 " + upSpeed) //netDataBits[i].up)
             // console.log("netDataAccumulator.down:           " + netDataAccumulator.down)
             // console.log("netDataAccumulator.up:             " + netDataAccumulator.up)
         }
