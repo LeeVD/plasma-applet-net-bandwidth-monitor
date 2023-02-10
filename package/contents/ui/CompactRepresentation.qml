@@ -781,9 +781,7 @@ Item {
                     accumulatorTime =        0          // RESET ACCUMULATOR TIME, USED TO RECORD THE accumulated time
 
                 } else {
-                    var values = multiNetAddition()     // ADD VALUES FOR MULTIPLE ACTIVE NETWORKS
-                    downSpeed = values[0]
-                    upSpeed   = values[1]
+                    [downSpeed, upSpeed] = multiNetAddition()     // ADD VALUES FOR MULTIPLE ACTIVE NETWORKS
                 }
             } 
         }
@@ -833,14 +831,14 @@ Item {
                 netDataAccumulator.down /= accumulatorTime
                 netDataAccumulator.up /= accumulatorTime
             } 
-            console.log("-----------------------------------")
-            console.log("updateInterval:                    " + updateInterval)
-            console.log("-- UPDATE_INTERVAL:                " + UPDATE_INTERVAL)
-            console.log("-- accumulatorTime:                " + accumulatorTime)
-            console.log("netDataBits[i].down:               " + downSpeed) //netDataBits[i].down)
-            console.log("netDataBits[i].up:                 " + upSpeed) //netDataBits[i].up)
-            console.log("netDataAccumulator.down:           " + netDataAccumulator.down)
-            console.log("netDataAccumulator.up:             " + netDataAccumulator.up)
+            // console.log("-----------------------------------")
+            // console.log("updateInterval:                    " + updateInterval)
+            // console.log("-- UPDATE_INTERVAL:                " + UPDATE_INTERVAL)
+            // console.log("-- accumulatorTime:                " + accumulatorTime)
+            // console.log("netDataBits[i].down:               " + downSpeed) //netDataBits[i].down)
+            // console.log("netDataBits[i].up:                 " + upSpeed) //netDataBits[i].up)
+            // console.log("netDataAccumulator.down:           " + netDataAccumulator.down)
+            // console.log("netDataAccumulator.up:             " + netDataAccumulator.up)
         }
     }
     
