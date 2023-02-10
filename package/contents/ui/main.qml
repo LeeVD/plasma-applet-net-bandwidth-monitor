@@ -87,15 +87,22 @@ Item {
             // NEW DBUS DATA RECIEVED EVERY 0.5 SECONDS
             sysMonitor.statsUpd(keys, values)
 
-            // sync statsUpd with updateUi
-            if (getTriggerInterval() === 0) {
-                sysMonitor.updateUi()
-                uiUpdateTimer = 0   // just in case numCheckedNets changed
+            // no network
+            if (numCheckedNets < 1) {
+                uiUpdateTimer = 0
                 return
             }
 
+            // updateInterval === 500
+            if (updateInterval <= 500) {
+                sysMonitor.updateUi()
+                uiUpdateTimer = 0
+                return
+            }
+
+            // multi times statsUpd() once updateUi()
             uiUpdateTimer += 500
-            if (uiUpdateTimer >= getTriggerInterval()) {
+            if (uiUpdateTimer >= updateInterval) {
                 sysMonitor.updateUi()
                 uiUpdateTimer = 0
             }
@@ -112,8 +119,8 @@ Item {
     //     }
     // }
 
-    function getTriggerInterval() {
-        if (numCheckedNets < 1)     return 0
-        else                        return updateInterval
-    } 
+    // function getTriggerInterval() {
+    //     if (numCheckedNets < 1)     return 0
+    //     else                        return updateInterval
+    // } 
 }
