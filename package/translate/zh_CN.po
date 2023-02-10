@@ -73,7 +73,7 @@ msgstr "下载网速在前"
 #: ../contents/ui/config/ConfigGeneral.qml
 #, kde-format
 msgid "Show speeds separately:"
-msgstr "同时显示上传和下载："
+msgstr "分别显示上传下载网速："
 
 #: ../contents/ui/config/ConfigGeneral.qml
 #, kde-format
