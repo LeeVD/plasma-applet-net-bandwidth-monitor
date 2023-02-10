@@ -80,21 +80,37 @@ Item {
     
     DbusData {
         id: dbusData
+
+        property double uiUpdateTimer: 0
+
         onNewSensorData: {
             // NEW DBUS DATA RECIEVED EVERY 0.5 SECONDS
             sysMonitor.statsUpd(keys, values)
+
+            // sync statsUpd with updateUi
+            if (getTriggerInterval() === 0) {
+                sysMonitor.updateUi()
+                uiUpdateTimer = 0   // just in case numCheckedNets changed
+                return
+            }
+
+            uiUpdateTimer += 500
+            if (uiUpdateTimer >= getTriggerInterval()) {
+                sysMonitor.updateUi()
+                uiUpdateTimer = 0
+            }
         }
     }
-    
-    Timer {
-        interval:   getTriggerInterval() //updateInterval
-        running:    true
-        repeat:     true
+
+    // Timer {
+    //     interval:   getTriggerInterval() //updateInterval
+    //     running:    true
+    //     repeat:     true
         
-        onTriggered: {
-            sysMonitor.updateUi()
-        }
-    }
+    //     onTriggered: {
+    //         sysMonitor.updateUi()
+    //     }
+    // }
 
     function getTriggerInterval() {
         if (numCheckedNets < 1)     return 0
