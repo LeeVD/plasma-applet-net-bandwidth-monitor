@@ -821,7 +821,7 @@ Item {
             accumulatorTime += TRIGGER_INTERVAL
             
             if (accumulatorTime < UPDATE_INTERVAL) {                 // STARTING CODE [ STARTS AT 0.5 ]
-                // flow(bits) = speed(bits/s) * time(seconds)
+                // traffic(bits) = speed(bits/s) * time(seconds)
                 netDataAccumulator.down   += downSpeed * TRIGGER_INTERVAL
                 netDataAccumulator.up     += upSpeed   * TRIGGER_INTERVAL
             } else {                                            // ENDING CODE
@@ -829,7 +829,7 @@ Item {
                 netDataAccumulator.up     += upSpeed   * TRIGGER_INTERVAL
 
                 // The average speed of the interval
-                // speed(bit/s) = flow(bits) / time(seconds)
+                // speed(bit/s) = traffic(bits) / time(seconds)
                 netDataAccumulator.down /= accumulatorTime
                 netDataAccumulator.up /= accumulatorTime
             } 
