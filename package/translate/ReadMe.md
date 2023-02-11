@@ -8,12 +8,13 @@ Or if you know how to make a pull request
 
 ## Scripts
 
-* `sh ./merge` will parse the `i18n()` calls in the `*.qml` files and write it to the `template.pot` file. Then it will merge any changes into the `*.po` language files.
-* `sh ./build` will convert the `*.po` files to it's binary `*.mo` version and move it to `contents/locale/...` which will bundle the translations in the `*.plasmoid` without needing the user to manually install them.
+* `bash ./merge` will parse the `i18n()` calls in the `*.qml` files and write it to the `template.pot` file. Then it will merge any changes into the `*.po` language files.
+* `bash ./build` will convert the `*.po` files to it's binary `*.mo` version and move it to `contents/locale/...` which will bundle the translations in the `*.plasmoid` without needing the user to manually install them.
 
 ## Links
 
 * i18n scripts from: https://github.com/Zren/plasma-applet-lib/tree/master/package/translate
+* https://zren.github.io/kde/docs/widget/#translations-i18n
 
 ## Status
 
