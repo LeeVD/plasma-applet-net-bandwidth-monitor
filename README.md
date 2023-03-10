@@ -12,8 +12,10 @@ I've taken the UI element from netspeed-widget and the dbus workings from system
 This is extremely BETA software and the first plasma widget I've done. If you find something or many things that aren't working, let me know and I'll take a look when I can.
 
 v0.2:
-
 Massive code rewrite for efficiency, understanding of original code workings and ease of reading. Fixed a number of previous issue / bugs from previous release and added more functionality.  Brand new settings and network interface(s) page, touch screen friendly.  More intervals between choices from previous version for finer control.  Holding buttons down for quick change.  Settings and buttons will activate only they need to be.  Added hide when inactive.  Added when interval is chnaged from default 0.5 seconds you have the choice to show on the next UI update, the data collected at that moment or the accumulated data over the last interval time.  All interfaces will be automatically monitored unless disabled from install and loading up.
+
+v0.3:
+Continued code clean up, merged a couple of simular functions, rewrote function for managing suffix. Rewrite of the setting section to include 'information buttons' as a tooltip replacement, more touchscreen friendly. Fixed (i think) an issue with user settings related to network interfaces selections being ignored. Added more options for 'per seconds' choice | show | hide, Added option for Interval delay data management.
 
 Thanks to all those that feedback their experiences using the widget and the thanks received.
 
@@ -26,13 +28,15 @@ Available Options:
 - Show speeds separately
 - Font size
 - Update interval
-- Interval data relay -- NEW
+- Interval data relay
 - Layout Padding
-- Hide when inactive -- NEW
+- Hide when inactive
 - Show speed units
 - Speed units
 - Shorten speed units 
 - Show speed icons
+- Show 'per seconds' suffix -- NEW
+- 'Per seconds' prefix -- NEW
 - Icon style
 - Icon position
 - Numbers [binary, metric]
