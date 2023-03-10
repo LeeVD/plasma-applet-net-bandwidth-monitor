@@ -49,7 +49,7 @@ TODO:
 - Main options:
     - ~~Hide when inactive~~ *DONE*
     - shrink area on taskbar when hidden
-    - minimum activivity for hidden
+    - minimum activity for hidden
 - ToolTip options:
     - Show ToolTip 
     - Show bandwidth Totals
