@@ -27,7 +27,7 @@ remembered to update the version number in 'About'
 10/03/2023
 # Third Release - v0.3
 Continued code clean up
-merged a couple of simular functions
+merged a couple of similar functions
 rewrote function for managing suffix
 Rewrite of the setting section to include 'information buttons' as a tooltip replacement, more touchscreen friendly. 
 Fixed (i think) an issue with user settings related to network interfaces selections being ignored. 
