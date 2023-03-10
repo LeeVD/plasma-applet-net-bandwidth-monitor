@@ -15,7 +15,7 @@ Fixed error with bits to bytes calculation, [note to self, divide not multiple..
 Added more info to setting section - Numbers + (1000 / 1024), renamed 'Decimal' to 'Metric'.
 
 08/02/2023
-# second Release - v0.2
+# Second Release - v0.2
 Major code rewrite and clean
 Reworked settings / options page
 Reworked Network Interface(s) page
@@ -23,3 +23,13 @@ Fixed previous known bugs
 Added hide when inactive
 Added interval data relay option
 remembered to update the version number in 'About'
+
+10/03/2023
+# Third Release - v0.3
+Continued code clean up
+merged a couple of simular functions
+rewrote function for managing suffix
+Rewrite of the setting section to include 'information buttons' as a tooltip replacement, more touchscreen friendly. 
+Fixed (i think) an issue with user settings related to network interfaces selections being ignored. 
+Added more options for 'per seconds' choice | show | hide
+Added option for Interval delay data management.
