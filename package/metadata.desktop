@@ -16,3 +16,6 @@ X-Plasma-MainScript=ui/main.qml
 X-Plasma-RemoteLocation=
 X-KDE-PluginInfo-Category=System Information
 Icon=network-connect
+
+Name[zh_CN]=Network Bandwidth DBUS Widget
+Comment[zh_CN]=网络速度

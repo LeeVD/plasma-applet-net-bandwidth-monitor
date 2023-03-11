@@ -1,0 +1,490 @@
+# Translation of nsw_dbus in LANGUAGE
+# Copyright (C) 2023
+# This file is distributed under the same license as the nsw_dbus package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nsw_dbus\n"
+"Report-Msgid-Bugs-To: https://github.com/leevd\n"
+"POT-Creation-Date: 2023-03-11 12:40+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.desktop
+msgid "Network Bandwidth DBUS Widget"
+msgstr ""
+
+#: ../metadata.desktop
+msgid "Network bandwidth"
+msgstr ""
+
+#: ../contents/config/config.qml
+#, kde-format
+msgid "General"
+msgstr ""
+
+#: ../contents/config/config.qml
+#, kde-format
+msgid "Network"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "i"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Layout:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Automatic"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Vertical"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Horizontal"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Should automatically adjust to size avaliable in taskbar."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Upload and Download will be stacked on top of each other:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Upload and Download will be aligned side by side:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Display order:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Upload speed first"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Download speed first"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Upload data on the top in Vertical layout or left in Horizontal."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Download data on the top in Vertical layout or left in Horizontal."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Show speeds separately:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Checked"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "The Upload and Download data will be displayed seperatey either stacked or side by side."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Unchecked"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "The Upload and Download data will be combined both in data calculation and display. Only one row of data will be shown combining both data measurements with a matching icon."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Font size:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Increase font size, maximum 200%."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Decrease font size, minimum 50%"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Update interval:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "%1 second"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "%1 seconds"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Summary"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Controls the time interval new network data is displayed in the widget."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Adjustments are in 0.5 second increments."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Increase the time interval, maximum 5 seconds."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Decrease the time interval, minimum 0.5 seconds."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Interval data relay:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Current"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Average"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Accumulated"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "This option becomes usable when 'Update interval' is above 0.5 seconds."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid ""
+"Shows the amount of used network speed at the interval set in 'Update interval'. For example, if 'Update interval' is 4 seconds, at every 4th second the display will only show the amount of speed "
+"traversing at that point (statistical value for the past 0.5 seconds, this is the minimum resolution of the data source) in time. The display will not refresh for the following 4 seconds."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid ""
+"The mathmatically correct way to calculate the network speed over time. This setting will return the network speed averaged over the period specified in 'Update interval'. Using the per second "
+"prefix ('/s' or 'ps') is correct with this option."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid ""
+"Returns the accumulated network traffic over the specified time period. For example, if 'Update interval' is set to 4 seconds, at every 4th second you will be presented with the sum total of "
+"network traffic over the time period selected. Using the per second prefix ('/s' or 'ps') with this option is not technically correct but the choice is yours."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Layout Padding:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Default pixels"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "%1 pixel closer"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "%1 pixels closer"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "%1 pixel apart"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "%1 pixels apart"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Move the upload and download data rows closer together, maximum 10 pixels closer."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Increase the distance between upload and download data rows, maximum 10 pixels apart."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Hide when inactive:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Hides the display when '0' traffic is reported.  Displays will become vsible again when traffic starts to flow."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Shows the display even when no traffic is traversing the network interfaces."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Show speed units:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Hides the trailing suffix for the bits (b, kib, Mib Gib) or bytes (B, KB, MB, GB)."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Shows the suffixes for bits or bytes."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Speed units:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Bits"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Bytes"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Displays data throughput based on bit units. The default option, bits are normally used to measure a data transfer."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Displays data throughput based on byte units. Second option as bytes can be used to measure an amount of data, normally storage data."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Shorten speed units:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Will only use a single character to represent the bits or bytes suffix, for example kb = k, Mb = M etc.  Per second units will also not be displayed."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "The complete suffix will be displayed including the per second unit."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Show 'per seconds' suffix:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Appends the per second suffix to the trailing measurement unit."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "* This option is technically correct when used in conjunction with 'Interval data relay' choice other than 'Accumulated'."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Removes the per second suffix ('/s' or 'ps') from the trailing bit or byte measurement unit."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "* This option is technically correct when used in conjunction with 'Interval data relay' choice of 'Accumulated'."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Per Seconds prefix:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "/s"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "ps"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Choose between a per second unit of '/s' or 'ps'."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Example, measuring in bits: Kib<b>/s</b> or Kib<b>ps</b>, measuring in bytes: KB<b>/s</b> or KB<b>ps</b>."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Show speed icons:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Displays the Download or Upload icons in the widget."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Hides the Download or Upload icons in the widget."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Icon Style:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Choose the Upload and Download icon style to be displayed in the widget."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Icon position:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Left"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Right"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Choose to have the Upload and Download icons to the left or the right of the speed data."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Numbers:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Binary (1024)"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Metric (1000)"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "In computing, binary 1024 and decimal 1000 are two different ways of measuring units of digital information."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid ""
+"Decimal 1000 is based on the metric system, which is based on powers of 10. In this system, each unit is 10 times larger than the previous unit. For example, 1 kilometer is 1000 meters, 1 megabyte "
+"is 1000 kilobytes, and so on."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid ""
+"Binary 1024 is based on the binary system, which is based on powers of 2. In this system, each unit is twice as large as the previous unit. For example, 1 kilobyte is 1024 bytes, 1 megabyte is 1024 "
+"kilobytes, and so on."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid ""
+"The reason why binary 1024 is used in computing is because computers store and process data in binary (0s and 1s), and it is convenient to use units that are based on powers of 2. However, for some "
+"purposes, such as networking, decimal 1000 units are used instead."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid ""
+"To avoid confusion, it is important to clearly specify which unit system is being used, and to use the correct prefix (e.g., kilo, mega) for the unit. The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have "
+"been introduced to refer to binary 1024 units, while the prefixes 'kilo,' 'mega,' 'giga,' etc. continue to refer to decimal 1000 units."
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Decimal Place:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+#, kde-format
+msgid "Choose the number of decimal fraction digits to the right of the decimal point."
+msgstr ""
