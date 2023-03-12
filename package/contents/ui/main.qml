@@ -113,7 +113,12 @@ Item {
     }
 
     function getTriggerInterval() {
-        if (numCheckedNets < 1)     return 0
-        else                        return updateInterval
+        if (numCheckedNets < 1) {
+            // If no network is checked, only update once
+            sysMonitor.updateUi()
+            return 0
+        } else {
+            return updateInterval
+        }
     } 
 }
