@@ -629,6 +629,14 @@ Item {
         }
     }
 
+    function netSourceObjectValid(obj) {
+        try {
+            return (typeof obj.path === 'string') && (typeof obj.checked === 'boolean')
+        } catch (e) {
+            return false
+        }
+    }
+
     //#####################################################
     
     //2nd
@@ -700,6 +708,10 @@ Item {
         //console.log("NI: "+netSourceEncode(ni))
 
         for (var i = 0; i < pcn.length; i++) {                  // LOOP THROUGH FIRST STORED SETTINGS ARRAY
+            // If there are any errors in config, ignore and override by netInterfaces
+            if (!netSourceObjectValid(pcn[i])) {
+                continue
+            }
             
             for (var ii = 0; ii < ni.length; ii++) {            // LOOP THROUGH SECOND netInterfaces ARRAY
                 
