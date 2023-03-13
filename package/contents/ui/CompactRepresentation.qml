@@ -863,8 +863,9 @@ Item {
             var uploaded       = 0
 
             if (accumulator === 2) {                    // ACCUMULATOR ON [ ACCUMULATED ]
-                downloaded = netDataAccumulator.down
-                uploaded   = netDataAccumulator.up
+                downloaded = netDataAccumulator.down * 0.5  // traffic = speed * time
+                uploaded   = netDataAccumulator.up * 0.5    // Use the associative law here:
+                                                            // (speed1*0.5 + speed2*0.5 + ...) = (speed1 + speed2 + ...) * 0.5
 
             } else if (accumulator === 1) {             // ACCUMULATOR ON [ AVERAGE ]
                 downloaded = getAverage(netDataAccumulator.down)
