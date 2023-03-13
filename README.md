@@ -19,7 +19,7 @@ Continued code clean up, merged a couple of similar functions, rewrote function 
 
 Thanks to all those that feedback their experiences using the widget and the thanks received.
 
-
+##### *** When upgrading via the Plasma 'get widgets' section, make sure you have the new version in the 'about' section.  If in doubt, download the .plasmoid and install via commandline with `plasmapkg2 -i /PATH/xxx.plasmoid`.  Once installed, I've found its a good idea to reboot or log out and in again, it seems to refresh the serialised stored settings. ***
 
 
 Available Options:
@@ -50,6 +50,7 @@ TODO:
     - ~~Hide when inactive~~ *DONE*
     - shrink area on taskbar when hidden
     - minimum activity for hidden
+    - Translations
 - ToolTip options:
     - Show ToolTip 
     - Show bandwidth Totals
