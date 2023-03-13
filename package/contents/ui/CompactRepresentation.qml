@@ -623,17 +623,17 @@ Item {
 
     function netSourceDecode(value) {
         try {
-            return JSON.parse(value)
+            let rawConfig = JSON.parse(value)
+            rawConfig = Array.isArray(rawConfig) ? rawConfig : []
+
+            return rawConfig.filter((obj) => {
+                return obj.hasOwnProperty("path") && obj.hasOwnProperty("name")
+                    && obj.hasOwnProperty("index") && obj.hasOwnProperty("checked")
+                    && (typeof obj.path === "string") && (typeof obj.name === "string")
+                    && (typeof obj.index === "number") && (typeof obj.checked === "boolean")
+            })
         } catch (E) {
             return []
-        }
-    }
-
-    function netSourceObjectValid(obj) {
-        try {
-            return (typeof obj.path === 'string') && (typeof obj.checked === 'boolean')
-        } catch (e) {
-            return false
         }
     }
 
@@ -709,9 +709,6 @@ Item {
 
         for (var i = 0; i < pcn.length; i++) {                  // LOOP THROUGH FIRST STORED SETTINGS ARRAY
             // If there are any errors in config, ignore and override by netInterfaces
-            if (!netSourceObjectValid(pcn[i])) {
-                continue
-            }
             
             for (var ii = 0; ii < ni.length; ii++) {            // LOOP THROUGH SECOND netInterfaces ARRAY
                 
