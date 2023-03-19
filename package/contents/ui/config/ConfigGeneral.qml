@@ -83,7 +83,7 @@ Item {
 
             id: infoButton
             implicitWidth: infoButton.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -161,13 +161,13 @@ Item {
                 color: theme.textColor
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
-                text: i18n("<table>
-                            <tr><td><b>Automatic</b>: </td> <td>Should automatically adjust to size avaliable in taskbar.</td></tr>
-                            <tr><td><b>Vertical</b>: </td> <td>Upload and Download will be stacked on top of each other:</td></tr>
-                            <tr><td></td> <td><img src='../image/1a2.png' width='120' height='65'></td></tr>
-                            <tr><td><b>Horizontal</b>: </td> <td>Upload and Download will be aligned side by side:</td></tr>
-                            <tr><td></td> <td><img src='../image/1b2.png' width='240' height='40'></td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Automatic") + "</b>: </td> <td>" + i18n("Should automatically adjust to size avaliable in taskbar.") +"</td></tr>"
+                        + "<tr><td><b>" + i18n("Vertical") + "</b>: </td> <td>" + i18n("Upload and Download will be stacked on top of each other:") + "</td></tr>"
+                        + "<tr><td></td> <td><img src='../image/1a2.png' width='120' height='65'></td></tr>"
+                        + "<tr><td><b>" + i18n("Horizontal") + "</b>: </td> <td>" + i18n("Upload and Download will be aligned side by side:") + "</td></tr>"
+                        + "<tr><td></td> <td><img src='../image/1b2.png' width='240' height='40'></td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim
@@ -219,7 +219,7 @@ Item {
 
             id: infoButton2
             implicitWidth: infoButton2.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -286,11 +286,11 @@ Item {
                 color: theme.textColor
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
-                text: i18n("<table>
-                            <tr><td><b>Upload speed first</b>: </td>   <td>Upload data on the top in Vertical layout or left in Horizontal.</td></tr>
-                            <tr><td><b>Download speed first</b>: </td> <td>Upload data on the top in Vertical layout or left in Horizontal.</td></tr>
-                            <tr><td></td> <td><img src='../image/2a.png' width='150' height='65'><img src='../image/2b.png' width='250' height='70'></td></tr>
-                            </table>")   
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Upload speed first") + "</b>: </td>   <td>" + i18n("Upload data on the top in Vertical layout or left in Horizontal.") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Download speed first") + "</b>: </td> <td>" + i18n("Download data on the top in Vertical layout or left in Horizontal.") + "</td></tr>"
+                        + "<tr><td></td> <td><img src='../image/2a.png' width='150' height='65'><img src='../image/2b.png' width='250' height='70'></td></tr>"
+                    + "</table>" 
             }
             OpacityAnimator {
                 id:anim2
@@ -333,7 +333,7 @@ Item {
 
             id: infoButton3
             implicitWidth: infoButton3.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -391,11 +391,11 @@ Item {
                 color: theme.textColor
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
-                text: i18n("<table>
-                            <tr><td><b>Checked</b>: </td> <td>The Upload and Download data will be displayed seperatey either stacked or side by side.</td></tr>
-                            <tr><td><b>Unchecked</b>: </td> <td>The Upload and Download data will be combined both in data calculation and display. Only one row of data will be shown combining both data measurements with a matching icon.</td></tr>
-                            <tr><td></td> <td><img src='../image/3a.png' width='305' height='65'></td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Checked") + "</b>: </td> <td>" + i18n("The Upload and Download data will be displayed seperatey either stacked or side by side.") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td>" + i18n("The Upload and Download data will be combined both in data calculation and display. Only one row of data will be shown combining both data measurements with a matching icon.") + "</td></tr>"
+                        + "<tr><td></td> <td><img src='../image/3a.png' width='305' height='65'></td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim3
@@ -438,7 +438,7 @@ Item {
 
             id: infoButton4
             implicitWidth: infoButton4.height
-            text: "i"
+            text: i18n("i")
             //anchors.right: parent.right 
             anchors.right: parent.right 
             onClicked: {
@@ -595,10 +595,10 @@ Item {
                 color: theme.textColor
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
-                text: i18n("<table>
-                            <tr><td><b>▲</b>: </td> <td>    Increase font size, maximum 200%.</td></tr>
-                            <tr><td><b>▼</b>: </td> <td>    Decrease font size, minimum 50%</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Increase font size, maximum 200%.") + "</td></tr>"
+                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Decrease font size, minimum 50%") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim4
@@ -641,7 +641,7 @@ Item {
 
             id: infoButton5
             implicitWidth: infoButton5.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -729,8 +729,8 @@ Item {
                             Label {
                                 id: intervalLabel
                                 text: {
-                                    if (cfg_updateInterval===1000)  return (cfg_updateInterval / 1000) + " second"
-                                    else                            return (cfg_updateInterval / 1000) + " seconds"
+                                    if (cfg_updateInterval===1000)  return i18n("%1 second", (cfg_updateInterval / 1000))
+                                    else                            return i18n("%1 seconds", (cfg_updateInterval / 1000))
                                 }
                             }
                         }
@@ -801,12 +801,12 @@ Item {
                 color: theme.textColor
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
-                text: i18n("<table>
-                            <tr><td><b>Summary</b>: </td> <td>Controls the time interval new network data is displayed in the widget.</td></tr>
-                            <tr><td></td>   <td style='padding-bottom:6px'>Adjustments are in 0.5 second increments.</td></tr>
-                            <tr><td><b>▲</b>: </td> <td>Increase the time interval, maximum 5 seconds.</td></tr>
-                            <tr><td><b>▼</b>: </td> <td>Decrease the time interval, minimum 0.5 seconds.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Summary") + "</b>: </td> <td>" + i18n("Controls the time interval new network data is displayed in the widget.") + "</td></tr>"
+                        + "<tr><td></td>   <td style='padding-bottom:6px'>" + i18n("Adjustments are in 0.5 second increments.") + "</td></tr>"
+                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Increase the time interval, maximum 5 seconds.") + "</td></tr>"
+                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Decrease the time interval, minimum 0.5 seconds.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim5
@@ -852,7 +852,7 @@ Item {
 
             id: infoButton6
             implicitWidth: infoButton6.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -943,18 +943,24 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<div>This option becomes usable when 'Update interval' is above 0.5 seconds.</div><br>
-                            <table>
-                            <tr><td><b>Current</b>: </td> <td style='padding-bottom:6px'>Shows the amount of used network traffic at the interval set in 'Update interval'.  
-                            For example, if 'Update interval' is 4 seconds, at every 4th second the display will only show the amount of traffic traversing at that point in time.  
-                            The display will not refresh for the following 4 seconds.</td></tr>
-                            <tr><td><b>Average</b>: </td> <td style='padding-bottom:6px'>The mathmatically correct way to calculate the network traffic over time.  
-                            This setting will return the network traffic averaged over the period specified in 'Update interval'. 
-                            Using the per second prefix ('/s' or 'ps') is correct with this option.</td></tr>
-                            <tr><td><b>Accumulated</b>: </td> <td>Returns the accumulated network traffic over the specified time period. 
-                            For example, if 'Update interval' is set to 4 seconds, at every 4th second you will be presented with the sum total of network traffic over the time period selected.  
-                            Using the per second prefix ('/s' or 'ps') with this option is not technically correct but the choice is yours.</td></tr>
-                            </table>")
+                text: "<div>" + i18n("This option becomes usable when 'Update interval' is above 0.5 seconds.") + "</div><br>"
+                        + "<table>"
+                        + "<tr><td><b>" + i18n("Current") + "</b>: </td> <td style='padding-bottom:6px'>"
+                        + i18n("Shows the amount of used network speed at the interval set in 'Update interval'. \
+For example, if 'Update interval' is 4 seconds, at every 4th second the display will only show the amount of speed traversing at that point (statistical value for the past 0.5 seconds, this is the minimum resolution of the data source) in time. \
+The display will not refresh for the following 4 seconds.")
+                        + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Average") + "</b>: </td> <td style='padding-bottom:6px'>"
+                        + i18n("The mathmatically correct way to calculate the network speed over time. \
+This setting will return the network speed averaged over the period specified in 'Update interval'. \
+Using the per second prefix ('/s' or 'ps') is correct with this option.")
+                        + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Accumulated") + "</b>: </td> <td>"
+                        + i18n("Returns the accumulated network traffic over the specified time period. \
+For example, if 'Update interval' is set to 4 seconds, at every 4th second you will be presented with the sum total of network traffic over the time period selected. \
+Using the per second prefix ('/s' or 'ps') with this option is not technically correct but the choice is yours.")
+                        + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim6
@@ -998,7 +1004,7 @@ Item {
 
             id: infoButton7
             implicitWidth: infoButton7.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -1081,15 +1087,15 @@ Item {
                         }
                         function paddingText() {        // MATH -i * -1 = +i
                             if          (cfg_layoutPadding === 0) {
-                                return "Default pixels"
+                                return i18n("Default pixels")
                             // NEGATIVE NUMBER = MOVE LAYOUT CLOSER
                             } else if   (Math.sign(cfg_layoutPadding) === -1) {   //Math.sign returns '-1' if number is a negative
-                                if      (cfg_layoutPadding === -1) return (cfg_layoutPadding * -1) + " pixel closer"
-                                return  (cfg_layoutPadding * -1) + " pixels closer"
+                                if      (cfg_layoutPadding === -1) return i18n("%1 pixel closer", (cfg_layoutPadding * -1))
+                                return  i18n("%1 pixels closer", (cfg_layoutPadding * -1))
                             // POSITIVE NUMBER = MOVE LAYOUT APART
                             } else {
-                                if      (cfg_layoutPadding ===  1) return cfg_layoutPadding + " pixel apart"
-                                return   cfg_layoutPadding + " pixels apart"
+                                if      (cfg_layoutPadding ===  1) return i18n("%1 pixel apart", cfg_layoutPadding)
+                                return  i18n("%1 pixels apart", cfg_layoutPadding)
                             }
                         }
                         Rectangle {
@@ -1168,11 +1174,11 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td><b>▲</b>: </td> <td>Move the upload and download data rows closer together, maximum 10 pixels closer.</td></tr>
-                            <tr><td><b>▼</b>: </td> <td>Increase the distance between upload and download data rows, maximum 10 pixels apart.</td></tr>
-                            <tr><td></td> <td><img src='../image/4a.png' width='280' height='85'></td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Move the upload and download data rows closer together, maximum 10 pixels closer.") + "</td></tr>"
+                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Increase the distance between upload and download data rows, maximum 10 pixels apart.") + "</td></tr>"
+                        + "<tr><td></td> <td><img src='../image/4a.png' width='280' height='85'></td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim7
@@ -1215,7 +1221,7 @@ Item {
 
             id: infoButton8
             implicitWidth: infoButton8.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -1282,10 +1288,10 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td><b>Checked</b>: </td> <td style='padding-bottom:6px'>Hides the display when '0' traffic is reported.  Displays will become vsible again when traffic starts to flow. </td></tr>
-                            <tr><td><b>Unchecked</b>: </td> <td style='padding-bottom:6px'>Shows the display even when no traffic is traversing the network interfaces.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Checked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Hides the display when '0' traffic is reported.  Displays will become visible again when traffic starts to flow.") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Shows the display even when no traffic is traversing the network interfaces.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim8
@@ -1328,7 +1334,7 @@ Item {
 
             id: infoButton9
             implicitWidth: infoButton9.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -1389,10 +1395,10 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td><b>Checked</b>: </td> <td style='padding-bottom:6px'>Hides the trailing suffix for the bits (b, kib, Mib Gib) or bytes (B, KB, MB, GB). </td></tr>
-                            <tr><td><b>Unchecked</b>: </td> <td style='padding-bottom:6px'>Shows the suffixes for bits or bytes.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Checked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Hides the trailing suffix for the bits (b, kib, Mib Gib) or bytes (B, KB, MB, GB).") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Shows the suffixes for bits or bytes.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim9
@@ -1435,7 +1441,7 @@ Item {
 
             id: infoButton10
             implicitWidth: infoButton10.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -1506,10 +1512,10 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td><b>Bits</b>: </td> <td style='padding-bottom:6px'>Displays data throughput based on bit units. The default option, bits are normally used to measure a data transfer.</td></tr>
-                            <tr><td><b>Bytes</b>: </td> <td style='padding-bottom:6px'>Displays data throughput based on byte units. Second option as bytes can be used to measure an amount of data, normally storage data.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Bits") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Displays data throughput based on bit units. The default option, bits are normally used to measure a data transfer.") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Bytes") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Displays data throughput based on byte units. Second option as bytes can be used to measure an amount of data, normally storage data.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim10
@@ -1552,7 +1558,7 @@ Item {
 
             id: infoButton11
             implicitWidth: infoButton11.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -1613,10 +1619,10 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td><b>Checked</b>: </td> <td style='padding-bottom:6px'>Will only use a single character to represent the bits or bytes suffix, for example kb = k, Mb = M etc.  Per second units will also not be displayed.</td></tr>
-                            <tr><td><b>Unchecked</b>: </td> <td style='padding-bottom:6px'>The complete suffix will be displayed including the per second unit.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Checked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Will only use a single character to represent the bits or bytes suffix, for example kb = k, Mb = M etc.  Per second units will also not be displayed.") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("The complete suffix will be displayed including the per second unit.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim11
@@ -1659,7 +1665,7 @@ Item {
 
             id: infoButton12
             implicitWidth: infoButton12.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -1721,12 +1727,12 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td><b>Checked</b>: </td> <td style='padding-bottom:6px'>Removes the per second suffix ('/s' or 'ps') from the trailing bit or byte measurement unit.</td></tr> 
-                            <tr><td><b></b></td> <td style='padding-bottom:6px'>* This option is technically correct when used in conjunction with an 'Update Interval' choice other than 1 second. </td></tr>
-                            <tr><td><b>Unchecked</b>: </td> <td style='padding-bottom:6px'>Appends the per second suffix to the trailing measurement unit.</td></tr>
-                            <tr><td><b></b></td> <td style='padding-bottom:6px'>* This option is technically correct when used in conjunction with an 'Update Interval' choice of 1 second. </td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Checked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Appends the per second suffix to the trailing measurement unit.") + "</td></tr>"
+                        + "<tr><td><b></b></td> <td style='padding-bottom:6px'>" + i18n("* This option is technically correct when used in conjunction with 'Interval data relay' choice other than 'Accumulated'.") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Removes the per second suffix ('/s' or 'ps') from the trailing bit or byte measurement unit.") + "</td></tr>"
+                        + "<tr><td><b></b></td> <td style='padding-bottom:6px'>" + i18n("* This option is technically correct when used in conjunction with 'Interval data relay' choice of 'Accumulated'.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim12
@@ -1769,7 +1775,7 @@ Item {
 
             id: infoButton13
             implicitWidth: infoButton13.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -1842,10 +1848,10 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td>Choose between a per second unit of '/s' or 'ps'.</td></tr>
-                            <tr><td>Example, measuring in bits:  Kib<b>/s</b> or Kib<b>ps</b>,  measuring in bytes:  KB<b>/s</b> or KB<b>ps</b>.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td>" + i18n("Choose between a per second unit of '/s' or 'ps'.") + "</td></tr>"
+                        + "<tr><td>" + i18n("Example, measuring in bits: Kib<b>/s</b> or Kib<b>ps</b>, measuring in bytes: KB<b>/s</b> or KB<b>ps</b>.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim13
@@ -1888,7 +1894,7 @@ Item {
 
             id: infoButton14
             implicitWidth: infoButton14.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -1949,10 +1955,10 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td><b>Checked</b>: </td> <td style='padding-bottom:6px'>Displays the Download or Upload icons in the widget.</td></tr>
-                            <tr><td><b>Unchecked</b>: </td> <td style='padding-bottom:6px'>Hides the Download or Upload icons in the widget.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td><b>" + i18n("Checked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Displays the Download or Upload icons in the widget.") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Hides the Download or Upload icons in the widget.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim14
@@ -1995,7 +2001,7 @@ Item {
 
             id: infoButton15
             implicitWidth: infoButton15.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -2048,23 +2054,23 @@ Item {
                         id:                         iconType
                         textRole:                   'text'
                         model: [
-                            { text: i18n('ᐁ ᐃ') },
-                            { text: i18n('▽ △') },
-                            { text: i18n('▼ ▲') },
-                            { text: i18n('⮟ ⮝') }, 
-                            { text: i18n('⩔ ⩓') }, 
-                            { text: i18n('🢗 🢕') }, 
-                            { text: i18n('⋁ ⋀') }, 
-                            { text: i18n('◥ ◢') }, 
-                            { text: i18n('D: U:') },
-                            { text: i18n('🠇 🠅') },
-                            { text: i18n('🠋 🠉') },
-                            { text: i18n('🡇 🡅') },
-                            { text: i18n('🡫 🡩') },
-                            { text: i18n('⮋ ⮉') },
-                            { text: i18n('⇩ ⇧') },
-                            { text: i18n('⮯ ⮭') },
-                            { text: i18n('⥥ ⥣') }
+                            { text: 'ᐁ ᐃ' },
+                            { text: '▽ △' },
+                            { text: '▼ ▲' },
+                            { text: '⮟ ⮝' }, 
+                            { text: '⩔ ⩓' }, 
+                            { text: '🢗 🢕' }, 
+                            { text: '⋁ ⋀' }, 
+                            { text: '◥ ◢' }, 
+                            { text: 'D: U:' },
+                            { text: '🠇 🠅' },
+                            { text: '🠋 🠉' },
+                            { text: '🡇 🡅' },
+                            { text: '🡫 🡩' },
+                            { text: '⮋ ⮉' },
+                            { text: '⇩ ⇧' },
+                            { text: '⮯ ⮭' },
+                            { text: '⥥ ⥣' }
                         ]
                         onCurrentIndexChanged: cfg_iconType = model[currentIndex]['text']
                         Component.onCompleted: {
@@ -2092,9 +2098,9 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td>Choose the Upload and Download icon style to be displayed in the widget.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td>" + i18n("Choose the Upload and Download icon style to be displayed in the widget.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim15
@@ -2137,7 +2143,7 @@ Item {
 
             id: infoButton16
             implicitWidth: infoButton16.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -2208,9 +2214,9 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td>Choose to have the Upload and Download icons to the left or the right of the speed data.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td>" + i18n("Choose to have the Upload and Download icons to the left or the right of the speed data.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim16
@@ -2253,7 +2259,7 @@ Item {
 
             id: infoButton17
             implicitWidth: infoButton17.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -2331,17 +2337,26 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td>In computing, binary 1024 and decimal 1000 are two different ways of measuring units of digital information.
-                            <p>Decimal 1000 is based on the metric system, which is based on powers of 10. In this system, each unit is 10 times larger than the previous unit. 
-                            For example, 1 kilometer is 1000 meters, 1 megabyte is 1000 kilobytes, and so on.</p>
-                            <p>Binary 1024 is based on the binary system, which is based on powers of 2. In this system, each unit is twice as large as the previous unit. 
-                            For example, 1 kilobyte is 1024 bytes, 1 megabyte is 1024 kilobytes, and so on.</p>
-                            <p>The reason why binary 1024 is used in computing is because computers store and process data in binary (0s and 1s), and it is convenient to use units that are based on powers of 2. 
-                            However, for some purposes, such as networking, decimal 1000 units are used instead.</p>
-                            <p>To avoid confusion, it is important to clearly specify which unit system is being used, and to use the correct prefix (e.g., kilo, mega) for the unit. 
-                            The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have been introduced to refer to binary 1024 units, while the prefixes 'kilo,' 'mega,' 'giga,' etc. continue to refer to decimal 1000 units.</p></td></tr>
-                            </table>")
+                text: "<table>" +
+                        + "<tr><td>"
+                        + i18n("In computing, binary 1024 and decimal 1000 are two different ways of measuring units of digital information.")
+                        + "<p>"
+                        + i18n("Decimal 1000 is based on the metric system, which is based on powers of 10. In this system, each unit is 10 times larger than the previous unit. \
+For example, 1 kilometer is 1000 meters, 1 megabyte is 1000 kilobytes, and so on.")
+                        + "</p>"
+                        + "<p>"
+                        + i18n("Binary 1024 is based on the binary system, which is based on powers of 2. In this system, each unit is twice as large as the previous unit. \
+For example, 1 kilobyte is 1024 bytes, 1 megabyte is 1024 kilobytes, and so on.")
+                        + "</p>"
+                        + "<p>"
+                        + i18n("The reason why binary 1024 is used in computing is because computers store and process data in binary (0s and 1s), and it is convenient to use units that are based on powers of 2. \
+However, for some purposes, such as networking, decimal 1000 units are used instead.")
+                        + "</p>"
+                        + "<p>"
+                        + i18n("To avoid confusion, it is important to clearly specify which unit system is being used, and to use the correct prefix (e.g., kilo, mega) for the unit. \
+The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have been introduced to refer to binary 1024 units, while the prefixes 'kilo,' 'mega,' 'giga,' etc. continue to refer to decimal 1000 units.")
+                        + "</p></td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim17
@@ -2384,7 +2399,7 @@ Item {
 
             id: infoButton18
             implicitWidth: infoButton18.height
-            text: "i"
+            text: i18n("i")
             anchors.right: parent.right 
             onClicked: {
                 if (state === false) {  // OPEN NEW TOOLTIP
@@ -2548,9 +2563,9 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 
-                text: i18n("<table>
-                            <tr><td>Choose the number of decimal fraction digits to the right of the decimal point.</td></tr>
-                            </table>")
+                text: "<table>"
+                        + "<tr><td>" + i18n("Choose the number of decimal fraction digits to the right of the decimal point.") + "</td></tr>"
+                    + "</table>"
             }
             OpacityAnimator {
                 id:anim18

@@ -1,8 +1,14 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+# IF ERRORS WITH ECMConfig.cmake AND ecm-config.cmake INSTALL extra-cmake-modules.
 
-find_package(ECM 0.0.11 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+cmake_minimum_required(VERSION 3.5)
 
-find_package(KF5Plasma)
+project(NetBandwidthMonitor VERSION 0.3.1)
 
-plasma_install_package(package org.kde.NetBandwidthMonitor)
+find_package(ECM 1.4.0 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+find_package(KF5 REQUIRED COMPONENTS
+    Plasma # Required for plasma_install_package()
+)
+
+plasma_install_package(package org.kde.nsw_dbus)

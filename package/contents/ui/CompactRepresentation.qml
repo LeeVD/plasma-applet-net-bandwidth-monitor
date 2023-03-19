@@ -571,7 +571,7 @@ Item {
         var ter = m * m * m * m;               // One T is 1024 Gb/B
 
         if (section === 'number') {
-            if      (value < kil)  return  value;                       // return '' if less than a Kx
+            if      (value < kil)  return  value.toFixed(dec);          // return '' if less than a Kx
             else if (value < meg)  return (value / kil).toFixed(dec);   // return Kx if less than a Mx
             else if (value < gig)  return (value / meg).toFixed(dec);   // return Mx if less than a Gx
             else if (value < ter)  return (value / gig).toFixed(dec);   // return Mx if less than a Gx

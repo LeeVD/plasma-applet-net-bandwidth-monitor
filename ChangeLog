@@ -33,3 +33,10 @@ Rewrite of the setting section to include 'information buttons' as a tooltip rep
 Fixed (i think) an issue with user settings related to network interfaces selections being ignored. 
 Added more options for 'per seconds' choice | show | hide
 Added option for Interval delay data management.
+
+19/03/2023
+# Fix Release - v0.3.1
+Corrected issue with multiple decimal fraction digits when using 'Update Interval' above 1 second and using 'Average' or 'Accumulated' for Interval data relay options.
+Modified CMakeLists.txt file.
+Added CatEricka edits to configGeneral.qml (staging for translations)
+Started using Git for source control.
