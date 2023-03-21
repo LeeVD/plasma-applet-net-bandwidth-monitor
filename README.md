@@ -11,19 +11,21 @@ https://github.com/dfaust/plasma-applet-netspeed-widget/  |  https://www.opencod
 I've taken the UI element from netspeed-widget and the dbus workings from system-monitor, glued them together and added a few additional UI nice to haves. This widget doesn't need ksysguard to function.
 This is extremely BETA software and the first plasma widget I've done. If you find something or many things that aren't working, let me know and I'll take a look when I can.
 
-v0.3:
+## v0.3:
 Continued code clean up, merged a couple of similar functions, rewrote function for managing suffix. Rewrite of the setting section to include 'information buttons' as a tooltip replacement, more touchscreen friendly. Fixed (i think) an issue with user settings related to network interfaces selections being ignored. Added more options for 'per seconds' choice | show | hide, Added option for Interval delay data management.
 
-v0.3.1:
+## v0.3.1:
 Small fix release to corrected issue with multiple decimal fraction digits being shown when using 'Update Interval' above 1 second and using 'Average' or 'Accumulated' for Interval data relay options.  Had some issue with compiling so made some modificatios to CMakeLists.txt file. Added CatEricka edits to configGeneral.qml (staging for translations) and setup my IDE and GitHub for correct source control.
 
 
 Thanks to all those that feedback their experiences using the widget and the thanks received.
 
-##### *** When upgrading via the Plasma 'get widgets' section, make sure you have the new version in the 'about' section.  If in doubt, download the .plasmoid and install via commandline with `plasmapkg2 -i /PATH/xxx.plasmoid`.  Once installed, I've found its a good idea to reboot or log out and in again, it seems to refresh the serialised stored settings. ***
+
+## IF EXPERIENCING ISSUES AFTER INSTALL / UPGRADE:
+When upgrading via the Plasma 'get widgets' section, make sure you have the new version in the 'about' section.  If in doubt, download the .plasmoid and install via commandline with ``` plasmapkg2 -i /PATH/xxx.plasmoid ```.  Once installed, I've found its a good idea to reboot or log out and in again, it seems to refresh the serialised stored settings.
 
 
-Available Options:
+## OPTIONS:
 - Layout
 - Display Order
 - Show speeds separately
@@ -42,11 +44,9 @@ Available Options:
 - Icon position
 - Numbers [binary, metric]
 - Decimal place
-
-Network Interface(s):
 - monitor individual or multiple interfaces
 
-TODO:
+## TODO:
 - Main options:
     - shrink area on taskbar when hidden
     - minimum activity for hidden
@@ -62,11 +62,11 @@ TODO:
     - Icon option (Wired, Wireless, Globe)
     - Show WiFi signal strength
 
-TO FIX:
+## TO FIX:
 - Settings window can be resized over page elements, doesnt do it in 'plasmaviewer' enviroment. Is this normal?
 
 
-
+## SCREENSHOTS
 ![4](https://user-images.githubusercontent.com/72889808/209709200-9f4c045e-2b54-4fb3-9758-62c4096e8fc9.png)
 
 ![A](https://user-images.githubusercontent.com/72889808/217652964-20a0556a-a403-40e5-9e54-5a49bdb83fd5.png)
