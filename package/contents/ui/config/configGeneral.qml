@@ -47,7 +47,7 @@ Item {
     //________ COLUMN WIDTH ________ 
     TextMetrics {
         id: titleTextMetrics
-        text: " Show Speeds seperately: "
+        text: " Show Speeds separately: "
         //font.pixelSize: 64
     }
     //________ COLUMN WIDTH ________ 
@@ -162,7 +162,7 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 text: "<table>"
-                        + "<tr><td><b>" + i18n("Automatic") + "</b>: </td> <td>" + i18n("Should automatically adjust to size avaliable in taskbar.") +"</td></tr>"
+                        + "<tr><td><b>" + i18n("Automatic") + "</b>: </td> <td>" + i18n("Should automatically adjust to size available in taskbar.") +"</td></tr>"
                         + "<tr><td><b>" + i18n("Vertical") + "</b>: </td> <td>" + i18n("Upload and Download will be stacked on top of each other:") + "</td></tr>"
                         + "<tr><td></td> <td><img src='../image/1a2.png' width='120' height='65'></td></tr>"
                         + "<tr><td><b>" + i18n("Horizontal") + "</b>: </td> <td>" + i18n("Upload and Download will be aligned side by side:") + "</td></tr>"
@@ -392,7 +392,7 @@ Item {
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
                 text: "<table>"
-                        + "<tr><td><b>" + i18n("Checked") + "</b>: </td> <td>" + i18n("The Upload and Download data will be displayed seperatey either stacked or side by side.") + "</td></tr>"
+                        + "<tr><td><b>" + i18n("Checked") + "</b>: </td> <td>" + i18n("The Upload and Download data will be displayed separately either stacked or side by side.") + "</td></tr>"
                         + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td>" + i18n("The Upload and Download data will be combined both in data calculation and display. Only one row of data will be shown combining both data measurements with a matching icon.") + "</td></tr>"
                         + "<tr><td></td> <td><img src='../image/3a.png' width='305' height='65'></td></tr>"
                     + "</table>"
@@ -951,7 +951,7 @@ For example, if 'Update interval' is 4 seconds, at every 4th second the display 
 The display will not refresh for the following 4 seconds.")
                         + "</td></tr>"
                         + "<tr><td><b>" + i18n("Average") + "</b>: </td> <td style='padding-bottom:6px'>"
-                        + i18n("The mathmatically correct way to calculate the network speed over time. \
+                        + i18n("The mathematically correct way to calculate the network speed over time. \
 This setting will return the network speed averaged over the period specified in 'Update interval'. \
 Using the per second prefix ('/s' or 'ps') is correct with this option.")
                         + "</td></tr>"

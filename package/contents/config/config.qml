@@ -5,7 +5,7 @@ ConfigModel {
     ConfigCategory {
          name: i18n("General")
          icon: 'preferences-desktop-settings'
-         source: 'config/ConfigGeneral.qml'
+         source: 'config/configGeneral.qml'
     }
     ConfigCategory {
         name: i18n("Network")

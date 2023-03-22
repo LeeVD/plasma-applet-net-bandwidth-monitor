@@ -11,7 +11,7 @@ Added option to add digits after decimal place.
 Changed speed icons to try and fix issue with missing fonts in setting dropdown.
 Added extra speed icons. Icons taken from HACK and DejaVu Sans.
 Fixed error with update interval, should now start at 1 second.
-Fixed error with bits to bytes calculation, [note to self, divide not multiple... stupid!]
+Fixed error with bits to bytes calculation.
 Added more info to setting section - Numbers + (1000 / 1024), renamed 'Decimal' to 'Metric'.
 
 08/02/2023
@@ -30,7 +30,7 @@ Continued code clean up
 merged a couple of similar functions
 rewrote function for managing suffix
 Rewrite of the setting section to include 'information buttons' as a tooltip replacement, more touchscreen friendly. 
-Fixed (i think) an issue with user settings related to network interfaces selections being ignored. 
+Fixed (I think) an issue with user settings related to network interfaces selections being ignored. 
 Added more options for 'per seconds' choice | show | hide
 Added option for Interval delay data management.
 
@@ -40,3 +40,9 @@ Corrected issue with multiple decimal fraction digits when using 'Update Interva
 Modified CMakeLists.txt file.
 Added CatEricka edits to configGeneral.qml (staging for translations)
 Started using Git for source control.
+
+21/03/2023
+# Fix Release - v0.3.2
+Small fix for unchecking networks forcing one final update to reset UI data to 0.
+Added zh_CN translation files - Thanks to CatEricka.  
+Corrected spelling mistakes.

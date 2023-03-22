@@ -615,7 +615,7 @@ Item {
         return unit
     }    
 
-    //################## SERIALISATION FIX ###########################
+    //################## SERIALIZATION FIX ###########################
 
     function netSourceEncode(value) {
         return JSON.stringify(value)
@@ -767,7 +767,7 @@ Item {
         target: sysMonitor
         
         function onStatsUpd(pathKeys, values) {
-            // TRIGGERED EVERY 500 MILISECONDS
+            // TRIGGERED EVERY 500 MILLISECONDS
 
             //console.log("CR-onStatsUpd: "+ pathKeys + " || "+ values)
             // qml: CR-onStatsUpd: network/wlp2s0/download,network/wlp2s0/upload || 334,128

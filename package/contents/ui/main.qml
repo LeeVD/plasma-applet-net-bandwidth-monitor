@@ -97,7 +97,7 @@ Item {
     DbusData {
         id: dbusData
         onNewSensorData: {
-            // NEW DBUS DATA RECIEVED EVERY 0.5 SECONDS
+            // NEW DBUS DATA RECEIVED EVERY 0.5 SECONDS
             sysMonitor.statsUpd(keys, values)
         }
     }
@@ -113,7 +113,11 @@ Item {
     }
 
     function getTriggerInterval() {
-        if (numCheckedNets < 1)     return 0
-        else                        return updateInterval
+        if (numCheckedNets < 1) {       // NO NETWORKS SELECTED
+            sysMonitor.updateUi()       // UPDATE UI ONCE TO RESET DATA TO 0 
+            return 0
+        } else {
+            return updateInterval
+        }
     } 
 }
