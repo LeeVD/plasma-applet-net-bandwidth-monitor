@@ -11,11 +11,14 @@ https://github.com/dfaust/plasma-applet-netspeed-widget/  |  https://www.opencod
 I've taken the UI element from netspeed-widget and the dbus workings from system-monitor, glued them together and added a few additional UI nice to haves. This widget doesn't need ksysguard to function.
 This is extremely BETA software and the first plasma widget I've done. If you find something or many things that aren't working, let me know and I'll take a look when I can.
 
-## v0.3:
-Continued code clean up, merged a couple of similar functions, rewrote function for managing suffix. Rewrite of the setting section to include 'information buttons' as a tooltip replacement, more touchscreen friendly. Fixed (i think) an issue with user settings related to network interfaces selections being ignored. Added more options for 'per seconds' choice | show | hide, Added option for Interval delay data management.
 
 ## v0.3.1:
 Small fix release to corrected issue with multiple decimal fraction digits being shown when using 'Update Interval' above 1 second and using 'Average' or 'Accumulated' for Interval data relay options.  Had some issue with compiling so made some modification's to CMakeLists.txt file. Added CatEricka edits to configGeneral.qml (staging for translations) and setup my IDE and GitHub for correct source control.
+
+
+## v0.3.2: 
+Added a small fix for when unchecking all networks the UI didn't update to reflect with 0. It now forces one final update to reset the UI. Added the foundation for translations and added zh_CN translation files - thanks to CatEricka for providing.  Corrected many spelling mistakes! Words are hard.
+
 
 
 Thanks to all those that feedback their experiences using the widget and the thanks received.
