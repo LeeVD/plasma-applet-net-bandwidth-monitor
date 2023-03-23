@@ -615,7 +615,7 @@ Item {
         return unit
     }    
 
-    //################## SERIALIZATION FIX ###########################
+    //################## SERIALISATION FIX ###########################
 
     function netSourceEncode(value) {
         return JSON.stringify(value)
@@ -738,7 +738,7 @@ Item {
                                 ni[i].path + "/totalUpload",
                                 ni[i].path + "/signal")
 
-                // INITIALISE AND SET GLOBAL VARIABLES BASED ON CHECKED:TRUE INTERFACES
+                // INITIALIZE AND SET GLOBAL VARIABLES BASED ON CHECKED:TRUE INTERFACES
                 netDataBits[checkedCount] =   { down:  0, up:  0 };
                 netDataByte[checkedCount] =   { down:  0, up:  0 };
                 netDataTotal[checkedCount] =  { down:  0, up:  0 };
