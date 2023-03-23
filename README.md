@@ -47,6 +47,7 @@ When upgrading via the Plasma 'get widgets' section, make sure you have the new 
 - monitor individual or multiple interfaces
 
 ## TODO:
+## TODO:
 - Main options:
     - shrink area on taskbar when hidden
     - minimum activity for hidden
@@ -66,6 +67,7 @@ When upgrading via the Plasma 'get widgets' section, make sure you have the new 
 - Settings window can be resized over page elements, doesn't do it in 'plasmaviewer' environment. Is this normal?
 
 
+## SCREENSHOTS
 ## SCREENSHOTS
 ![4](https://user-images.githubusercontent.com/72889808/209709200-9f4c045e-2b54-4fb3-9758-62c4096e8fc9.png)
 
