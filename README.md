@@ -70,7 +70,7 @@ When upgrading via the Plasma 'get widgets' section, make sure you have the new 
     - Show WiFi signal strength
 
 ## TO FIX:
-- Settings window can be resized over page elements, doesn't do it in 'plasmaviewer' environment. Is this normal?
+- Settings window can be resized over page elements, doesn't do it in 'plasmoidviewer' environment. Is this normal?
 
 
 
