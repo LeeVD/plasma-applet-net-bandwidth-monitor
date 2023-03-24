@@ -20,6 +20,9 @@ Small fix release to corrected issue with multiple decimal fraction digits being
 Added a small fix for when unchecking all networks the UI didn't update to reflect with 0. It now forces one final update to reset the UI. Added the foundation for translations and added zh_CN translation files - thanks to CatEricka for providing.  Corrected many spelling mistakes! Words are hard.
 
 
+## v0.3.3:
+Update to the translations.
+
 
 Thanks to all those that feedback their experiences using the widget and the thanks received.
 
