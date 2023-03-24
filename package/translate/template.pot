@@ -1,4 +1,4 @@
-# Translation of nsw_dbus in zh_CN
+# Translation of nsw_dbus in LANGUAGE
 # Copyright (C) 2023
 # This file is distributed under the same license as the nsw_dbus package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -12,465 +12,479 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: zh_CN\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../metadata.desktop
 msgid "Network Bandwidth DBUS Widget"
-msgstr "Network Bandwidth DBUS Widget"
+msgstr ""
 
 #: ../metadata.desktop
 msgid "Network bandwidth"
-msgstr "网络速度"
+msgstr ""
 
 #: ../contents/config/config.qml
 #, kde-format
 msgid "General"
-msgstr "常规"
+msgstr ""
 
 #: ../contents/config/config.qml
 #, kde-format
 msgid "Network"
-msgstr "网络"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "i"
-msgstr "i"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Layout:"
-msgstr "布局"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Automatic"
-msgstr "自动布局"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Vertical"
-msgstr "垂直布局"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Horizontal"
-msgstr "水平布局"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Should automatically adjust to size available in taskbar."
-msgstr "自动调整为任务栏中可用的大小。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Upload and Download will be stacked on top of each other:"
-msgstr "上下叠放上传速度和下载速度："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Upload and Download will be aligned side by side:"
-msgstr "并排显示上传速度和下载速度："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Display order:"
-msgstr "显示顺序："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Upload speed first"
-msgstr "上传速度在前"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Download speed first"
-msgstr "下载速度在前"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Upload data on the top in Vertical layout or left in Horizontal."
-msgstr "上传速度显示在垂直布局的顶部，或水平布局的左侧。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Download data on the top in Vertical layout or left in Horizontal."
-msgstr "下载速度显示在垂直布局的顶部，或水平布局的左侧。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Show speeds separately:"
-msgstr "分别显示上传下载速度："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Checked"
-msgstr "选中"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "The Upload and Download data will be displayed separately either stacked or side by side."
-msgstr "上传和下载速度将单独显示"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Unchecked"
-msgstr "取消选中"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "The Upload and Download data will be combined both in data calculation and display. Only one row of data will be shown combining both data measurements with a matching icon."
-msgstr "上传和下载速度相加后显示，仅占用一行空间。同时显示上传和下载的图标。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Font size:"
-msgstr "字体大小："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Increase font size, maximum 200%."
-msgstr "增大字体，最大 200%。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Decrease font size, minimum 50%"
-msgstr "缩小字体，最小 50%。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Update interval:"
-msgstr "更新间隔："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "%1 second"
-msgstr "%1 秒"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "%1 seconds"
-msgstr "%1 秒"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Summary"
-msgstr "简要说明"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Controls the time interval new network data is displayed in the widget."
-msgstr "控制网络速度显示的更新间隔。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Adjustments are in 0.5 second increments."
-msgstr "调整步进为 0.5 秒。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Increase the time interval, maximum 5 seconds."
-msgstr "增加时间间隔，最大 5 秒。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Decrease the time interval, minimum 0.5 seconds."
-msgstr "减少时间间隔，最小 0.5 秒。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Interval data relay:"
-msgstr "更新间隔的计算方式："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Current"
-msgstr "当前值"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Average"
-msgstr "平均值"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Accumulated"
-msgstr "累加值"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "This option becomes usable when 'Update interval' is above 0.5 seconds."
-msgstr "当 “更新间隔” 大于 0.5 秒时，此选项可用。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "Shows the amount of used network speed at the interval set in 'Update interval'. For example, if 'Update interval' is 4 seconds, at every 4th second the display will only show the amount of speed traversing at that point (statistical value for the past 0.5 seconds, this is the minimum resolution of the data source) in time. The display will not refresh for the following 4 seconds."
-msgstr "以 “更新间隔” 设置的频率显示当前（实际上是过去 0.5 秒内，因为这是数据源的最小分辨率）的网络速度。例如 “更新间隔” 为 4 秒，则每隔 4 秒显示一次过去 0.5 秒内的网络速度。在接下来的 4 秒内，显示不会刷新。"
+msgid ""
+"Shows the amount of used network speed at the interval set in 'Update interval'. For example, if 'Update interval' is 4 seconds, at every 4th second the display will only show the amount of speed "
+"traversing at that point (statistical value for the past 0.5 seconds, this is the minimum resolution of the data source) in time. The display will not refresh for the following 4 seconds."
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "The mathematically correct way to calculate the network speed over time. This setting will return the network speed averaged over the period specified in 'Update interval'. Using the per second prefix ('/s' or 'ps') is correct with this option."
-msgstr "计算随时间变化的网络速度的数学上正确方法。此设置将显示 “更新间隔” 中指定时间段内的平均网络速度。使用此选项时，启用 “每秒” 后缀（ “/s” 或 “ps” ）是正确的。"
+msgid ""
+"The mathematically correct way to calculate the network speed over time. This setting will return the network speed averaged over the period specified in 'Update interval'. Using the per second "
+"prefix ('/s' or 'ps') is correct with this option."
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "Returns the accumulated network traffic over the specified time period. For example, if 'Update interval' is set to 4 seconds, at every 4th second you will be presented with the sum total of network traffic over the time period selected. Using the per second prefix ('/s' or 'ps') with this option is not technically correct but the choice is yours."
-msgstr "返回 “更新间隔” 内累计的网络流量。例如， “更新间隔” 设置为 4 秒，则每隔 4 秒您将看到间隔内的网络流量总和。使用此选项时，启用 “每秒” 后缀（ “/s” 或 “ps” ）在技术上是不正确的，但选择权在你。"
+msgid ""
+"Returns the accumulated network traffic over the specified time period. For example, if 'Update interval' is set to 4 seconds, at every 4th second you will be presented with the sum total of "
+"network traffic over the time period selected. Using the per second prefix ('/s' or 'ps') with this option is not technically correct but the choice is yours."
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Layout Padding:"
-msgstr "布局对齐："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Default pixels"
-msgstr "默认设置"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "%1 pixel closer"
-msgstr "减小 %1 像素间距"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "%1 pixels closer"
-msgstr "减小 %1 像素间距"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "%1 pixel apart"
-msgstr "增加 %1 像素间距"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "%1 pixels apart"
-msgstr "增加 %1 像素间距"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Move the upload and download data rows closer together, maximum 10 pixels closer."
-msgstr "缩小上传和下载速度之间的间距，最多 10 个像素。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Increase the distance between upload and download data rows, maximum 10 pixels apart."
-msgstr "增加上传和下载速度之间的间距，最多 10 个像素。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Hide when inactive:"
-msgstr "不活动时隐藏："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Hides the display when '0' traffic is reported.  Displays will become visible again when traffic starts to flow."
-msgstr "流量为 “0” 时隐藏显示。反之会恢复显示。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Shows the display even when no traffic is traversing the network interfaces."
-msgstr "即使没有流量通过网络接口也显示。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Show speed units:"
-msgstr "显示速度单位："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Hides the trailing suffix for the bits (b, kib, Mib Gib) or bytes (B, KB, MB, GB)."
-msgstr "隐藏 bits（b、kib、Mib Gib）或 bytes（B、KB、MB、GB）的尾随后缀。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Shows the suffixes for bits or bytes."
-msgstr "显示 bits 或 bytes 的后缀。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Speed units:"
-msgstr "速度单位："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Bits"
-msgstr "Bits"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Bytes"
-msgstr "Bytes"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Displays data throughput based on bit units. The default option, bits are normally used to measure a data transfer."
-msgstr "以 bit 为单位显示数据吞吐量。默认选项，bit 通常用于测量数据传输。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Displays data throughput based on byte units. Second option as bytes can be used to measure an amount of data, normally storage data."
-msgstr "以 bit 为单位显示数据吞吐量。第二种选择，因为 bytes 可以用来衡量数据量，通常是存储的数据大小"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Shorten speed units:"
-msgstr "更短的速度单位格式："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Will only use a single character to represent the bits or bytes suffix, for example kb = k, Mb = M etc.  Per second units will also not be displayed."
-msgstr "只用单个字符来表示 bits 或 bytes后缀，例如 Kb 显示为 K、Mb 显示为 M 等。每秒的单位也不会显示。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "The complete suffix will be displayed including the per second unit."
-msgstr "将显示完整的后缀，包括每秒单位。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Show 'per seconds' suffix:"
-msgstr "显示单位后缀"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Appends the per second suffix to the trailing measurement unit."
-msgstr "保留单位后的 “每秒” 后缀"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "* This option is technically correct when used in conjunction with 'Interval data relay' choice other than 'Accumulated'."
-msgstr "* 当与 “更新间隔的计算方式” 中 “累加值” 以外的选项一起使用时，在技术上是正确的。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Removes the per second suffix ('/s' or 'ps') from the trailing bit or byte measurement unit."
-msgstr "从测量单位中删除 “每秒” 后缀（ “/s” 或 “ps” ）。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "* This option is technically correct when used in conjunction with 'Interval data relay' choice of 'Accumulated'."
-msgstr "* 当与 “更新间隔的计算方式” 中的 “累加值” 选项一起使用时，在技术上是正确的。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Per Seconds prefix:"
-msgstr "单位后缀"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "/s"
-msgstr "/s"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "ps"
-msgstr "ps"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Choose between a per second unit of '/s' or 'ps'."
-msgstr "在每秒单位 “/s” 或 “ps” 之间进行选择"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Example, measuring in bits: Kib<b>/s</b> or Kib<b>ps</b>, measuring in bytes: KB<b>/s</b> or KB<b>ps</b>."
-msgstr "例如，以 bit 为单位时：Kib<b>/s</b> 或 Kib<b>ps</b>；以 byte 为单位时：KB<b>/s</b> 或 KB<b>ps</b>。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Show speed icons:"
-msgstr "显示速度类型图标："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Displays the Download or Upload icons in the widget."
-msgstr "显示下载或上传图标。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Hides the Download or Upload icons in the widget."
-msgstr "隐藏下载或上传图标。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Icon Style:"
-msgstr "图标风格："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Choose the Upload and Download icon style to be displayed in the widget."
-msgstr "选择上传和下载图标样式。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Icon position:"
-msgstr "图标位置："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Left"
-msgstr "左"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Right"
-msgstr "右"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Choose to have the Upload and Download icons to the left or the right of the speed data."
-msgstr "将上传和下载图标置于速度数据的左侧或右侧。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Numbers:"
-msgstr "数值进位："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Binary (1024)"
-msgstr "二进制（1024）"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Metric (1000)"
-msgstr "公制（1000）"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "In computing, binary 1024 and decimal 1000 are two different ways of measuring units of digital information."
-msgstr "在计算机中，二进制 1024 和十进制 1000 是两种不同的数字信息计量单位。"
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "Decimal 1000 is based on the metric system, which is based on powers of 10. In this system, each unit is 10 times larger than the previous unit. For example, 1 kilometer is 1000 meters, 1 megabyte is 1000 kilobytes, and so on."
-msgstr "十进制的 1000 是基于公制的，公制是基于 10 的幂。在这个系统中，每个单位都比前一个单位大 1000 倍。例如，1 公里是 1000 米，1 megabyte 是 1000 bytes，等等。"
+msgid ""
+"Decimal 1000 is based on the metric system, which is based on powers of 10. In this system, each unit is 10 times larger than the previous unit. For example, 1 kilometer is 1000 meters, 1 megabyte "
+"is 1000 kilobytes, and so on."
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "Binary 1024 is based on the binary system, which is based on powers of 2. In this system, each unit is twice as large as the previous unit. For example, 1 kilobyte is 1024 bytes, 1 megabyte is 1024 kilobytes, and so on."
-msgstr "二进制 1024 是基于二进制的系统，它是基于 2 的幂。在这个系统中，每个单位都是前一个单位的 2^10 倍。例如，1 kilobyte 是 1024 bytes，1 megabyte 是 1024 kilobytes，依此类推。"
+msgid ""
+"Binary 1024 is based on the binary system, which is based on powers of 2. In this system, each unit is twice as large as the previous unit. For example, 1 kilobyte is 1024 bytes, 1 megabyte is 1024 "
+"kilobytes, and so on."
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "The reason why binary 1024 is used in computing is because computers store and process data in binary (0s and 1s), and it is convenient to use units that are based on powers of 2. However, for some purposes, such as networking, decimal 1000 units are used instead."
-msgstr "之所以在计算机中使用二进制 1024 是因为计算机以二进制（0 和 1）存储和处理数据，使用基于 2 的幂的单位很方便。但是，出于某些目的，例如网络，则改为使用十进制的 1000 为单位。"
+msgid ""
+"The reason why binary 1024 is used in computing is because computers store and process data in binary (0s and 1s), and it is convenient to use units that are based on powers of 2. However, for some "
+"purposes, such as networking, decimal 1000 units are used instead."
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "To avoid confusion, it is important to clearly specify which unit system is being used, and to use the correct prefix (e.g., kilo, mega) for the unit. The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have been introduced to refer to binary 1024 units, while the prefixes 'kilo,' 'mega,' 'giga,' etc. continue to refer to decimal 1000 units."
-msgstr "为避免混淆，重要的是要清楚地指定正在使用的单位系统，并为单位使用正确的前缀（例如 kilo、mega）。因此引入前缀 “kibi”、 “mebi”、 “gibi” 等来表示二进制 1024 单位，而前缀 “kilo”、 “mega”、 “giga” 等继续表示十进制 1000 单位."
+msgid ""
+"To avoid confusion, it is important to clearly specify which unit system is being used, and to use the correct prefix (e.g., kilo, mega) for the unit. The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have "
+"been introduced to refer to binary 1024 units, while the prefixes 'kilo,' 'mega,' 'giga,' etc. continue to refer to decimal 1000 units."
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Decimal Place:"
-msgstr "保留小数点："
+msgstr ""
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
 msgid "Choose the number of decimal fraction digits to the right of the decimal point."
-msgstr "选择小数点右边保留的小数位数。"
+msgstr ""
