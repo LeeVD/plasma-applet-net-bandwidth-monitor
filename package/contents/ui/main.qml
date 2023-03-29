@@ -19,6 +19,7 @@
 // kquitapp5 plasmashell
 // kstart5 plasmashell
 // plasmoidviewer -a org.kde.nsw_dbus -l topedge -f horizontal  
+// kstatsviewer --details --remain 'ADDRESS' example: network/wlp2s0/totalDownload  [ View DBUS messages ]
 
 // USEFUL PROGRAMS:
 // Qt QDBusViewer

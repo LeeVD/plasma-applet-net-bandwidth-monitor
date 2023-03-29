@@ -20,5 +20,5 @@ Or if you know how to make a pull request
 
 |  Locale  |  Lines  | % Done|
 |----------|---------|-------|
-| Template |      92 |       |
-| zh_CN    |   92/92 |  100% |
+| Template |      95 |       |
+| zh_CN    |   95/95 |  100% |

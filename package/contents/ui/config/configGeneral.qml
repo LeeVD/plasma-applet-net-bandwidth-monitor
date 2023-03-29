@@ -125,26 +125,46 @@ Item {
                 }
                 Column {
                     RowLayout {
+                        id: testing
+                        function paddingFix(caller) {
+                            // row
+                            if (caller == 'row'){
+                                cfg_layoutPadding   = 0         // RESET PADDING TO DEFAULT
+                                paddingLabel.color  = "grey"    // SET 'Default pixels' FONT COLOR TO GREY
+                                paddingDOWN.enabled = false     // SET BOTH BUTTONS TO DISABLED
+                                paddingUP.enabled   = false 
+                            } else {
+                                paddingLabel.color  = theme.textColor
+                                if (paddingUP.enabled === false && paddingDOWN.enabled === false ) {        // IF BOTH BUTTONS DISABLED, CAME FROM 'row' LAYOUT
+                                    paddingUP.enabled = true
+                                    paddingDOWN.enabled = true
+                                } 
+                            }
+                        }                         
                         RadioButton {
                             id:                     speedLayout_rb0
                             Layout.rightMargin:     20      // PADDING RIGHT
                             checked:                plasmoid.configuration.speedLayout === 'auto'
                             text:                   i18n("Automatic")
-                            onReleased:             cfg_speedLayout = 'auto'
+                            onReleased:            {cfg_speedLayout = 'auto'
+                                                    testing.paddingFix('auto')} 
                         }
                         RadioButton {
                             id:                     speedLayout_rb1
                             Layout.rightMargin:     20      // PADDING RIGHT
                             checked:                plasmoid.configuration.speedLayout === 'column'
                             text:                   i18n("Vertical")
-                            onReleased:             cfg_speedLayout = 'column'    // ONE ABOVE OTHER
+                            onReleased:            {cfg_speedLayout = 'column'      // ONE ABOVE OTHER
+                                                    testing.paddingFix('column')}                             
                         }
                         RadioButton {
                             id:                     speedLayout_rb2
                             checked:                plasmoid.configuration.speedLayout === 'row'
                             text:                   i18n("Horizontal")
-                            onReleased:             cfg_speedLayout = 'row'       // SIDE BY SIDE
+                            onReleased:            {cfg_speedLayout     = 'row'     // SIDE BY SIDE
+                                                    testing.paddingFix('row')}        
                         }
+                       
                     }
                 }
             }
@@ -1028,6 +1048,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton7.verticalCenter
 
             Row {
+                id: rr
                 spacing: 10    
                 Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: infoButtonX.verticalCenter' NOT TO WORK WITH LABEL.
                     id: recAlign7
@@ -1063,7 +1084,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                             if (buttonPressed.text === "▲") {
                                 paddingUP.enabled == true
                                 cfg_layoutPadding -= 1
-                                s = -10
+                                s = -20
 
                                 if (cfg_layoutPadding === s) {
                                     paddingUP.enabled = false
@@ -1075,7 +1096,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                             if (buttonPressed.text === "▼") {
                                 paddingDOWN.enabled == true
                                 cfg_layoutPadding += 1
-                                s = 10
+                                s = 20
 
                                 if (cfg_layoutPadding === s) {
                                     paddingDOWN.enabled = false
@@ -1114,13 +1135,14 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                             border.color: "dark grey"
                             border.width: 0.5
                             radius: 4           
-                            RowLayout {                  
+                            RowLayout {       
+                                id:paddingRow2           
                                 Button {
                                     id: paddingDOWN
                                     text: "▼"
                                     implicitWidth: paddingDOWN.height
                                     Layout.margins: 1   //buttonMargin
-                                    enabled: cfg_layoutPadding != 10
+                                    enabled: cfg_layoutPadding != 20
                                     onPressAndHold: {
                                         paddingRow.buttonPressed = paddingDOWN
                                         paddingButtonTimer.start() 
@@ -1136,7 +1158,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                                     text: "▲"
                                     implicitWidth: paddingUP.height
                                     Layout.margins: 1   //buttonMargin
-                                    enabled: cfg_layoutPadding != -10 
+                                    enabled: cfg_layoutPadding != -20 
                                     onPressAndHold: { 
                                         paddingRow.buttonPressed = paddingUP 
                                         paddingButtonTimer.start() 
@@ -1175,10 +1197,11 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                 wrapMode: Text.Wrap
                 
                 text: "<table>"
-                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Move the upload and download data rows closer together, maximum 10 pixels closer.") + "</td></tr>"
-                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Increase the distance between upload and download data rows, maximum 10 pixels apart.") + "</td></tr>"
-                        + "<tr><td></td> <td><img src='../image/4a.png' width='280' height='85'></td></tr>"
+                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Move the upload and download data rows closer together, maximum 20 pixels closer.") + "</td></tr>"
+                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Increase the distance between upload and download data rows, maximum 20 pixels apart.") + "</td></tr>"
+                        + "<tr><td></td> <td style='padding-bottom:6px'><img src='../image/4a.png' width='280' height='85'></td></tr>"
                     + "</table>"
+                    + i18n("* Function disabled in 'Horizontal' layout mode.")
             }
             OpacityAnimator {
                 id:anim7

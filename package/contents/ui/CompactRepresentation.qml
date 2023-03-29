@@ -24,8 +24,10 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-// import org.kde.plasma.components 3.0 as PlasmaComponents    // used in tooltip section
-// import org.kde.plasma.extras 2.0 as PlasmaExtras            // used in tooltip section
+//import org.kde.plasma.components 3.0 as PlasmaComponents    // used in tooltip section
+//import org.kde.plasma.extras 2.0 as PlasmaExtras            // used in tooltip section
+
+
 
 Item {
     id: itemParent
@@ -317,6 +319,15 @@ Item {
     }
     
 
+    PlasmaCore.ToolTipArea {
+        anchors.fill: parent
+        interactive: true
+        mainText: i18n("Network Bandwidth Monitor")
+        subText: i18n("DBUS Data Source")
+        icon: 'network-connect'        
+    }
+
+
     function dataShown(caller, properties){
         var height = singleLine ? itemParent.height : itemParent.height / 2
         var fontPixelSize =  height * fontHeightRatio * fontSizeScale
@@ -342,10 +353,10 @@ Item {
                         // left : text in t2 & b2  |  right : text in t1 & b1  |  left Alt : see left
                         case 't1': return Text.AlignRight
                         case 't2': return Text.AlignLeft
-                        case 't3': return Text.AlignVCenter
+                        case 't3': return Text.AlignHCenter //Text.AlignVCenter
                         case 'b1': return Text.AlignRight
                         case 'b2': return Text.AlignLeft
-                        case 'b3': return Text.AlignVCenter
+                        case 'b3': return Text.AlignHCenter //Text.AlignVCenter
                     }   
                 case 'anchorL':
                     switch (caller) {
@@ -392,10 +403,10 @@ Item {
                 case 'horizAlign':
                     switch (caller) {
                         // left : text in t2 & b2  |  right : text in t1 & b1  |  left Alt : see left
-                        case 't1': return Text.AlignVCenter
+                        case 't1': return Text.AlignHCenter //Text.AlignVCenter
                         case 't2': return Text.AlignRight
                         case 't3': return Text.AlignLeft
-                        case 'b1': return Text.AlignVCenter
+                        case 'b1': return Text.AlignHCenter //Text.AlignVCenter
                         case 'b2': return Text.AlignRight
                         case 'b3': return Text.AlignLeft
                     }  
@@ -431,12 +442,12 @@ Item {
             case 'height': return  singleLine ? itemParent.parent.height : itemParent.parent.height / 2
             case 'vertiAlign': //return  Text.AlignVCenter Text.AlignTop
                 switch (caller) {
-                    case 't1': return Text.AlignBottom          //Text.AlignVCenter
-                    case 't2': return Text.AlignBottom          //Text.AlignVCenter
-                    case 't3': return Text.AlignBottom          //Text.AlignVCenter
-                    case 'b1': return Text.AlignTop             //Text.AlignVCenter
-                    case 'b2': return Text.AlignTop             //Text.AlignVCenter 
-                    case 'b3': return Text.AlignTop             //Text.AlignVCenter
+                    case 't1': return Text.AlignVCenter //Text.AlignBottom          
+                    case 't2': return Text.AlignVCenter //Text.AlignBottom          
+                    case 't3': return Text.AlignVCenter //Text.AlignBottom          
+                    case 'b1': return Text.AlignVCenter //Text.AlignTop             
+                    case 'b2': return Text.AlignVCenter //Text.AlignTop              
+                    case 'b3': return Text.AlignVCenter //Text.AlignTop             
                 }  
             case 'fontPixSize': return height * fontHeightRatio * fontSizeScale
             case 'anchorLMargin': return fontPixelSize * marginFactor
@@ -532,34 +543,6 @@ Item {
         return Number.parseFloat('1000').toFixed( decimalPlace );
     }
 
-    // function speedText(value) {
-    //     // data communication 1 kilobit = 1000 bits, while in data storage 1 Kilobyte = 1024 Bytes
-    //     var m    = getBinDec                    // binary 1024 | decimal 1000
-    //     var deci = decimalPlace                 // # of decimal places
-    //     var kilo = m;                           // One Kilo is 1024 b/B
-    //     var mega = m * m;                       // One MB is 1024 Kb/B
-    //     var giga = m * m * m;                   // One GB is 1024 Mb/B
-    //     var tera = m * m * m * m;               // One TB is 1024 Gb/B
-
-    //     if      (value < kilo)  return value;                        // return bytes if less than a Kx
-    //     else if (value < mega)  return (value / kilo).toFixed(deci); // return Kx if less than a Mx
-    //     else if (value < giga)  return (value / mega).toFixed(deci); // return Mx if less than a Gx
-    //     else                    return (value / giga).toFixed(deci); // return Gx if less than a Tx
-    // }
-
-    // function speedUnit(value) {
-    //     // data communication 1 kilobit = 1000 bits, while in data storage 1 Kilobyte = 1024 Bytes
-    //     var m    = getBinDec                    // binary 1024 | decimal 1000
-    //     var kilo = m;                           // One Kilo is 1024 x
-    //     var mega = m * m;                       // One MB is 1024 Kx
-    //     var giga = m * m * m;                   // One GB is 1024 Mx
-    //     var tera = m * m * m * m;               // One TB is 1024 Gx
-        
-    //     if (value < kilo)       return shortUnits ? (boolUnits ? 'b' : 'B') : (boolUnits ? 'b/s'  : 'B/s' ); // return bytes if less than a KB
-    //     else if (value < mega)  return shortUnits ? (boolUnits ? 'k' : 'K') : (boolUnits ? 'Kb/s' : 'KB/s'); // return KB if less than a MB
-    //     else if (value < giga)  return shortUnits ? (boolUnits ? 'm' : 'M') : (boolUnits ? 'Mb/s' : 'MB/s'); // return MB if less than a GB
-    //     else                    return shortUnits ? (boolUnits ? 'g' : 'G') : (boolUnits ? 'Gb/s' : 'GB/s'); // return GB if less than a TB                    
-    // }
 
     function speedDisplay(section, value) {
         // data communication 1 kilobit = 1000 bits, while in data storage 1 Kilobyte = 1024 Bytes
@@ -585,6 +568,8 @@ Item {
             else                   return shortUnits ? 'T' : suffix('T')
         }
     }
+
+
     function suffix(unit) { // NEW SOLUTION TO SUFFIX
         // https://en-academic.com/dic.nsf/enwiki/8315069#Kibibit_per_second
         //! BINARY:                   DECIMAL:
@@ -672,7 +657,6 @@ Item {
         // network/wlp2s0/uploadBits,
 
         //var duplicateCheck = {}
-
 
         for (var idx = 0; idx < sensors.length; idx++) {
 

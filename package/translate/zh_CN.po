@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsw_dbus\n"
 "Report-Msgid-Bugs-To: https://github.com/leevd\n"
-"POT-Creation-Date: 2023-03-24 21:51+0000\n"
+"POT-Creation-Date: 2023-03-29 23:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,16 @@ msgstr "常规"
 #, kde-format
 msgid "Network"
 msgstr "网络"
+
+#: ../contents/ui/CompactRepresentation.qml
+#, kde-format
+msgid "Network Bandwidth Monitor"
+msgstr "网络带宽监视器"
+
+#: ../contents/ui/CompactRepresentation.qml
+#, kde-format
+msgid "DBUS Data Source"
+msgstr "DBUS数据源"
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
@@ -252,13 +262,18 @@ msgstr "增加 %1 像素间距"
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "Move the upload and download data rows closer together, maximum 10 pixels closer."
-msgstr "缩小上传和下载速度之间的间距，最多 10 个像素。"
+msgid "Move the upload and download data rows closer together, maximum 20 pixels closer."
+msgstr "缩小上传和下载速度之间的间距，最多 20 个像素。"
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
-msgid "Increase the distance between upload and download data rows, maximum 10 pixels apart."
-msgstr "增加上传和下载速度之间的间距，最多 10 个像素。"
+msgid "Increase the distance between upload and download data rows, maximum 20 pixels apart."
+msgstr "增加上传和下载速度之间的间距，最多 20 个像素。"
+
+#: ../contents/ui/config/configGeneral.qml
+#, kde-format
+msgid "* Function disabled in 'Horizontal' layout mode."
+msgstr "* 功能在“水平”布局模式下被禁用。"
 
 #: ../contents/ui/config/configGeneral.qml
 #, kde-format
@@ -474,3 +489,11 @@ msgstr "保留小数点："
 #, kde-format
 msgid "Choose the number of decimal fraction digits to the right of the decimal point."
 msgstr "选择小数点右边保留的小数位数。"
+
+#, kde-format
+#~ msgid "Move the upload and download data rows closer together, maximum 10 pixels closer."
+#~ msgstr "缩小上传和下载速度之间的间距，最多 10 个像素。"
+
+#, kde-format
+#~ msgid "Increase the distance between upload and download data rows, maximum 10 pixels apart."
+#~ msgstr "增加上传和下载速度之间的间距，最多 10 个像素。"
