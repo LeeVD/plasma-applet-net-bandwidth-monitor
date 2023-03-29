@@ -46,3 +46,10 @@ Started using Git for source control.
 Small fix for unchecking networks forcing one final update to reset UI data to 0.
 Added zh_CN translation files - Thanks to CatEricka.  
 Corrected spelling mistakes.
+
+29/03/2023
+## Fix Release - v0.3.3
+Update to the translations.  
+Fixed issue with UI text and icon alignment in Horizontal layout.  
+Added code to disable padding selection in Horizontal mode.  
+Doubled padding option from 10 to 20. 

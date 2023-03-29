@@ -21,7 +21,7 @@ Added a small fix for when unchecking all networks the UI didn't update to refle
 
 
 ## v0.3.3:
-Update to the translations.  Fixed issue with UI text and icon alignment in Horizontal layout.  Added code to disable padding selection in Horizontal mode.  Double padding option from 10 to 20. 
+Update to the translations.  Fixed issue with UI text and icon alignment in Horizontal layout.  Added code to disable padding selection in Horizontal mode.  Doubled padding option from 10 to 20. 
 
 
 
