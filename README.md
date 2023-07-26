@@ -12,16 +12,20 @@ I've taken the UI element from netspeed-widget and the dbus workings from system
 This is extremely BETA software and the first plasma widget I've done. If you find something or many things that aren't working, let me know and I'll take a look when I can.
 
 
-## v0.3.1:
-Small fix release to corrected issue with multiple decimal fraction digits being shown when using 'Update Interval' above 1 second and using 'Average' or 'Accumulated' for Interval data relay options.  Had some issue with compiling so made some modification's to CMakeLists.txt file. Added CatEricka edits to configGeneral.qml (staging for translations) and setup my IDE and GitHub for correct source control.
-
-
-## v0.3.2: 
-Added a small fix for when unchecking all networks the UI didn't update to reflect with 0. It now forces one final update to reset the UI. Added the foundation for translations and added zh_CN translation files - thanks to CatEricka for providing.  Corrected many spelling mistakes! Words are hard.
-
-
 ## v0.3.3:
 Update to the translations.  Fixed issue with UI text and icon alignment in Horizontal layout.  Added code to disable padding selection in Horizontal mode.  Doubled padding option from 10 to 20. 
+
+## v0.4
+Cleaned up lots of code in settings section, 343 lines of code removed and reworked.
+Added 'Custom Icon Style' option.
+Added 'Speed icon size' option.
+Added 'Prefix/Suffix size' option.
+reworked 'Number font size' option.
+Added Sliders for font resizing.
+Added 'Decimal Place Filter' to manage how the decimal place in the bandwidth data is presented.
+Added 'Rounded Whole number' to manage how the rounding in the bandwidth data is presented.
+Changes made to the Settings page, info button reworked, text amendments and setting section line breaks added. 
+
 
 
 
@@ -36,21 +40,26 @@ When upgrading via the Plasma 'get widgets' section, make sure you have the new 
 - Layout
 - Display Order
 - Show speeds separately
-- Font size
 - Update interval
 - Interval data relay
 - Layout Padding
 - Hide when inactive
+- Number font size - NEW
+- Icon Font size - NEW  
+- Prefix/Suffix font size - NEW 
 - Show speed units
 - Speed units
 - Shorten speed units 
 - Show speed icons
-- Show 'per seconds' suffix -- NEW
-- 'Per seconds' prefix -- NEW
+- Show 'per seconds' suffix
+- 'Per seconds' prefix
 - Icon style
+- Custom icon style - NEW
 - Icon position
 - Numbers [binary, metric]
 - Decimal place
+- Decimal place filter - NEW
+- Rounded whole number - NEW
 - Monitor individual or multiple interfaces
 
 

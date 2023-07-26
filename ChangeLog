@@ -53,3 +53,15 @@ Update to the translations.
 Fixed issue with UI text and icon alignment in Horizontal layout.  
 Added code to disable padding selection in Horizontal mode.  
 Doubled padding option from 10 to 20. 
+
+25/072023
+# Fouth Release - v0.4
+Cleaned up lots of code in settings section, 343 lines of code removed and reworked.
+Added 'Custom Icon Style' option.
+Added 'Speed icon size' option.
+Added 'Prefix/Suffix size' option.
+reworked 'Number font size' option.
+Added Sliders for font resizing.
+Added 'Decimal Place Filter' to manage how the decimal place in the bandwidth data is presented.
+Added 'Rounded Whole number' to manage how the rounding in the bandwidth data is presented.
+Changes made to the Settings page, info button reworked, text amendments and setting section line breaks added. 
