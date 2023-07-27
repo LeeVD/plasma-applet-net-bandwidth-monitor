@@ -55,6 +55,13 @@ Item {
     property var        netSources:         plasmoid.configuration.netSources
     property bool       showSeconds:        plasmoid.configuration.showSeconds
     property string     secondsPrefix:      plasmoid.configuration.secondsPrefix
+    property bool       decimalFilter0:     plasmoid.configuration.decimalFilter0
+    property bool       decimalFilter1:     plasmoid.configuration.decimalFilter1
+    property bool       decimalFilter2:     plasmoid.configuration.decimalFilter2
+    property bool       decimalFilter3:     plasmoid.configuration.decimalFilter3
+    property int        roundedNumber:      plasmoid.configuration.roundedNumber
+    property double     iconSize:           Plasmoid.configuration.iconSize
+    property double     sufixSize:         Plasmoid.configuration.sufixSize
 
     property var        netInterfaces:      []
     property var        netPath:            []

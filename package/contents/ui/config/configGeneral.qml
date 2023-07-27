@@ -40,14 +40,22 @@ Item {
     property bool   cfg_hideZone:       hideZone
     property alias  cfg_showSeconds:    showSeconds.checked
     property string cfg_secondsPrefix:  '/s'
+    property alias  cfg_decimalFilter0: decimalFilter0.checked
+    property alias  cfg_decimalFilter1: decimalFilter1.checked
+    property alias  cfg_decimalFilter2: decimalFilter2.checked
+    property alias  cfg_decimalFilter3: decimalFilter3.checked
+    property int    cfg_roundedNumber:  roundedNumber
+    property double cfg_iconSize:       iconSize
+    property double cfg_sufixSize:      sufixSize
 
     property int spacerA: 8
     property int spacerB: 30
 
+    id: main
     //________ COLUMN WIDTH ________ 
     TextMetrics {
         id: titleTextMetrics
-        text: " Show Speeds separately: "
+        text: "Show 'per seconds' suffix:   "
         //font.pixelSize: 64
     }
     //________ COLUMN WIDTH ________ 
@@ -56,65 +64,117 @@ Item {
         text: " 10 pixel closer  "
         //font.pixelSize: 64
     }
+    //________ TOOLTIP ANIMATIONS ________ 
+    NumberAnimation {
+        id:         heightAnimation
+        target:     null     //rootRec
+        property:   "height"
+        duration:   100
+        onStopped: {  
+                                                                            // target contains reference to rec | rootRec#
+            var buttonObject = target.children[0].children[1]               // GET infoButton Object
+            var buttonState = buttonObject.state                            // GET infoButton state
+            if (buttonState === true) {                                     // infoButton#.MouseArea.state
+                
+                opacityAnimation.target = target.children[2].children[0]    // target infoText#
+                opacityAnimation.to = 1;                                    // open infoText# tooltip
+                opacityAnimation.start()                                    // start Animation
+            }
+        }
+    }
+    OpacityAnimator {
+        id:         opacityAnimation
+        target:     null    //infoText
+        duration:   200
+        onStopped: {   
+                                                                            // target contains reference infoText#
+            var buttonObject = target.parent.parent.children[0].children[1] // GET infoButton Object
+            var buttonState = buttonObject.state                            // GET infoButton state
+
+            if (buttonState === false) {                                    // infoButton#.MouseArea.state
+
+                heightAnimation.target = target.parent.parent               // target rootRec#
+                heightAnimation.to = infoButton.height                      // close infoText# tooltip
+                heightAnimation.start()                                     // start Animation
+            }
+        }
+    }
+
+
+    //________ ANIMATION CALLER ________ 
+    function toggleTooltip(rec) {           // SEND ENTIRE ROW OBJECT TO ANIMATION FUNCTION
+        
+        var rec_infoButton  = rec.children[0]                       // GET rec infoButton MouseArea Object (MEMORY ADDRESS IDENTIFIER)
+        var rec_infoText    = rec.children[2].children[0]           // GET rec infoText Object (MEMORY ADDRESS IDENTIFIER)
+        var rec_state       = rec_infoButton.children[1].state      // GET rec infoButton MouseArea state toggle
+
+        if (rec_state === true) {                        // OPEN NEW TOOLTIP
+
+            var heightAnimationTo = rec_infoButton.height + rec_infoText.contentHeight + (rec_infoText.padding * 2)
+
+            heightAnimation.target = rec                            // target rootRec or rec in this instance
+            heightAnimation.to = heightAnimationTo
+            heightAnimation.start()
+
+            rec_infoButton.opacity = 1.0
+            rec.border.width = 0.5
+
+        } else {                                                    // CLOSE NEW TOOLTIP
+
+            opacityAnimation.target = rec_infoText                  // TARGET infoText FROM THE rec OBJECT
+            opacityAnimation.to = 0
+            opacityAnimation.start()
+            
+            rec_infoButton.opacity = 0.5
+            rec.border.width = 0
+        }
+    }
+
 
     Rectangle {
 
         id: rootRec
         width: parent.width
-        height: infoButton.height
+        height: 40//infoButton.height
         color: "transparent" //"red"
         border.color: "dark grey"
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation
-            target: rootRec
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton.state === true) {
-                     anim.to = 1;  anim.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
+            //property bool state: false
             id: infoButton
-            implicitWidth: infoButton.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation.to = infoButton.height + infoText.contentHeight + (infoText.padding * 2) 
-                    heightAnimation.start()
-                    opacity = 1.0
-                    rootRec.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim.to = 0;  anim.start();
-                    opacity = 0.5
-                    rootRec.border.width = 0
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton.height    
+            anchors.right: parent.right
+            opacity: 0.5
+
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton.opacity = 1 
+                onExited:               state ? infoButton.opacity = 1 : infoButton.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec)
                 }
             }
-            opacity: 0.5
         }
+
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
             id: gA
             anchors.verticalCenter: infoButton.verticalCenter
 
             Row {
-                    spacing: 10                
+                //spacing: 10                
                 Column {
                     Rectangle {
                         height: 10
                         width: spacerA
                         color: "transparent" //"red"
                     }
-                    
                 }
                 Column {
                     //________ LAYOUT ________ 
@@ -170,8 +230,9 @@ Item {
             }
         }
         Grid {
+
+            property alias nText: infoText
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA.bottom
             Text {
                 id: infoText
@@ -188,17 +249,6 @@ Item {
                         + "<tr><td><b>" + i18n("Horizontal") + "</b>: </td> <td>" + i18n("Upload and Download will be aligned side by side:") + "</td></tr>"
                         + "<tr><td></td> <td><img src='../image/1b2.png' width='240' height='40'></td></tr>"
                     + "</table>"
-            }
-            OpacityAnimator {
-                id:anim
-                target: infoText
-                duration: 200
-                onStopped: {   
-                    if (infoButton.state === false) {     
-                        heightAnimation.to = infoButton.height
-                        heightAnimation.start()               
-                    }
-                }
             }
         }
     }
@@ -223,46 +273,31 @@ Item {
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation2
-            target: rootRec2
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton2.state === true) {
-                     anim2.to = 1;  anim2.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton2
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton2.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation2.to = infoButton2.height + infoText2.contentHeight + (infoText2.padding * 2) 
-                    heightAnimation2.start()
-                    opacity = 1.0
-                    rootRec2.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim2.to = 0;  anim2.start();
-                    opacity = 0.5
-                    rootRec2.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton2.opacity = 1
+                onExited:               state ? infoButton2.opacity = 1 : infoButton2.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec2)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
             id: gA2
             anchors.verticalCenter: infoButton2.verticalCenter
             Row {
-                spacing: 10                                
+                //spacing: 10                                
                 Column {
                     Rectangle {
                         height: 10
@@ -296,7 +331,6 @@ Item {
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA2.bottom
             Text {
                 id: infoText2
@@ -312,17 +346,6 @@ Item {
                         + "<tr><td></td> <td><img src='../image/2a.png' width='150' height='65'><img src='../image/2b.png' width='250' height='70'></td></tr>"
                     + "</table>" 
             }
-            OpacityAnimator {
-                id:anim2
-                target: infoText2
-                duration: 200
-                onStopped: {   
-                    if (infoButton2.state === false) {     
-                        heightAnimation2.to = infoButton2.height
-                        heightAnimation2.start()               
-                    }
-                }
-            }
         }
     }
     //#######################################################################################################
@@ -337,46 +360,31 @@ Item {
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation3
-            target: rootRec3
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton3.state === true) {
-                     anim3.to = 1;  anim3.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton3
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton3.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation3.to = infoButton3.height + infoText3.contentHeight + (infoText3.padding * 2) 
-                    heightAnimation3.start()
-                    opacity = 1.0
-                    rootRec3.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim3.to = 0;  anim3.start();
-                    opacity = 0.5
-                    rootRec3.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton3.opacity = 1
+                onExited:               state ? infoButton3.opacity = 1 : infoButton3.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec3)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
             id: gA3
             anchors.verticalCenter: infoButton3.verticalCenter
             Row {
-                spacing: 10                
+                //spacing: 10                
                 Column {
                     Rectangle {
                         height: 10
@@ -401,7 +409,6 @@ Item {
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA3.bottom
             Text {
                 id: infoText3
@@ -417,24 +424,14 @@ Item {
                         + "<tr><td></td> <td><img src='../image/3a.png' width='305' height='65'></td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim3
-                target: infoText3
-                duration: 200
-                onStopped: {   
-                    if (infoButton3.state === false) {     
-                        heightAnimation3.to = infoButton3.height
-                        heightAnimation3.start()               
-                    }
-                }
-            }
         }
     }
+
     //#######################################################################################################
     Rectangle {
-        id: rootRec4
+        id: rootRec5
         width: parent.width
-        height: infoButton4.height + 8
+        height: infoButton5.height
         anchors.top: rootRec3.bottom
         anchors.topMargin: spacerA
         color: "transparent" //"red"
@@ -442,242 +439,23 @@ Item {
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation4
-            target: rootRec4
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton4.state === true) {
-                     anim4.to = 1;  anim4.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
-            id: infoButton4
-            implicitWidth: infoButton4.height
-            text: i18n("i")
-            //anchors.right: parent.right 
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation4.to = infoButton4.height + infoText4.contentHeight + (infoText4.padding * 2) 
-                    heightAnimation4.start()
-                    opacity = 1.0
-                    rootRec4.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim4.to = 0;  anim4.start();
-                    opacity = 0.5
-                    rootRec4.border.width = 0
-                }
-            }
-            opacity: 0.5
-        }
-        Grid {
-            // TITLE | CHOICE BUTTONS GO HERE
-            id: gA4
-            anchors.verticalCenter: infoButton4.verticalCenter
-
-            Row {
-                spacing: 10        
-                Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: recAlign4.verticalCenter' NOT TO WORK WITH LABEL.
-                    id: recAlign4
-                    height: infoButton4.height
-                    width: 0
-                    color: "transparent"
-                }
-                Column {
-                    Rectangle {
-                        height: 10
-                        width: spacerA
-                        color: "transparent" //"red"
-                    } 
-                }
-                Column {
-                    anchors.verticalCenter: recAlign4.verticalCenter
-                    Label {
-                        width: titleTextMetrics.width
-                        text:  i18n("Font size:")
-                    }
-                }
-                Column {
-                    //####################################################
-                    RowLayout {
-                        id: fontSizeRow
-
-                        property var buttonPressed
-
-                        function setFontSize() {
-
-                            var s
-                            if (buttonPressed.text === "▲") {
-                                fontSizeUP.enabled == true
-                                cfg_fontSize += 0.01
-                                s = 2
-
-                                if (cfg_fontSize === s) {
-                                    fontSizeUP.enabled = false
-                                    fontSizeButtonTimer.stop()
-                                } else {
-                                    fontSizeDOWN.enabled = true
-                                }
-                            }
-                            if (buttonPressed.text === "▼") {
-                                fontSizeDOWN.enabled == true
-                                cfg_fontSize -= 0.01
-                                s = 0.5
-
-                                if (cfg_fontSize === s) {
-                                    fontSizeDOWN.enabled = false
-                                    fontSizeButtonTimer.stop()
-                                } else {
-                                    fontSizeUP.enabled = true
-                                }
-                            }       
-                            cfg_fontSize = Number.parseFloat(cfg_fontSize).toFixed(2);
-                        }
-                        Rectangle {
-                            width: labelTextMetrics.width
-                            height: textLabel.height
-                            color: "transparent"
-                            Label {
-                                id: textLabel
-                                text: (cfg_fontSize * 100).toFixed(0) + " %"
-                            }
-                        }
-                        Rectangle { 
-                            width: (fontSizeUP.x - fontSizeDOWN.x) + (fontSizeDOWN.width + 2)
-                            height: fontSizeDOWN.height + 2
-                            color: "transparent"
-                            border.color: "dark grey"
-                            border.width: 0.5
-                            radius: 4           
-                            RowLayout {        
-                                Button {
-                                    id: fontSizeDOWN
-                                    text: "▼"
-                                    implicitWidth: fontSizeDOWN.height
-                                    Layout.margins: 1   //buttonMargin
-                                    enabled: cfg_fontSize != 0.5
-                                    onPressAndHold: {
-                                        fontSizeRow.buttonPressed = fontSizeDOWN
-                                        fontSizeButtonTimer.start() 
-                                        }
-                                    onReleased: {
-                                        fontSizeRow.buttonPressed = fontSizeDOWN
-                                        fontSizeRow.setFontSize()
-                                        fontSizeButtonTimer.stop()
-                                    }
-                                }
-                                Button {
-                                    id: fontSizeUP
-                                    text: "▲"
-                                    implicitWidth: fontSizeUP.height
-                                    Layout.margins: 1   //buttonMargin
-                                    enabled: cfg_fontSize != 2
-                                    onPressAndHold: { 
-                                        fontSizeRow.buttonPressed = fontSizeUP 
-                                        fontSizeButtonTimer.start() 
-                                        }
-                                    onReleased: {
-                                        fontSizeRow.buttonPressed = fontSizeUP
-                                        fontSizeRow.setFontSize()
-                                        fontSizeButtonTimer.stop()
-                                    }
-                                }
-                                Timer {
-                                    id: fontSizeButtonTimer
-                                    interval: 100 // repeat every 200 milliseconds
-                                    running: false
-                                    repeat: true
-                                    onTriggered: fontSizeRow.setFontSize()
-                                }
-                            }
-                        }
-                    } 
-                    //##################################################  
-                }
-            }
-        }
-        Grid {
-            // NEW TOOLTIP INFORMATION
-            //id: gB
-            anchors.top: gA4.bottom
-            Text {
-                id: infoText4
-                opacity: 0
-                padding: 10 
-                width: rootRec4.width
-                color: theme.textColor
-                textFormat: Text.RichText
-                wrapMode: Text.Wrap
-                text: "<table>"
-                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Increase font size, maximum 200%.") + "</td></tr>"
-                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Decrease font size, minimum 50%") + "</td></tr>"
-                    + "</table>"
-            }
-            OpacityAnimator {
-                id:anim4
-                target: infoText4
-                duration: 200
-                onStopped: {   
-                    if (infoButton4.state === false) {     
-                        heightAnimation4.to = infoButton4.height
-                        heightAnimation4.start()               
-                    }
-                }
-            }
-        }
-    }
-    //#######################################################################################################
-    Rectangle {
-        id: rootRec5
-        width: parent.width
-        height: infoButton5.height
-        anchors.top: rootRec4.bottom
-        anchors.topMargin: spacerA
-        color: "transparent" //"red"
-        border.color: "dark grey"
-        border.width: 0
-        radius: 4
-
-        NumberAnimation {
-            id: heightAnimation5
-            target: rootRec5
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton5.state === true) {
-                     anim5.to = 1;  anim5.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton5
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton5.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation5.to = infoButton5.height + infoText5.contentHeight + (infoText5.padding * 2) 
-                    heightAnimation5.start()
-                    opacity = 1.0
-                    rootRec5.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim5.to = 0;  anim5.start();
-                    opacity = 0.5
-                    rootRec5.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton5.opacity = 1
+                onExited:               state ? infoButton5.opacity = 1 : infoButton5.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec5)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -685,7 +463,7 @@ Item {
             anchors.verticalCenter: infoButton5.verticalCenter
 
             Row {
-                spacing: 10  
+                //spacing: 10  
                 Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: infoButtonX.verticalCenter' NOT TO WORK WITH LABEL.
                     id: recAlign5
                     height: infoButton5.height
@@ -811,7 +589,6 @@ Item {
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA5.bottom
             Text {
                 id: infoText5
@@ -828,21 +605,7 @@ Item {
                         + "<tr><td><b>▼</b>: </td> <td>" + i18n("Decrease the time interval, minimum 0.5 seconds.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim5
-                target: infoText5
-                duration: 200
-                onStopped: {   
-                    if (infoButton5.state === false) {     
-                        heightAnimation5.to = infoButton5.height
-                        heightAnimation5.start()               
-                    }
-                }
-            }
         }
-
-
-
     }
  //#######################################################################################################
     Rectangle {
@@ -856,39 +619,23 @@ Item {
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation6
-            target: rootRec6
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton6.state === true) {
-                     anim6.to = 1;  anim6.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton6
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton6.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation6.to = infoButton6.height + infoText6.contentHeight + (infoText6.padding * 2) 
-                    heightAnimation6.start()
-                    opacity = 1.0
-                    rootRec6.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim6.to = 0;  anim6.start();
-                    opacity = 0.5
-                    rootRec6.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton6.opacity = 1
+                onExited:               state ? infoButton6.opacity = 1 : infoButton6.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec6)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -896,7 +643,7 @@ Item {
             anchors.verticalCenter: infoButton6.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -952,7 +699,6 @@ Item {
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA6.bottom
             Text {
                 id: infoText6
@@ -982,17 +728,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim6
-                target: infoText6
-                duration: 200
-                onStopped: {   
-                    if (infoButton6.state === false) {     
-                        heightAnimation6.to = infoButton6.height
-                        heightAnimation6.start()               
-                    }
-                }
-            }
         }
     }
 
@@ -1008,39 +743,23 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation7
-            target: rootRec7
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton7.state === true) {
-                     anim7.to = 1;  anim7.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton7
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton7.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation7.to = infoButton7.height + infoText7.contentHeight + (infoText7.padding * 2) 
-                    heightAnimation7.start()
-                    opacity = 1.0
-                    rootRec7.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim7.to = 0;  anim7.start();
-                    opacity = 0.5
-                    rootRec7.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton7.opacity = 1
+                onExited:               state ? infoButton7.opacity = 1 : infoButton7.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec7)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -1049,7 +768,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
 
             Row {
                 id: rr
-                spacing: 10    
+                //spacing: 10    
                 Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: infoButtonX.verticalCenter' NOT TO WORK WITH LABEL.
                     id: recAlign7
                     height: infoButton7.height
@@ -1185,7 +904,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA7.bottom
             Text {
                 id: infoText7
@@ -1203,17 +921,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                     + "</table>"
                     + i18n("* Function disabled in 'Horizontal' layout mode.")
             }
-            OpacityAnimator {
-                id:anim7
-                target: infoText7
-                duration: 200
-                onStopped: {   
-                    if (infoButton7.state === false) {     
-                        heightAnimation7.to = infoButton7.height
-                        heightAnimation7.start()               
-                    }
-                }
-            }
         } 
     }
  //#######################################################################################################
@@ -1228,39 +935,23 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation8
-            target: rootRec8
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton8.state === true) {
-                     anim8.to = 1;  anim8.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton8
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton8.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation8.to = infoButton8.height + infoText8.contentHeight + (infoText8.padding * 2) 
-                    heightAnimation8.start()
-                    opacity = 1.0
-                    rootRec8.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim8.to = 0;  anim8.start();
-                    opacity = 0.5
-                    rootRec8.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton8.opacity = 1
+                onExited:               state ? infoButton8.opacity = 1 : infoButton8.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec8)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -1268,7 +959,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton8.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -1287,11 +978,9 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                     //####################################################
                     CheckBox {
                         id:                         hideInactive
+                        checked:                    !cfg_hideZone
                         onCheckedChanged: {
-                            if (!hideInactive.checked) {
-                                cfg_hideZone = false
-                                //rbZone1.checked = true
-                            }
+                            cfg_hideZone = !hideInactive.checked
                         }
                     }   
                     // ################################################################    
@@ -1300,7 +989,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA8.bottom
             Text {
                 id: infoText8
@@ -1316,64 +1004,586 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Shows the display even when no traffic is traversing the network interfaces.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim8
-                target: infoText8
-                duration: 200
-                onStopped: {   
-                    if (infoButton8.state === false) {     
-                        heightAnimation8.to = infoButton8.height
-                        heightAnimation8.start()               
-                    }
-                }
-            }
         } 
     }
  //#######################################################################################################
-    Rectangle {
-        id: rootRec9
-        width: parent.width
-        height: infoButton9.height
+    MenuSeparator {
+        id: separator1
+        padding: 0
+        topPadding: 20
+        bottomPadding: 20
+        contentItem: Rectangle {
+            implicitWidth: parent.parent.width
+            implicitHeight: 1
+            color: "light grey"
+        }
         anchors.top: rootRec8.bottom
-        anchors.topMargin: spacerB
+    }
+ //#######################################################################################################   
+    // -- SIZE --
+
+    Rectangle {
+        id: rootRec4
+        width: parent.width
+        height: infoButton4.height + 8
+        anchors.top: separator1.bottom
+        anchors.topMargin: spacerA
         color: "transparent" //"red"
         border.color: "dark grey"
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation9
-            target: rootRec9
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton9.state === true) {
-                     anim9.to = 1;  anim9.start()                 
+        ToolButton {
+            id: infoButton4
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton4.height
+            anchors.right: parent.right
+            opacity: 0.5
+
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton4.opacity = 1
+                onExited:               state ? infoButton4.opacity = 1 : infoButton4.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec4)
                 }
             }
         }
-        Button {
-            property bool state: false
+        Grid {              // TITLE | CHOICE BUTTONS GO HERE
+            id: gA4
+            anchors.verticalCenter: infoButton4.verticalCenter
 
-            id: infoButton9
-            implicitWidth: infoButton9.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation9.to = infoButton9.height + infoText9.contentHeight + (infoText9.padding * 2) 
-                    heightAnimation9.start()
-                    opacity = 1.0
-                    rootRec9.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim9.to = 0;  anim9.start();
-                    opacity = 0.5
-                    rootRec9.border.width = 0
+            Row {
+                //spacing: 10        
+                Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: recAlign4.verticalCenter' NOT TO WORK WITH LABEL.
+                    id: recAlign4
+                    height: infoButton4.height
+                    width: 0
+                    color: "transparent"
+                }
+                Column {
+                    Rectangle {
+                        height: 10
+                        width: spacerA
+                        color: "transparent" //"red"
+                    } 
+                }
+                Column {
+                    anchors.verticalCenter: recAlign4.verticalCenter
+                    Label {
+                        width: titleTextMetrics.width
+                        text:  i18n("Numbers font size:")
+                    }
+                }
+                Column {
+                    //####################################################
+                    RowLayout {
+                        id: fontSizeRow
+
+                        property var buttonPressed;
+                        property var t: 2;
+                        property var f: 0.5;
+
+                        function disableButton() {
+                            if (cfg_fontSize === f) {
+                                fontSizeDOWN.enabled = false;
+                            } else {
+                                fontSizeDOWN.enabled = true;
+                            }                 
+                            if (cfg_fontSize === t) {
+                                fontSizeUP.enabled = false;
+                            } else {
+                                fontSizeUP.enabled = true;
+                            }                
+                        }
+                        function setFontSize() {
+                            if (buttonPressed.text === "▲") {           // BUTTONS
+                                cfg_fontSize += 0.01;
+                            } else if (buttonPressed.text === "▼") {
+                                cfg_fontSize -= 0.01;
+                            } 
+                            fontSizeSlider.value = cfg_fontSize
+                            disableButton()
+                        }    
+                            
+                        function setFontSizeSlider() {                  // SLIDER
+                            var sliderVal
+                            sliderVal = buttonPressed.value.toFixed(2)
+                            if (sliderVal !==  cfg_fontSize) {
+                                cfg_fontSize = sliderVal
+                            }
+                            disableButton()
+                        }
+
+                        Rectangle {
+                            width: labelTextMetrics.width
+                            height: textLabel.height
+                            color: "transparent"
+                            Label {
+                                id: textLabel
+                                text: (cfg_fontSize * 100).toFixed(0) + " %"
+                            }
+                        }
+
+                        Rectangle { 
+                            width: (fontSizeUP.x - fontSizeDOWN.x) + (fontSizeDOWN.width + 2)
+                            height: fontSizeDOWN.height + 2
+                            color: "transparent"
+                            border.color: "dark grey"
+                            border.width: 0.5
+                            radius: 4           
+                            RowLayout {       
+                                Button {
+                                    id: fontSizeDOWN
+                                    text: "▼"
+                                    implicitWidth: fontSizeDOWN.height
+                                    Layout.margins: 1   //buttonMargin
+                                    enabled: cfg_fontSize != fontSizeRow.f
+                                    onReleased: {
+                                        fontSizeRow.buttonPressed = fontSizeDOWN
+                                        fontSizeRow.setFontSize()
+                                    }
+                                }
+                                Button {
+                                    id: fontSizeUP
+                                    text: "▲"
+                                    implicitWidth: fontSizeUP.height
+                                    Layout.margins: 1   //buttonMargin
+                                    enabled: cfg_fontSize != fontSizeRow.t
+                                    onReleased: {
+                                        fontSizeRow.buttonPressed = fontSizeUP
+                                        fontSizeRow.setFontSize()
+                                    }
+                                }
+                                Slider {
+                                    id: fontSizeSlider
+                                    implicitWidth: 140
+                                    from: fontSizeRow.f
+                                    value: cfg_fontSize
+                                    to: fontSizeRow.t
+                                    onValueChanged: {
+                                        fontSizeRow.buttonPressed = fontSizeSlider
+                                        fontSizeRow.setFontSizeSlider()
+                                    }
+                                }
+                            }
+                        }
+                    } 
+                    //##################################################  
                 }
             }
+        }
+        Grid {
+            // NEW TOOLTIP INFORMATION
+            anchors.top: gA4.bottom
+            Text {
+                id: infoText4
+                opacity: 0
+                padding: 10 
+                width: rootRec4.width
+                color: theme.textColor
+                textFormat: Text.RichText
+                wrapMode: Text.Wrap
+                text: "<table>"
+                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Increase font size of the numbers in the display, maximum 200%.") + "</td></tr>"
+                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Decrease font size of the numbers in the display, minimum 50%") + "</td></tr>"
+                    + "</table>"
+            }
+        }
+    }
+    //#######################################################################################################
+    Rectangle {
+        id: rootRec45
+        width: parent.width
+        height: infoButton45.height + 8
+        anchors.top: rootRec4.bottom
+        anchors.topMargin: spacerA
+        color: "transparent" //"red"
+        border.color: "dark grey"
+        border.width: 0
+        radius: 4
+
+        ToolButton {
+            id: infoButton45
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton45.height
+            anchors.right: parent.right
             opacity: 0.5
+
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton45.opacity = 1
+                onExited:               state ? infoButton45.opacity = 1 : infoButton45.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec45)
+                }
+            }
+        }
+        Grid {
+            // TITLE | CHOICE BUTTONS GO HERE
+            id: gA45
+            anchors.verticalCenter: infoButton45.verticalCenter
+
+            Row {
+                //spacing: 10        
+                Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: recAlign4.verticalCenter' NOT TO WORK WITH LABEL.
+                    id: recAlign45
+                    height: infoButton45.height
+                    width: 0
+                    color: "transparent"
+                }
+                Column {
+                    Rectangle {
+                        height: 10
+                        width: spacerA
+                        color: "transparent" //"red"
+                    } 
+                }
+                Column {
+                    anchors.verticalCenter: recAlign45.verticalCenter
+                    Label {
+                        width: titleTextMetrics.width
+                        text:  i18n("Icon size:")
+                    }
+                }
+                Column {
+                    //####################################################
+                    RowLayout {
+                        id: iconSizeRow
+
+                        property var buttonPressed;
+                        property var t: 2;
+                        property var f: 0.5;
+
+                        function disableButton() {
+                            if (cfg_iconSize === f) {
+                                iconSizeDOWN.enabled = false;
+                            } else {
+                                iconSizeDOWN.enabled = true;
+                            }                 
+                            if (cfg_iconSize === t) {
+                                iconSizeUP.enabled = false;
+                            } else {
+                                iconSizeUP.enabled = true;
+                            }                
+                        }
+                        function seticonSize() {
+                            if (buttonPressed.text === "▲") {           // BUTTONS
+                                cfg_iconSize += 0.01;
+                            } else if (buttonPressed.text === "▼") {
+                                cfg_iconSize -= 0.01;
+                            } 
+                            iconSizeSlider.value = cfg_iconSize
+                            disableButton()
+                        }    
+                            
+                        function seticonSizeSlider() {                  // SLIDER
+                            var sliderVal
+                            sliderVal = buttonPressed.value.toFixed(2)
+                            if (sliderVal !==  cfg_iconSize) {
+                                cfg_iconSize = sliderVal
+                            }
+                            disableButton()
+                        }
+
+                        Rectangle {
+                            width: labelTextMetrics.width
+                            height: iconSizeLabel.height
+                            color: "transparent"
+                            Label {
+                                id: iconSizeLabel
+                                text: (cfg_iconSize * 100).toFixed(0) + " %"
+                            }
+                        }
+
+                        Rectangle { 
+                            width: (iconSizeUP.x - iconSizeDOWN.x) + (iconSizeDOWN.width + 2)
+                            height: iconSizeDOWN.height + 2
+                            color: "transparent"
+                            border.color: "dark grey"
+                            border.width: 0.5
+                            radius: 4           
+                            RowLayout {       
+                                Button {
+                                    id: iconSizeDOWN
+                                    text: "▼"
+                                    implicitWidth: iconSizeDOWN.height
+                                    Layout.margins: 1   //buttonMargin
+                                    enabled: cfg_iconSize != iconSizeRow.f
+                                    onReleased: {
+                                        iconSizeRow.buttonPressed = iconSizeDOWN
+                                        iconSizeRow.seticonSize()
+                                    }
+                                }
+                                Button {
+                                    id: iconSizeUP
+                                    text: "▲"
+                                    implicitWidth: iconSizeUP.height
+                                    Layout.margins: 1   //buttonMargin
+                                    enabled: cfg_iconSize != iconSizeRow.t
+                                    onReleased: {
+                                        iconSizeRow.buttonPressed = iconSizeUP
+                                        iconSizeRow.seticonSize()
+                                    }
+                                }
+                                Slider {
+                                    id: iconSizeSlider
+                                    implicitWidth: 140
+                                    from: iconSizeRow.f
+                                    value: cfg_iconSize
+                                    to: iconSizeRow.t
+                                    onValueChanged: {
+                                        iconSizeRow.buttonPressed = iconSizeSlider
+                                        iconSizeRow.seticonSizeSlider()
+                                    }
+                                }
+                            }
+                        }
+                    } 
+                }
+            }
+        }
+        Grid {
+            // NEW TOOLTIP INFORMATION
+            anchors.top: gA45.bottom
+            Text {
+                id: infoText45
+                opacity: 0
+                padding: 10 
+                width: rootRec45.width
+                color: theme.textColor
+                textFormat: Text.RichText
+                wrapMode: Text.Wrap
+                text: "<table>"
+                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Increase speed icon size, maximum 200%.") + "</td></tr>"
+                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Decrease speed icon size, minimum 50%") + "</td></tr>"
+                    + "</table>"
+            }
+        }
+    } 
+    //#######################################################################################################
+    Rectangle {
+        id: rootRec46
+        width: parent.width
+        height: infoButton46.height + 8
+        anchors.top: rootRec45.bottom
+        anchors.topMargin: spacerA
+        color: "transparent" //"red"
+        border.color: "dark grey"
+        border.width: 0
+        radius: 4
+
+        ToolButton {
+            id: infoButton46
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton46.height
+            anchors.right: parent.right
+            opacity: 0.5
+
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton46.opacity = 1
+                onExited:               state ? infoButton46.opacity = 1 : infoButton46.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec46)
+                }
+            }
+        }
+        Grid {
+            // TITLE | CHOICE BUTTONS GO HERE
+            id: gA46
+            anchors.verticalCenter: infoButton46.verticalCenter
+
+            Row {
+                //spacing: 10        
+                Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: recAlign4.verticalCenter' NOT TO WORK WITH LABEL.
+                    id: recAlign46
+                    height: infoButton46.height
+                    width: 0
+                    color: "transparent"
+                }
+                Column {
+                    Rectangle {
+                        height: 10
+                        width: spacerA
+                        color: "transparent" //"red"
+                    } 
+                }
+                Column {
+                    anchors.verticalCenter: recAlign46.verticalCenter
+                    Label {
+                        width: titleTextMetrics.width
+                        text:  i18n("Prefix/Suffix size:")
+                    }
+                }
+                Column {
+                    //####################################################
+                    RowLayout {
+                        id: sufixSizeRow
+
+                        property var buttonPressed;
+                        property var t: 2;
+                        property var f: 0.5;
+
+                        function disableButton() {
+                            if (cfg_sufixSize === f) {
+                                sufixSizeDOWN.enabled = false;
+                            } else {
+                                sufixSizeDOWN.enabled = true;
+                            }                 
+                            if (cfg_sufixSize === t) {
+                                sufixSizeUP.enabled = false;
+                            } else {
+                                sufixSizeUP.enabled = true;
+                            }                
+                        }
+                        function setsufixSize() {
+                            if (buttonPressed.text === "▲") {           // BUTTONS
+                                cfg_sufixSize += 0.01;
+                            } else if (buttonPressed.text === "▼") {
+                                cfg_sufixSize -= 0.01;
+                            } 
+                            sufixSizeSlider.value = cfg_sufixSize
+                            disableButton()
+                        }    
+                            
+                        function setsufixSizeSlider() {                  // SLIDER
+                            var sliderVal
+                            sliderVal = buttonPressed.value.toFixed(2)
+                            if (sliderVal !==  cfg_sufixSize) {
+                                cfg_sufixSize = sliderVal
+                            }
+                            disableButton()
+                        }
+
+                        Rectangle {
+                            width: labelTextMetrics.width
+                            height: sufixSizeLabel.height
+                            color: "transparent"
+                            Label {
+                                id: sufixSizeLabel
+                                text: (cfg_sufixSize * 100).toFixed(0) + " %"
+                            }
+                        }
+
+                        Rectangle { 
+                            width: (sufixSizeUP.x - sufixSizeDOWN.x) + (sufixSizeDOWN.width + 2)
+                            height: sufixSizeDOWN.height + 2
+                            color: "transparent"
+                            border.color: "dark grey"
+                            border.width: 0.5
+                            radius: 4           
+                            RowLayout {       
+                                Button {
+                                    id: sufixSizeDOWN
+                                    text: "▼"
+                                    implicitWidth: sufixSizeDOWN.height
+                                    Layout.margins: 1   //buttonMargin
+                                    enabled: cfg_sufixSize != sufixSizeRow.f
+                                    onReleased: {
+                                        sufixSizeRow.buttonPressed = sufixSizeDOWN
+                                        sufixSizeRow.setsufixSize()
+                                    }
+                                }
+                                Button {
+                                    id: sufixSizeUP
+                                    text: "▲"
+                                    implicitWidth: sufixSizeUP.height
+                                    Layout.margins: 1   //buttonMargin
+                                    enabled: cfg_sufixSize != sufixSizeRow.t
+                                    onReleased: {
+                                        sufixSizeRow.buttonPressed = sufixSizeUP
+                                        sufixSizeRow.setsufixSize()
+                                    }
+                                }
+                                Slider {
+                                    id: sufixSizeSlider
+                                    implicitWidth: 140
+                                    from: sufixSizeRow.f
+                                    value: cfg_sufixSize
+                                    to: sufixSizeRow.t
+                                    onValueChanged: {
+                                        sufixSizeRow.buttonPressed = sufixSizeSlider
+                                        sufixSizeRow.setsufixSizeSlider()
+                                    }
+                                }
+                            }
+                        }
+                    } 
+                }
+            }
+        }
+        Grid {
+            // NEW TOOLTIP INFORMATION
+            anchors.top: gA46.bottom
+            Text {
+                id: infoText46
+                opacity: 0
+                padding: 10 
+                width: rootRec46.width
+                color: theme.textColor
+                textFormat: Text.RichText
+                wrapMode: Text.Wrap
+                text: "<table>"
+                        + "<tr><td><b>▲</b>: </td> <td>" + i18n("Increase speed prefix/suffix font size, maximum 200%.") + "</td></tr>"
+                        + "<tr><td><b>▼</b>: </td> <td>" + i18n("Decrease speed prefix/suffix font size, minimum 50%") + "</td></tr>"
+                    + "</table>"
+            }
+        }
+    }    
+
+ //#######################################################################################################
+    MenuSeparator {
+        id: separator11
+        padding: 0
+        topPadding: 20
+        bottomPadding: 20
+        contentItem: Rectangle {
+            implicitWidth: parent.parent.width
+            implicitHeight: 1
+            color: "light grey"
+        }
+        anchors.top: rootRec46.bottom
+    }
+ //#######################################################################################################  
+    Rectangle {
+        id: rootRec9
+        width: parent.width
+        height: infoButton9.height
+        //anchors.top: rootRec8.bottom
+        anchors.top: separator11.bottom
+        //anchors.topMargin: spacerB
+        color: "transparent" //"red"
+        border.color: "dark grey"
+        border.width: 0
+        radius: 4
+
+        ToolButton {
+            id: infoButton9
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton9.height
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton9.opacity = 1
+                onExited:               state ? infoButton9.opacity = 1 : infoButton9.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec9)
+                }
+            }
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -1381,7 +1591,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton9.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -1407,7 +1617,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA9.bottom
             Text {
                 id: infoText9
@@ -1423,17 +1632,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Shows the suffixes for bits or bytes.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim9
-                target: infoText9
-                duration: 200
-                onStopped: {   
-                    if (infoButton9.state === false) {     
-                        heightAnimation9.to = infoButton9.height
-                        heightAnimation9.start()               
-                    }
-                }
-            }
         } 
     }
  //#######################################################################################################
@@ -1448,39 +1646,23 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation10
-            target: rootRec10
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton10.state === true) {
-                     anim10.to = 1;  anim10.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton10
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton10.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation10.to = infoButton10.height + infoText10.contentHeight + (infoText10.padding * 2) 
-                    heightAnimation10.start()
-                    opacity = 1.0
-                    rootRec10.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim10.to = 0;  anim10.start();
-                    opacity = 0.5
-                    rootRec10.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton10.opacity = 1
+                onExited:               state ? infoButton10.opacity = 1 : infoButton10.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec10)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -1488,7 +1670,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton10.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -1524,7 +1706,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA10.bottom
             Text {
                 id: infoText10
@@ -1540,17 +1721,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td><b>" + i18n("Bytes") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Displays data throughput based on byte units. Second option as bytes can be used to measure an amount of data, normally storage data.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim10
-                target: infoText10
-                duration: 200
-                onStopped: {   
-                    if (infoButton10.state === false) {     
-                        heightAnimation10.to = infoButton10.height
-                        heightAnimation10.start()               
-                    }
-                }
-            }
         } 
     }
  //#######################################################################################################
@@ -1565,39 +1735,23 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation11
-            target: rootRec11
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton11.state === true) {
-                     anim11.to = 1;  anim11.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton11
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton11.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation11.to = infoButton11.height + infoText11.contentHeight + (infoText11.padding * 2) 
-                    heightAnimation11.start()
-                    opacity = 1.0
-                    rootRec11.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim11.to = 0;  anim11.start();
-                    opacity = 0.5
-                    rootRec11.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton11.opacity = 1
+                onExited:               state ? infoButton11.opacity = 1 : infoButton11.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec11)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -1605,7 +1759,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton11.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -1631,7 +1785,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA11.bottom
             Text {
                 id: infoText11
@@ -1647,64 +1800,51 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("The complete suffix will be displayed including the per second unit.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim11
-                target: infoText11
-                duration: 200
-                onStopped: {   
-                    if (infoButton11.state === false) {     
-                        heightAnimation11.to = infoButton11.height
-                        heightAnimation11.start()               
-                    }
-                }
-            }
         } 
     }
  //#######################################################################################################
+    MenuSeparator {
+        id: separator2
+        padding: 0
+        topPadding: 20
+        bottomPadding: 20
+        contentItem: Rectangle {
+            implicitWidth: parent.parent.width
+            implicitHeight: 1
+            color: "light grey"
+        }
+        anchors.top: rootRec11.bottom
+    }
+ //#######################################################################################################   
     Rectangle {
         id: rootRec12
         width: parent.width
         height: infoButton12.height
-        anchors.top: rootRec11.bottom
-        anchors.topMargin: spacerB
+        anchors.top: separator2.bottom
+        //anchors.top: rootRec11.bottom
+        //anchors.topMargin: spacerB
         color: "transparent" //"red"
         border.color: "dark grey"
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation12
-            target: rootRec12
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton12.state === true) {
-                     anim12.to = 1;  anim12.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton12
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton12.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation12.to = infoButton12.height + infoText12.contentHeight + (infoText12.padding * 2) 
-                    heightAnimation12.start()
-                    opacity = 1.0
-                    rootRec12.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim12.to = 0;  anim12.start();
-                    opacity = 0.5
-                    rootRec12.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton12.opacity = 1
+                onExited:               state ? infoButton12.opacity = 1 : infoButton12.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec12)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -1712,7 +1852,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton12.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -1739,7 +1879,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA12.bottom
             Text {
                 id: infoText12
@@ -1757,17 +1896,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td><b></b></td> <td style='padding-bottom:6px'>" + i18n("* This option is technically correct when used in conjunction with 'Interval data relay' choice of 'Accumulated'.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim12
-                target: infoText12
-                duration: 200
-                onStopped: {   
-                    if (infoButton12.state === false) {     
-                        heightAnimation12.to = infoButton12.height
-                        heightAnimation12.start()               
-                    }
-                }
-            }
         } 
     }
  //#######################################################################################################
@@ -1782,39 +1910,23 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation13
-            target: rootRec13
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton13.state === true) {
-                     anim13.to = 1;  anim13.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton13
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton13.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation13.to = infoButton13.height + infoText13.contentHeight + (infoText13.padding * 2) 
-                    heightAnimation13.start()
-                    opacity = 1.0
-                    rootRec13.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim13.to = 0;  anim13.start();
-                    opacity = 0.5
-                    rootRec13.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton13.opacity = 1
+                onExited:               state ? infoButton13.opacity = 1 : infoButton13.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec13)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -1822,7 +1934,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton13.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -1860,7 +1972,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA13.bottom
             Text {
                 id: infoText13
@@ -1876,64 +1987,50 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td>" + i18n("Example, measuring in bits: Kib<b>/s</b> or Kib<b>ps</b>, measuring in bytes: KB<b>/s</b> or KB<b>ps</b>.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim13
-                target: infoText13
-                duration: 200
-                onStopped: {   
-                    if (infoButton13.state === false) {     
-                        heightAnimation13.to = infoButton13.height
-                        heightAnimation13.start()               
-                    }
-                }
-            }
         } 
     }
  //#######################################################################################################
+    MenuSeparator {
+        id: separator3
+        padding: 0
+        topPadding: 20
+        bottomPadding: 20
+        contentItem: Rectangle {
+            implicitWidth: parent.parent.width
+            implicitHeight: 1
+            color: "light grey"
+        }
+        anchors.top: rootRec13.bottom
+    }
+ //#######################################################################################################   
     Rectangle {
         id: rootRec14
         width: parent.width
         height: infoButton14.height
-        anchors.top: rootRec13.bottom
-        anchors.topMargin: spacerB
+        anchors.top: separator3.bottom
+        //anchors.topMargin: spacerB
         color: "transparent" //"red"
         border.color: "dark grey"
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation14
-            target: rootRec14
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton14.state === true) {
-                     anim14.to = 1;  anim14.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton14
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton14.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation14.to = infoButton14.height + infoText14.contentHeight + (infoText14.padding * 2) 
-                    heightAnimation14.start()
-                    opacity = 1.0
-                    rootRec14.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim14.to = 0;  anim14.start();
-                    opacity = 0.5
-                    rootRec14.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton14.opacity = 1
+                onExited:               state ? infoButton14.opacity = 1 : infoButton14.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec14)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -1941,7 +2038,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton14.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -1967,7 +2064,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA14.bottom
             Text {
                 id: infoText14
@@ -1983,17 +2079,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td><b>" + i18n("Unchecked") + "</b>: </td> <td style='padding-bottom:6px'>" + i18n("Hides the Download or Upload icons in the widget.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim14
-                target: infoText14
-                duration: 200
-                onStopped: {   
-                    if (infoButton14.state === false) {     
-                        heightAnimation14.to = infoButton14.height
-                        heightAnimation14.start()               
-                    }
-                }
-            }
         } 
     }    
  //#######################################################################################################
@@ -2008,39 +2093,23 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation15
-            target: rootRec15
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton15.state === true) {
-                     anim15.to = 1;  anim15.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton15
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton15.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation15.to = infoButton15.height + infoText15.contentHeight + (infoText15.padding * 2) 
-                    heightAnimation15.start()
-                    opacity = 1.0
-                    rootRec15.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim15.to = 0;  anim15.start();
-                    opacity = 0.5
-                    rootRec15.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton15.opacity = 1
+                onExited:               state ? infoButton15.opacity = 1 : infoButton15.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec15)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -2048,7 +2117,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton15.verticalCenter
 
             Row {
-                spacing: 10     
+                //spacing: 10     
                 Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: infoButtonX.verticalCenter' NOT TO WORK WITH LABEL.
                     id: recAlign15
                     height: infoButton15.height
@@ -2110,7 +2179,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA15.bottom
             Text {
                 id: infoText15
@@ -2125,24 +2193,13 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td>" + i18n("Choose the Upload and Download icon style to be displayed in the widget.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim15
-                target: infoText15
-                duration: 200
-                onStopped: {   
-                    if (infoButton15.state === false) {     
-                        heightAnimation15.to = infoButton15.height
-                        heightAnimation15.start()               
-                    }
-                }
-            }
         } 
     }   
  //#######################################################################################################
     Rectangle {
-        id: rootRec16
+        id: rootRec155
         width: parent.width
-        height: infoButton16.height
+        height: infoButton155.height
         anchors.top: rootRec15.bottom
         anchors.topMargin: spacerA
         color: "transparent" //"red"
@@ -2150,39 +2207,148 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation16
-            target: rootRec16
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton16.state === true) {
-                     anim16.to = 1;  anim16.start()                 
+        ToolButton {
+            id: infoButton155
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton155.height
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton155.opacity = 1
+                onExited:               state ? infoButton155.opacity = 1 : infoButton155.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec155)
                 }
             }
         }
-        Button {
-            property bool state: false
+        Grid {
+            // TITLE | CHOICE BUTTONS GO HERE
+            id: gA155
+            anchors.verticalCenter: infoButton155.verticalCenter
 
-            id: infoButton16
-            implicitWidth: infoButton16.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation16.to = infoButton16.height + infoText16.contentHeight + (infoText16.padding * 2) 
-                    heightAnimation16.start()
-                    opacity = 1.0
-                    rootRec16.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim16.to = 0;  anim16.start();
-                    opacity = 0.5
-                    rootRec16.border.width = 0
+            Row {
+                //spacing: 10     
+                Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: infoButtonX.verticalCenter' NOT TO WORK WITH LABEL.
+                    id: recAlign155
+                    height: infoButton155.height
+                    width: 0
+                    color: "transparent"
+                }   
+                Column {
+                    Rectangle {
+                        height: 10
+                        width: spacerA
+                        color: "transparent" //"red"
+                    } 
+                }
+                Column {
+                    anchors.verticalCenter: recAlign155.verticalCenter
+                    //________ LAYOUT ________ 
+                    Label {
+                        width: titleTextMetrics.width
+                        text:  i18n("Custom Icon Style:")
+                    }
+                }
+                Column {
+                    //####################################################
+                    Row {
+                        id: custIconRow
+                        function getCustIcons() {
+                            cfg_iconType = custIconDown.text + " " + custIconUp.text
+                        }
+                        CheckBox {
+                            id:     custIcon 
+                            onCheckedChanged: {
+                                custIconDown.enabled = custIcon.checked
+                                custIconUp.enabled = custIcon.checked
+                                iconType.enabled = !iconType.enabled        // Disable Icon ComboBox
+                            }
+                        } 
+                        TextField {
+                            id: custIconDown
+                            placeholderText: "Receive"
+                            enabled: custIcon.checked
+                            width:      100
+                            onTextChanged: {
+                                custIconRow.getCustIcons()
+                                if (text.length > 10) {
+                                    text = text.substring(0, 10); // Limit to 10 characters
+                                }
+                            }
+                        }
+                        Rectangle {
+                            height: 10
+                            width: spacerA
+                            color: "transparent" //"red"
+                        } 
+                        TextField {
+                            id: custIconUp
+                            placeholderText: "Transmit"
+                            enabled: custIcon.checked
+                            width:      100
+                            onTextChanged: {
+                                custIconRow.getCustIcons()
+                                if (text.length > 10) {
+                                    text = text.substring(0, 10); // Limit to 10 characters
+                                }
+                            }
+                        }
+                    }
+                    // ################################################################    
                 }
             }
+        }
+        Grid {
+            // NEW TOOLTIP INFORMATION
+            anchors.top: gA155.bottom
+            Text {
+                id: infoText155
+                opacity: 0
+                padding: 10 
+                width: rootRec155.width
+                color: theme.textColor
+                textFormat: Text.RichText
+                wrapMode: Text.Wrap
+                
+                text: "<table>"
+                        + "<tr><td>" + i18n("Input your custom font icons or text of choice.  Each text field is limited to 10 characters.") + "</td></tr>"
+                    + "</table>"
+            }
+        } 
+    }  
+ //#######################################################################################################
+    Rectangle {
+        id: rootRec16
+        width: parent.width
+        height: infoButton16.height
+        anchors.top: rootRec155.bottom
+        anchors.topMargin: spacerA
+        color: "transparent" //"red"
+        border.color: "dark grey"
+        border.width: 0
+        radius: 4
+
+        ToolButton {
+            id: infoButton16
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton16.height
+            anchors.right: parent.right
             opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton16.opacity = 1
+                onExited:               state ? infoButton16.opacity = 1 : infoButton16.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec16)
+                }
+            }
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -2190,7 +2356,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton16.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Column {
                     Rectangle {
                         height: 10
@@ -2226,7 +2392,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA16.bottom
             Text {
                 id: infoText16
@@ -2241,64 +2406,52 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         + "<tr><td>" + i18n("Choose to have the Upload and Download icons to the left or the right of the speed data.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim16
-                target: infoText16
-                duration: 200
-                onStopped: {   
-                    if (infoButton16.state === false) {     
-                        heightAnimation16.to = infoButton16.height
-                        heightAnimation16.start()               
-                    }
-                }
-            }
         } 
     }  
+
  //#######################################################################################################
+    MenuSeparator {
+        id: separator4
+        padding: 0
+        topPadding: 20
+        bottomPadding: 20
+        contentItem: Rectangle {
+            implicitWidth: parent.parent.width
+            implicitHeight: 1
+            color: "light grey"
+        }
+        anchors.top: rootRec16.bottom
+    }
+ //#######################################################################################################   
+ 
     Rectangle {
         id: rootRec17
         width: parent.width
         height: infoButton17.height
-        anchors.top: rootRec16.bottom
-        anchors.topMargin: spacerB
+        anchors.top: separator4.bottom
+        //anchors.topMargin: spacerB
         color: "transparent" //"red"
         border.color: "dark grey"
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation17
-            target: rootRec17
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton17.state === true) {
-                     anim17.to = 1;  anim17.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton17
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton17.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation17.to = infoButton17.height + infoText17.contentHeight + (infoText17.padding * 2) 
-                    heightAnimation17.start()
-                    opacity = 1.0
-                    rootRec17.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim17.to = 0;  anim17.start();
-                    opacity = 0.5
-                    rootRec17.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton17.opacity = 1
+                onExited:               state ? infoButton17.opacity = 1 : infoButton17.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec17)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -2306,7 +2459,7 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
             anchors.verticalCenter: infoButton17.verticalCenter
 
             Row {
-                spacing: 10        
+                //spacing: 10        
                 Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: infoButtonX.verticalCenter' NOT TO WORK WITH LABEL.
                     id: recAlign17
                     height: infoButton17.height
@@ -2334,12 +2487,12 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                         RadioButton {
                             Layout.rightMargin:     20          // PADDING RIGHT
                             checked:                plasmoid.configuration.binaryDecimal === 'binary'
-                            text:                   i18n("Binary (1024)")
+                            text:                   i18n("Binary (1024 - 2^10)")
                             onReleased:             cfg_binaryDecimal = 'binary'
                         }
                         RadioButton {
                             checked:                plasmoid.configuration.binaryDecimal === 'decimal'
-                            text:                   i18n("Metric (1000)")
+                            text:                   i18n("Metric (1000 - 10^3)")
                             onReleased:             cfg_binaryDecimal = 'decimal'
                         }
                     }
@@ -2349,7 +2502,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA17.bottom
             Text {
                 id: infoText17
@@ -2359,7 +2511,6 @@ Using the per second prefix ('/s' or 'ps') with this option is not technically c
                 color: theme.textColor
                 textFormat: Text.RichText
                 wrapMode: Text.Wrap
-                
                 text: "<table>" +
                         + "<tr><td>"
                         + i18n("In computing, binary 1024 and decimal 1000 are two different ways of measuring units of digital information.")
@@ -2381,17 +2532,6 @@ The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have been introduced to refer to binar
                         + "</p></td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim17
-                target: infoText17
-                duration: 200
-                onStopped: {   
-                    if (infoButton17.state === false) {     
-                        heightAnimation17.to = infoButton17.height
-                        heightAnimation17.start()               
-                    }
-                }
-            }
         } 
     }  
  //#######################################################################################################
@@ -2406,39 +2546,23 @@ The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have been introduced to refer to binar
         border.width: 0
         radius: 4
 
-        NumberAnimation {
-            id: heightAnimation18
-            target: rootRec18
-            property: "height"
-            duration: 100
-            onStopped: {   
-                if (infoButton18.state === true) {
-                     anim18.to = 1;  anim18.start()                 
-                }
-            }
-        }
-        Button {
-            property bool state: false
-
+        ToolButton {
             id: infoButton18
+            icon.name: 'kt-info-widget'
             implicitWidth: infoButton18.height
-            text: i18n("i")
-            anchors.right: parent.right 
-            onClicked: {
-                if (state === false) {  // OPEN NEW TOOLTIP
-                    state = true
-                    heightAnimation18.to = infoButton18.height + infoText18.contentHeight + (infoText18.padding * 2) 
-                    heightAnimation18.start()
-                    opacity = 1.0
-                    rootRec18.border.width = 0.5
-                } else {                // CLOSE NEW TOOLTIP
-                    state = false
-                    anim18.to = 0;  anim18.start();
-                    opacity = 0.5
-                    rootRec18.border.width = 0
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton18.opacity = 1
+                onExited:               state ? infoButton18.opacity = 1 : infoButton18.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec18)
                 }
             }
-            opacity: 0.5
         }
         Grid {
             // TITLE | CHOICE BUTTONS GO HERE
@@ -2446,7 +2570,7 @@ The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have been introduced to refer to binar
             anchors.verticalCenter: infoButton18.verticalCenter
 
             Row {
-                spacing: 10     
+                //spacing: 10     
                 Rectangle {     // USED FOR LABEL ALIGNMENT - NOT SURE WHY HAVING BELOW BUTTONS CAUSED 'anchors.verticalCenter: infoButtonX.verticalCenter' NOT TO WORK WITH LABEL.
                     id: recAlign18
                     height: infoButton18.height
@@ -2575,7 +2699,6 @@ The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have been introduced to refer to binar
         }
         Grid {
             // NEW TOOLTIP INFORMATION
-            //id: gB
             anchors.top: gA18.bottom
             Text {
                 id: infoText18
@@ -2590,17 +2713,257 @@ The prefixes 'kibi,' 'mebi,' 'gibi,' etc. have been introduced to refer to binar
                         + "<tr><td>" + i18n("Choose the number of decimal fraction digits to the right of the decimal point.") + "</td></tr>"
                     + "</table>"
             }
-            OpacityAnimator {
-                id:anim18
-                target: infoText18
-                duration: 200
-                onStopped: {   
-                    if (infoButton18.state === false) {     
-                        heightAnimation18.to = infoButton18.height
-                        heightAnimation18.start()               
+        } 
+    } 
+ //#######################################################################################################
+    Rectangle {
+        id: rootRec19
+        width: parent.width
+        height: infoButton19.height
+        anchors.top: rootRec18.bottom
+        anchors.topMargin: spacerA
+        color: "transparent" //"red"
+        border.color: "dark grey"
+        border.width: 0
+        radius: 4
+
+        ToolButton {
+            id: infoButton19
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton19.height
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton19.opacity = 1
+                onExited:               state ? infoButton19.opacity = 1 : infoButton19.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec19)
+                }
+            }
+        }
+        Grid {
+            // TITLE | CHOICE BUTTONS GO HERE
+            id: gA19
+            anchors.verticalCenter: infoButton19.verticalCenter
+
+            Row {
+                //spacing: 10        
+                Column {
+                    Rectangle {
+                        height: 10
+                        width: spacerA
+                        color: "transparent" //"red"
+                    } 
+                }
+                Column {
+                    //________ LAYOUT ________ 
+                    Label {
+                        width: titleTextMetrics.width
+                        text:  i18n("Decimal place filter:")
+                    }
+                }
+                Column {
+                    Row {
+                        id: filterRow
+                        //#################################################################
+                        // FILTERING IS THE DEFAULT SETTING AND ALLOWS THE RECIEVED BITS TO BE  
+                        // ROUNDED TO THE LEAST POSSIBLE NUMBERS:
+                        // EXAMPLE: 1,553,808 BITS = 1.6 Mb (ASSUMING 1 DECIMAL PLACE HAS BEEN SELECTED)
+                        // DISABLING THE MEGA CHECKBOXES WILL ROUND THE VALUE DOWN THE THE NEAREST KILOBIT
+                        // EXAMPLE: 1,553,808 BITS = 1554 Kb (ASSUMING 4 DIGIT ROUNDING WAS SELECTED)
+
+                        //________ CHECKBOX WIDTH ________ 
+                        TextMetrics {
+                            id: checkBoxMetrics
+                            text: "Bytes    "
+                        }
+                        CheckBox {
+                            id:     decimalFilter0
+                        } 
+                        Label {
+                            id:                     decimalFilter0Label
+                            text:                   cfg_speedUnits === 'bits' ? "bits" : "Bytes"
+                            anchors.verticalCenter: decimalFilter0.verticalCenter
+                            width:                  checkBoxMetrics.width
+                        }
+                        CheckBox {
+                            id:     decimalFilter1
+                        } 
+                        Label {
+                            id:                     decimalFilter1Label
+                            text:                   cfg_binaryDecimal === 'binary' ? "Kibi" : "Kilo"
+                            anchors.verticalCenter: decimalFilter0.verticalCenter
+                            width:                  checkBoxMetrics.width
+                        }
+                        CheckBox {
+                            id:     decimalFilter2
+                        } 
+                        Label {
+                            id:                     decimalFilter2Label
+                            text:                   cfg_binaryDecimal === 'binary' ? "Mebi" : "Mega"
+                            anchors.verticalCenter: decimalFilter0.verticalCenter
+                            width:                  checkBoxMetrics.width
+                        }
+                        CheckBox {
+                            id:     decimalFilter3
+                        } 
+                        Label {
+                            id:                     decimalFilter3Label
+                            text:                   cfg_binaryDecimal === 'binary' ? "Gibi" : "Giga"
+                            anchors.verticalCenter: decimalFilter0.verticalCenter
+                            width:                  checkBoxMetrics.width
+                        }
+                        // ################################################################                         
                     }
                 }
             }
+        }
+        Grid {
+            // NEW TOOLTIP INFORMATION
+            anchors.top: gA19.bottom
+            Text {
+                id: infoText19
+                opacity: 0
+                padding: 10 
+                width: rootRec19.width
+                color: theme.textColor
+                textFormat: Text.RichText
+                wrapMode: Text.Wrap  
+                text: "<table>"
+                    + "<tr><td>" + i18n("Provides fine-grained control over decimal places and rounding in each bit / Byte zone for the data display.") + "</td></tr>"
+                    + "<tr><td>" + i18n("For example, if the control is turned off (decimal places disabled), data values will be shown as whole numbers in the chosen zone as per the selected rounding method (either 3 or 4 digits rounding).") + "</td></tr>"
+                    + "<tr><td>" + i18n("If the control is turned on (decimal places enabled), data values will be shown with the appropriate decimal places and 3 digit rounding enabled.") + "</td></tr>"
+                    + "</table>"
+            }
+        }  
+        
+    }     
+ //#######################################################################################################
+    Rectangle {
+        id: rootRec20
+        width: parent.width
+        height: infoButton20.height
+        anchors.top: rootRec19.bottom
+        anchors.topMargin: spacerA
+        color: "transparent" //"red"
+        border.color: "dark grey"
+        border.width: 0
+        radius: 4
+
+        ToolButton {
+            id: infoButton20
+            icon.name: 'kt-info-widget'
+            implicitWidth: infoButton20.height
+            anchors.right: parent.right
+            opacity: 0.5
+            MouseArea {
+                property bool state:    false
+                anchors.fill:           parent
+                hoverEnabled:           true
+                onEntered:              infoButton20.opacity = 1
+                onExited:               state ? infoButton20.opacity = 1 : infoButton20.opacity = 0.5
+                onClicked: {
+                    state = !state
+                    main.toggleTooltip(rootRec20)
+                }
+            }
+        }
+        Grid {
+            // TITLE | CHOICE BUTTONS GO HERE
+            id: gA20
+            anchors.verticalCenter: infoButton20.verticalCenter
+
+            Row {
+                //spacing: 10        
+                Column {
+                    Rectangle {
+                        height: 10
+                        width: spacerA
+                        color: "transparent" //"red"
+                    } 
+                }
+                Column {
+                    //________ LAYOUT ________ 
+                    Label {
+                        width: titleTextMetrics.width
+                        text:  i18n("Rounded whole number:")
+                    }
+                }
+                Column {
+                    //####################################################
+                    // THIS WILL ROUND THE FIGURE DOWN TO THE NEAREST 3 OR 4 DIGIT, IF THIS ISNT POSSIBLE   
+                    // A DECIMAL PLACE WILL BE USED TO DISPLAY THE NUMBER.
+                    // EXAMPLE: 
+                    // [3] 408,288 BITS = 408 Kb || 1,553,808 BITS = 1.6 Mb
+                    // [4] 408,288 BITS = 408 Kb || 1,553,808 BITS = 1554 Kb
+                    RowLayout {
+                        id: roundedNumberRow
+                        function enableState() {
+                            if (cfg_decimalFilter0 && cfg_decimalFilter1 && cfg_decimalFilter2 && cfg_decimalFilter3) {
+                                if (rb_roundedNumber1.checked === true) {
+                                    rb_roundedNumber0.checked = true
+                                }
+                                return false;           // DISABLE 
+                            } else {
+                                return true;            // ENABLE
+                            }
+                        }
+                        RadioButton {
+                            Layout.rightMargin:     20          // PADDING RIGHT
+                            id:                     rb_roundedNumber0
+                            checked:                true
+                            text:                   i18n("3")
+                            onReleased:             cfg_roundedNumber = 3
+                            enabled:                roundedNumberRow.enableState()
+                        }
+                        RadioButton {
+                            //checked:                plasmoid.configuration.binaryDecimal === 'decimal'
+                            id:                     rb_roundedNumber1        
+                            text:                   i18n("4")
+                            onReleased:             cfg_roundedNumber = 4
+                            enabled:                roundedNumberRow.enableState()
+                        }
+                    }
+                    // ################################################################                              
+                }
+            }
+        }
+        Grid {
+            // NEW TOOLTIP INFORMATION
+            anchors.top: gA20.bottom
+            Text {
+                id: infoText20
+                opacity: 0
+                padding: 10 
+                width: rootRec20.width
+                color: theme.textColor
+                textFormat: Text.RichText
+                wrapMode: Text.Wrap               
+                text: "<div>" + i18n("This option becomes active when 'Decimal place filter' checkbox(es) are disabled.") + "</div><br>"
+                    + "<table>"
+                    + "<tr><td>" + i18n("Provides finer control over how the bit / Byte data is displayed and rounded.") + "</td></tr>"
+                    + "<tr><td>" + i18n("By default (3), the logic will round a 4-digit bit figure to a Kilobit / Kilobyte figure. For example, 3456 bits becomes 3.38 Kb.") + "</td></tr>"
+                    + "<tr><td>" + i18n("Selecting 4 will only round up if the digit count exceeds 4 digits. For example, 1234567 bits will become 1206 Kb (not 1.2 Mb).") + "</td></tr>"
+                    + "</table>"
+            }
         } 
-    }   
+    }  
+ //####################################################################################################### 
+    MenuSeparator {
+        id: separator10
+        padding: 0
+        topPadding: 20
+        bottomPadding: 20
+        contentItem: Rectangle {
+            implicitWidth: Math.max(200, parent.parent.width)
+            implicitHeight: 1
+            color: "light grey"
+        }
+        anchors.top: rootRec20.bottom
+    }
+ //#######################################################################################################         
 }

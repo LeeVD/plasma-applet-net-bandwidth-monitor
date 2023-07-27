@@ -62,6 +62,27 @@
         </entry> 
         <entry name="secondsPrefix" type="String">
             <default>/s</default>
+        </entry>
+        <entry name="decimalFilter0" type="Bool">
+            <default>true</default>
+        </entry> 
+        <entry name="decimalFilter1" type="Bool">
+            <default>true</default>
+        </entry> 
+        <entry name="decimalFilter2" type="Bool">
+            <default>true</default>
+        </entry> 
+        <entry name="decimalFilter3" type="Bool">
+            <default>true</default>
+        </entry> 
+        <entry name="roundedNumber" type="Int">
+            <default>3</default>
+        </entry> 
+        <entry name="iconSize" type="Double">
+            <default>1</default>
+        </entry> 
+        <entry name="sufixSize" type="Double">
+            <default>1</default>
         </entry> 
     </group>
 

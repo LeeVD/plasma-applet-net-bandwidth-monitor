@@ -363,20 +363,24 @@ Item {
                         case 't1': return offsetItem.right
                         case 't2': return t1.right
                         case 't3': return showUnits ? t2.right : t1.right
-
                         case 'b1': return anchorLfunction()     //(singleLine && showIcons) ? t3.right : (singleLine ? t2.right : offsetItem.right) //showIcon
                         case 'b2': return b1.right
                         case 'b3': return showUnits ? b2.right : b1.right
                     } 
+                case 'fontPixSize':
+                    switch (caller) {
+                        case 't1': return Math.round(height * fontHeightRatio * fontSizeScale ) // needs to return int not float
+                        case 't2': return Math.round(height * fontHeightRatio * sufixSize )
+                        case 't3': return Math.round(height * fontHeightRatio * iconSize);
+                        case 'b1': return Math.round(height * fontHeightRatio * fontSizeScale )
+                        case 'b2': return Math.round(height * fontHeightRatio * sufixSize )
+                        case 'b3': return Math.round(height * fontHeightRatio * iconSize)
+                    }
                 case 'text':
                     switch (caller) {
-                        // case 't1': return speedText(showSeparately ? (swapDownUp ? upSpeed : downSpeed) : downSpeed + upSpeed)
-                        // case 't2': return speedUnit(showSeparately ? (swapDownUp ? upSpeed : downSpeed) : downSpeed + upSpeed)
                         case 't1': return speedDisplay('number', showSeparately ? (swapDownUp ? upSpeed : downSpeed) : downSpeed + upSpeed)
                         case 't2': return speedDisplay('suffix', showSeparately ? (swapDownUp ? upSpeed : downSpeed) : downSpeed + upSpeed)
                         case 't3': return showSeparately ? (swapDownUp ? iconStyle(0) : iconStyle(1)) : iconStyle(2)
-                        // case 'b1': return speedText(swapDownUp ? downSpeed : upSpeed)
-                        // case 'b2': return speedUnit(swapDownUp ? downSpeed : upSpeed)
                         case 'b1': return speedDisplay('number', swapDownUp ? downSpeed : upSpeed)
                         case 'b2': return speedDisplay('suffix', swapDownUp ? downSpeed : upSpeed)
                         case 'b3': return swapDownUp ? iconStyle(1) : iconStyle(0)
@@ -420,17 +424,22 @@ Item {
                         case 'b2': return showIcons ? b1.right : ((singleLine && showUnits) ? t3.right : (singleLine ? t2.right : offsetItem.right))
                         case 'b3': return b2.right
                     }
+                case 'fontPixSize':
+                    switch (caller) {
+                        case 't1': return Math.round(height * fontHeightRatio * iconSize) // needs to return int not float
+                        case 't2': return Math.round(height * fontHeightRatio * fontSizeScale )
+                        case 't3': return Math.round(height * fontHeightRatio * sufixSize )
+                        case 'b1': return Math.round(height * fontHeightRatio * iconSize)
+                        case 'b2': return Math.round(height * fontHeightRatio * fontSizeScale )
+                        case 'b3': return Math.round(height * fontHeightRatio * sufixSize )
+                    }
                 case 'text':
                     switch (caller) {
                         case 't1': return showSeparately ? (swapDownUp ? iconStyle(0) : iconStyle(1)) : iconStyle(2)
-                        //case 't2': return speedText(showSeparately ? (swapDownUp ? upSpeed : downSpeed) : downSpeed + upSpeed)
                         case 't2': return speedDisplay('number', showSeparately ? (swapDownUp ? upSpeed : downSpeed) : downSpeed + upSpeed)      //speedDisplay(section, value) 
-                        //case 't3': return speedUnit(showSeparately ? (swapDownUp ? upSpeed : downSpeed) : downSpeed + upSpeed)
                         case 't3': return speedDisplay('suffix', showSeparately ? (swapDownUp ? upSpeed : downSpeed) : downSpeed + upSpeed)
                         case 'b1': return swapDownUp ? iconStyle(1) : iconStyle(0)
-                        //case 'b2': return speedText(swapDownUp ? downSpeed : upSpeed)
                         case 'b2': return speedDisplay('number', swapDownUp ? downSpeed : upSpeed)
-                        //case 'b3': return speedUnit(swapDownUp ? downSpeed : upSpeed)
                         case 'b3': return speedDisplay('suffix', swapDownUp ? downSpeed : upSpeed)
                     } 
                 case 'visible':  
@@ -449,7 +458,6 @@ Item {
                     case 'b2': return Text.AlignVCenter //Text.AlignTop              
                     case 'b3': return Text.AlignVCenter //Text.AlignTop             
                 }  
-            case 'fontPixSize': return height * fontHeightRatio * fontSizeScale
             case 'anchorLMargin': return fontPixelSize * marginFactor
             case 'y':
                 switch (caller) {
@@ -539,8 +547,18 @@ Item {
     }
 
 
-     function getDecimalPlace() {
+    function getDecimalPlace() {
         return Number.parseFloat('1000').toFixed( decimalPlace );
+    }
+
+
+    function customRound(number) {
+        var decimalPart = number - Math.floor(number);
+        if (decimalPart >= 0.445) {
+            return Math.ceil(number);
+        } else {
+            return Math.floor(number);
+        }
     }
 
 
@@ -548,25 +566,86 @@ Item {
         // data communication 1 kilobit = 1000 bits, while in data storage 1 Kilobyte = 1024 Bytes
         var m   = getBinDec                    // binary 1024 | decimal 1000
         var dec = decimalPlace                 // # of decimal places
-        var kil = m;                           // One K is 1024  b/B
-        var meg = m * m;                       // One M is 1024 Kb/B
-        var gig = m * m * m;                   // One G is 1024 Mb/B
-        var ter = m * m * m * m;               // One T is 1024 Gb/B
+        // BIT CONVERSION TO HIGHER PREFIXES
+        var kil = m;                           // One K is 1024  b/B    1024            1000
+        var meg = m * m;                       // One M is 1024 Kb/B    1048576         1000000
+        var gig = m * m * m;                   // One G is 1024 Mb/B    1073741824      1000000000
+        var ter = m * m * m * m;               // One T is 1024 Gb/B    1099511627776   1000000000000
+        // NEW THRESHOLD : 4 DIGITS ALLOWED
+        const fourb = 10000;
+        const fourk = 10000000;
+        const fourm = 10000000000;
+        const fourg = 10000000000000;
+        const fourt = 10000000000000000;
+
+        var result;
+        var digitNum = value.toString().length;
 
         if (section === 'number') {
-            if      (value < kil)  return  value.toFixed(dec);          // return '' if less than a Kx
-            else if (value < meg)  return (value / kil).toFixed(dec);   // return Kx if less than a Mx
-            else if (value < gig)  return (value / meg).toFixed(dec);   // return Mx if less than a Gx
-            else if (value < ter)  return (value / gig).toFixed(dec);   // return Mx if less than a Gx
-            else                   return (value / ter).toFixed(dec);   // return Gx if less than a Tx
+
+            if (roundedNumber === 3) {  
+
+                if        (value < kil) { 
+                    result = decimalFilter0 ?  value.toFixed(dec)          : value;                     // result = '' if less than a Kx         
+                } else if (value < meg) { 
+                    result = decimalFilter1 ? (value / kil).toFixed(dec)   : customRound(value / kil);  // return Kx if less than a Mx
+                } else if (value < gig) { 
+                    result = decimalFilter2 ? (value / meg).toFixed(dec)   : customRound(value / meg);  // return Mx if less than a Gx
+                } else if (value < ter) { 
+                    result = decimalFilter3 ? (value / gig).toFixed(dec)   : customRound(value / gig);  // result = Gx if less than a Gx
+                } else                  { 
+                    result = decimalFilter3 ? (value / ter).toFixed(dec)   : customRound(value / ter);  // result = Tx if less than a Tx
+                }  
+
+            } else {
+
+                // roundedNumber SET TO 4 [ EX. BITS= 1211648	RESULT= 1183.25 Kb	NOT 1.16 Mb ]
+                if      (value < fourb) { 
+                    result = decimalFilter0 ?  value.toFixed(dec)          : value;       // return '' if less than a Kx   
+                } else if (value < fourk) { 
+                    result = decimalFilter1 ? (value / kil).toFixed(dec)   : customRound(value / kil);  // return Kx if less than a Mx
+                } else if (value < fourm) { 
+                    result = decimalFilter2 ? (value / meg).toFixed(dec)   : customRound(value / meg);  // return Mx if less than a Gx
+                } else if (value < fourg) { 
+                    result = decimalFilter3 ? (value / gig).toFixed(dec)   : customRound(value / gig);  // return Gx if less than a Tx
+                } else { 
+                    result = decimalFilter3 ? (value / ter).toFixed(dec)   : customRound(value / ter);  // return Gx if less than a Tx
+                }  
+            }
 
         } else if (section === 'suffix') {
-            if      (value < kil)  return shortUnits ? (boolUnits ? 'b' : 'B') : suffix('b')
-            else if (value < meg)  return shortUnits ? (boolUnits ? 'k' : 'K') : suffix('k')
-            else if (value < gig)  return shortUnits ? 'M' : suffix('M')
-            else if (value < ter)  return shortUnits ? 'G' : suffix('G')
-            else                   return shortUnits ? 'T' : suffix('T')
+
+            if (roundedNumber === 3) {
+                if        (value < kil) { 
+                    result = shortUnits ? (boolUnits ? 'b' : 'B') : suffix('b') 
+                } else if (value < meg) { 
+                    result = shortUnits ? (boolUnits ? 'k' : 'K') : suffix('k') 
+                } else if (value < gig) { 
+                    result = shortUnits ? 'M' : suffix('M') 
+                } else if (value < ter) { 
+                    result = shortUnits ? 'G' : suffix('G') 
+                } else                  { 
+                    result = shortUnits ? 'T' : suffix('T') 
+                } 
+
+            } else {
+
+                // roundedNumber SET TO 4 [ EX. BITS= 1211648	RESULT= 1183.25 Kb	NOT 1.16 Mb ] RETURN Kb NOT Mb
+                if        (value < fourb) { 
+                    result = shortUnits ? (boolUnits ? 'b' : 'B') : suffix('b') 
+                } else if (value < fourk) { 
+                    result = shortUnits ? (boolUnits ? 'k' : 'K') : suffix('k') 
+                } else if (value < fourm) { 
+                    result = shortUnits ? 'M' : suffix('M') 
+                } else if (value < fourg) { 
+                    result = shortUnits ? 'G' : suffix('G') 
+                } else                  { 
+                    result = shortUnits ? 'T' : suffix('T') 
+                } 
+            } 
         }
+        //console.log("value:", value, "   result:", result, "   digitNum:", digitNum, "   roundedNumber:", roundedNumber);
+        return result
     }
 
 
@@ -738,6 +817,7 @@ Item {
         ready = true;
     }
 
+
     Connections {
         target: plasmoid.configuration
         function onNetSourcesChanged() {            // TRIGGERED WHEN INTERFACE CHECKED CHANGED IN SETTINGS
@@ -746,6 +826,7 @@ Item {
             else            addSources()
         }
     }
+
 
     Connections {
         target: sysMonitor
