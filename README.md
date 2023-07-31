@@ -91,7 +91,7 @@ When upgrading via the Plasma 'get widgets' section, make sure you have the new 
 
 ![1](https://user-images.githubusercontent.com/72889808/209696486-0419dd51-f7c8-47a4-aba6-1f2fc4590812.png)
 
-![B](https://user-images.githubusercontent.com/72889808/217652736-9e8c7d27-d5eb-486f-ab66-e8bcc28b87ca.png)
+![image](https://github.com/LeeVD/plasma-applet-net-bandwidth-monitor/assets/72889808/c334ca8e-ec56-4fda-81db-35adb84ca692)
 
 ![C](https://user-images.githubusercontent.com/72889808/217652754-07799096-c390-4bde-a974-8632371cd54d.png)
 
