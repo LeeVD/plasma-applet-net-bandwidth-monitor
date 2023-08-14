@@ -34,7 +34,15 @@ Item {
 
     function netSourceDecode(value) {
         try {
-            return JSON.parse(value)
+            let rawConfig = JSON.parse(value)
+            rawConfig = Array.isArray(rawConfig) ? rawConfig : []
+
+            return rawConfig.filter((obj) => {
+                return obj.hasOwnProperty("path") && obj.hasOwnProperty("name")
+                    && obj.hasOwnProperty("index") && obj.hasOwnProperty("checked")
+                    && (typeof obj.path === "string") && (typeof obj.name === "string")
+                    && (typeof obj.index === "number") && (typeof obj.checked === "boolean")
+            })
         } catch (E) {
             return []
         }
