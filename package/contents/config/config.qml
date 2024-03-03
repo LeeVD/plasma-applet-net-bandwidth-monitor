@@ -12,6 +12,11 @@ ConfigModel {
         icon: 'network-card' //'network-wired'
         source: 'config/configNetwork.qml'
     }
+    ConfigCategory {
+        name: i18n("CPU")
+        icon: 'show-gpu-effects' //'network-wired'
+        source: 'config/configCPU.qml'
+    }
     // ConfigCategory {
     //     name: i18n('Tooltip')
     //     icon: 'dialog-information' //'preferences-desktop-locale' //'configure'

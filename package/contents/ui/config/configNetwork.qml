@@ -21,12 +21,17 @@ import QtQuick.Layouts 1.1
 //import org.kde.plasma.core 2.0 as PlasmaCore
 import DbusModel 1.1
 
-Item {
+import QtQuick 2.2
+import QtQuick.Dialogs 1.0
 
+Item {
+    // configNetwork.qml >>> plasmoid.configuration
     property var cfg_netSources: netSources   
+    property var cfg_netDetails: netDetails
 
     //################## SERIALISATION FIX ###########################
     property var net: []
+    property var det: []
 
     function netSourceEncode(value) {
         return JSON.stringify(value)
@@ -64,32 +69,34 @@ Item {
 
             Repeater {
                 model:          net.length   //sources
-                CheckBox {
-                    text:       net[index].name
-                    checked:    net[index].checked 
-                    onCheckedChanged: {
-                        if (!data.loading) {
-                            net[index].checked = checked
-                            cfg_netSources = netSourceEncode(net)
-                            cfg_netSourcesChanged();    // SETS NEW VALUES IN MAIN 
+                Row {
+                    CheckBox {
+                        id: interfaceCheckbox
+                        //text:       net[index].name
+                        checked:    net[index].checked 
+                        onCheckedChanged: {
+                            if (!data.loading) {
+                                net[index].checked = checked
+                                cfg_netSources = netSourceEncode(net)
+                                //console.log("ip:", cfg_netDetails)
+                                cfg_netSourcesChanged();    // SETS NEW VALUES IN MAIN 
+                            }
                         }
                     }
+                    Label {
+                        text: { 
+                            if (interfaceCheckbox.checked) {
+                                return " Disable monitoring on interface [ " + net[index].name + " ] " 
+                            } else {
+                                return " Enable monitoring on interface [ " + net[index].name + " ] " 
+                            }
+                        }//"Enable Interface  "
+                        height: interfaceCheckbox.height
+                    }
+
+
                 }
             }
-            // Repeater {
-            //     model:          cfg_netSources.length   //sources
-                
-            //     CheckBox {
-            //         text:       cfg_netSources[index].name
-            //         checked:    cfg_netSources[index].checked 
-            //         onCheckedChanged: {
-            //             if (!data.loading) {
-            //                 cfg_netSources[index].checked = checked
-            //                 cfg_netSourcesChanged();    // SETS NEW VALUES IN MAIN 
-            //             }
-            //         }
-            //     }
-            // }
         }
 
         ListModel {
@@ -102,6 +109,7 @@ Item {
         
         Component.onCompleted: {
             net = netSourceDecode(cfg_netSources)
+            //det = netSourceDecode(cfg_netDetails)
         }
     }
 }

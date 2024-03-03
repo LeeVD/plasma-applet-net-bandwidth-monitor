@@ -27,14 +27,23 @@
 // KCharSelect
 
 // USEFUL LOCATIONS:
+// ___ CONFIGURATIONS: ___
 // /home/USER/.config/plasma-org.kde.plasma.desktop-appletsrc
 // /home/USER/.config/plasmoidviewer-appletsrc
+// ___ PLASMOID STORE: ___
+// /home/USER/.local/share/plasma/plasmoids/
+
+// USEFUL SITES
+// https://doc.qt.io/qt-5.15/qmltypes.html
+// https://community.kde.org/Plasma/DeveloperGuide
 
 import QtQuick 2.2
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+//import QtDBus 2.0
 
 Item {
+    // plasmoid.configuration (configGeneral.qml) >>> CompactRepresentation.qml
     property bool       showSeparately:     plasmoid.configuration.showSeparately
     property string     speedLayout:        plasmoid.configuration.speedLayout
     property bool       swapDownUp:         plasmoid.configuration.swapDownUp
@@ -60,23 +69,48 @@ Item {
     property bool       decimalFilter2:     plasmoid.configuration.decimalFilter2
     property bool       decimalFilter3:     plasmoid.configuration.decimalFilter3
     property int        roundedNumber:      plasmoid.configuration.roundedNumber
-    property double     iconSize:           Plasmoid.configuration.iconSize
-    property double     sufixSize:         Plasmoid.configuration.sufixSize
+    property double     iconSize:           plasmoid.configuration.iconSize
+    property double     sufixSize:          Plasmoid.configuration.sufixSize
+    property bool       colorDefault:       plasmoid.configuration.colorDefault
+    property string     colorDownIcon:      plasmoid.configuration.colorDownIcon
+    property string     colorDownDigits:    plasmoid.configuration.colorDownDigits
+    property string     colorDownSuffix:    plasmoid.configuration.colorDownSuffix
+    property string     colorUpIcon:        plasmoid.configuration.colorUpIcon
+    property string     colorUpDigits:      plasmoid.configuration.colorUpDigits
+    property string     colorUpSuffix:      plasmoid.configuration.colorUpSuffix
+    property string     color_b_square:     plasmoid.configuration.color_b_square
+    property string     color_k_square:     plasmoid.configuration.color_k_square
+    property string     color_m_square:     plasmoid.configuration.color_m_square
+    property string     color_g_square:     plasmoid.configuration.color_g_square
+    property bool       speedColorActive1:  plasmoid.configuration.speedColorActive1
+    property bool       speedColorActive2:  plasmoid.configuration.speedColorActive2
+    property bool       speedColorActive3:  plasmoid.configuration.speedColorActive3  
+    property bool       speedUnitB:         plasmoid.configuration.speedUnitB  
+    property bool       speedUnitK:         plasmoid.configuration.speedUnitK  
+    property bool       speedUnitM:         plasmoid.configuration.speedUnitM  
+    property bool       speedUnitG:         plasmoid.configuration.speedUnitG  
+    property bool       ignoreDecimalIdle:  plasmoid.configuration.ignoreDecimalIdle
 
+
+    // CompactRepresentation.qml
     property var        netInterfaces:      []
-    property var        netPath:            []
-    //property var        numberOfNets:       0
+    //property var        netPath:            []
+    property var        netInformation:     []
+    //property var        netInfo:            []
     property var        numCheckedNets:     0
-    //property var        netLabels:          []
+    
     property bool       ready:              false
     property var        sensorList:         []
+    property var        sensorList2:        []
     property var        netDataBits:        []
     property var        netDataByte:        []
     property var        netDataTotal:       []
+    property var        netDetail:          []
+    property var        netDetails:         plasmoid.configuration.netDetails
     property var        netDataAccumulator: []      
     property var        accumulatorCounter: 0
     //property var        getIPInfo:          []
-    //property var        ip:                 []
+    property var        showIP:             []
     //property var        sm:                 []
     //property var        gw:                 []  
     //property var        wifiSig:            []
@@ -101,11 +135,12 @@ Item {
     signal statsUpd(var keys, var values)
 
     property alias dbusData : dbusData
-    
+
     DbusData {
         id: dbusData
         onNewSensorData: {
             // NEW DBUS DATA RECEIVED EVERY 0.5 SECONDS
+            //console.log(keys, values)
             sysMonitor.statsUpd(keys, values)
         }
     }

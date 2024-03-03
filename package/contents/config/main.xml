@@ -84,14 +84,79 @@
         <entry name="sufixSize" type="Double">
             <default>1</default>
         </entry> 
+        <entry name="colorDefault" type="Bool">
+            <default>true</default>
+        </entry>        
+        <entry name="colorDownIcon" type="String">
+            <default></default>
+        </entry>
+        <entry name="colorDownDigits" type="String">
+            <default></default>
+        </entry>
+        <entry name="colorDownSuffix" type="String">
+            <default></default>
+        </entry>
+        <entry name="colorUpIcon" type="String">
+            <default></default>
+        </entry>
+        <entry name="colorUpDigits" type="String">
+            <default></default>
+        </entry>
+        <entry name="colorUpSuffix" type="String">
+            <default></default>
+        </entry>
+        <entry name="color_b_square" type="String">
+            <default></default>
+        </entry>
+        <entry name="color_k_square" type="String">
+            <default></default>
+        </entry>
+        <entry name="color_m_square" type="String">
+            <default></default>
+        </entry>
+        <entry name="color_g_square" type="String">
+            <default></default>
+        </entry>
+        <entry name="speedColorActive1" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="speedColorActive2" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="speedColorActive3" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="speedUnitB" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="speedUnitK" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="speedUnitM" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="speedUnitG" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="ignoreDecimalIdle" type="Bool">
+            <default>false</default>
+        </entry>
     </group>
 
     <group name="Network">
         <entry name="netSources" type="StringList">
             <default></default>
         </entry>
+        <entry name="netDetails" type="StringList">
+            <default></default>
+        </entry>
     </group>
 
+    <group name="CPU">
+        <entry name="" type="">
+            <default></default>
+        </entry>
+    </group>
     <!-- 
     <group name="ToolTip">
         <entry name="showTooltip" type="Bool">
