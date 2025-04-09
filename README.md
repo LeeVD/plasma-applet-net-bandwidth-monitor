@@ -1,3 +1,6 @@
+Qt6 version @ [Github:plasma-applet-net-bandwidth-monitor_qt6](https://github.com/LeeVD/plasma-applet-net-bandwidth-monitor_qt6)
+
+
 ![1a](https://user-images.githubusercontent.com/72889808/217653034-4ed63b12-875b-4001-84f7-b3159d933a99.png)
 
 # plasma-applet-net-bandwidth-monitor
